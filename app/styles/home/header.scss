@@ -1,0 +1,56 @@
+$header-height: 60px;
+.web-header {
+	position: fixed;
+	top: 0;
+	z-index: $header-z-index;
+	background-color: rgba(255, 255, 255, .9);
+	//background-color: rgba(0, 0, 0, .9);
+	height: $header-height;
+	overflow: hidden;
+	font-size: 14px;
+	a {
+		color: $theme-color;
+	}
+}
+.logo-wrapper {
+	width: 10%;
+}
+.nav-wrapper {
+	width: 90%;
+	.header-nav {
+		height: 60px;
+		li {
+			float: left;
+			line-height: 60px;
+			width: 80px;
+			text-align: center;
+			border-bottom: solid 3px transparent;
+			height: 60px;
+			a {
+				margin: 0;
+				padding: 0;
+				font-weight: normal;
+				height: 60px;
+				&:hover {
+					color: $deep-theme-color;
+				}
+				span {
+					display: block;
+				}
+			}
+			&.active {
+				//background-color: rgba(255, 255, 255, .8);
+				border-color: $theme-color;
+				a {
+					color: $theme-color;
+				}
+			}
+		}
+	}
+	.login-wrapper {
+		margin-left: 50px;
+		a {
+			line-height: $header-height;
+		}
+	}
+}

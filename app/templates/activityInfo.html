@@ -1,0 +1,49 @@
+<!-- application template -->
+<!-- section header -->
+{{include './partial/header'}}
+<!-- section content -->
+{{if stage=="drafting"}}
+<section class="container container0">暂无此活动！</section>
+{{else}}
+<section class="container container0">
+	<div class="wrapper popbox-wrapper">
+		<div class="imgbox image-back" style="background-image:url('../images/default/101.jpg');"></div>
+	</div>
+	<div class="wrapper xx-title-wrapper clearfix">
+		<div class="focus">
+			<span class="type-wrapper benefit">
+				<span class="square">益</span>
+				<span class="triangle left"></span>
+				<span class="triangle right"></span>
+			</span>
+		</div>
+		<div class="info">
+			<p class="date">{{begin}}</p>
+			<p class="title">
+				<span class="org">复旦诗社</span>
+				—
+				<a href="undefined">
+					<span class="">惬意的生活，寻找生活中美丽的瞬间</span>
+				</a>
+			</p>
+		</div>
+	</div>
+</section>
+<section class="container">
+	<div class="wrapper article-wrapper">
+		<article  class="article-content">
+			{{each descriptions as des i}}
+			<p>{{des}}</p>
+			{{/each}}
+		</article>
+		<footer class="article-footer">
+			<p>时间：{{begin}}至{{end}}</p>
+			<p>地址：{{location}}</p>
+			<p>人数：{{numberOfPeople}}人</p>
+			<p>类型：{{category}}</p>
+		</footer>
+	</div>
+</section>
+{{/if}}
+<!-- section footer -->
+{{include './partial/footer'}}

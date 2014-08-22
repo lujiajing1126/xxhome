@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>popbox demo</title>
+	<link rel="stylesheet" type="text/css" href="index.css"></head>
+<body>
+	<div class="popbox-wrapper" id="box1"></div>
+	<script type="text/javascript" src="popbox.js"></script>
+	<script type="text/javascript">
+	var box = new Popbox();
+	box.width = 1000;
+	box.height = 500;
+	box.autoplayer = 3;
+	box.add({
+		"url": "images/tu1.jpg",
+		"title": "fuck",
+		"type": 1
+	});
+	box.add({
+		"url": "images/tu2.jpg",
+		"title": "fuck",
+		"type": 2
+	});
+	box.add({
+		"url": "images/tu3.jpg",
+		"title": "fuck",
+		"type": 3
+	});
+	box.add([{
+		"url": "images/tu4.jpg",
+		"title": "fuck",
+		"type": 4
+	},{
+		"url": "images/tu4.jpg",
+		"title": "fuck",
+		"type": 4
+	}]);
+	box.render("box1");
+	</script>
+</body>
+
+</html>

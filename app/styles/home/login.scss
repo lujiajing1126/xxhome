@@ -1,0 +1,230 @@
+
+#Login_Box_Wrapper, #Signup_Box_Wrapper {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	// larger than carousel box
+	z-index: 10000;
+	display: none;
+}
+#Login_Box_Wrapper.on, #Signup_Box_Wrapper.on {
+	display: block;
+}
+.login-box {
+	.box {
+		position: relative;
+		width: 800px;
+		height: 500px;
+		background-color: #fff;
+		margin: 50px auto 0;
+		box-shadow: 1px 1px 5px #aaa;
+		display: block;
+		float: none;
+	}
+	#Login_Box .bg {
+		position: relative;
+		height: 230px;
+		background-image: url(../images/index_03.jpg);
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		background-size: cover;
+		//  background-size: 120%;
+		// -webkit-animation: move 10s 0s linear infinite;
+	}
+	// @-webkit-keyframes  move {
+	// 	0% {
+	// 		background-position: 30% 50%;
+	// 	}
+	// 	50% {
+	// 		background-position: 70% 50%;
+	// 	}
+	// 	100% {
+	// 		background-position: 30% 50%;
+	// 	}
+	// }
+	#Signup_Box .bg {
+		position: relative;
+		height: 100px;
+		text-align: center;
+		letter-spacing: -0.5em;
+		padding-top: 30px;
+	}
+	.box .bg .close {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		cursor: pointer;
+		z-index: 9;
+	}
+	.box .bg .close span {
+		font-size: 25px;
+		color: #cdcdcd;
+	}
+	.box .bg .close:hover span {
+		color: red;
+	}
+	.form-box {
+		width: 100%;
+	}
+	#Signup_Box .form-box {
+		padding-top: 30px;
+	}
+	.form-box .form {
+		width: auto;
+		text-align: right;
+	}
+	.form-box .form input {
+		margin-right: 250px;
+		line-height: 18px;
+		font-size: 14px;
+	}
+	#Login_Box .form-box {
+		height: 270px;
+	}
+	#Signup_Box .form-box {
+		height: 400px;
+		background-color: #f7f7f7;
+	}
+	#Signup_Box .form-row .btn-side {
+		// margin-left: 250px;
+		
+	}
+	.form-row {
+		line-height: 40px;
+		margin-top: 20px;
+		text-align: right;
+	}
+	.form-row span {
+		color: #49d0f2;
+		margin-right: 20px;
+	}
+	.form-row input {
+		width: 300px;
+		padding: 10px;
+		outline: none;
+		font-size: 16px;
+	}
+	.form-row input[type=password], .form-row input[type=text] {
+		border: 1px solid #e6e6e6;
+		background-color: #f0f0f0;
+		color: #444;
+	}
+	.form-row input[type=password]:focus, .form-row input[type=text]:focus {
+		border-color: #49d0f2;
+	}
+	.form-row input[type=submit] {
+		border: none;
+		background-color: #49d0f2;
+		color: #fff;
+		cursor: pointer;
+	}
+	.form-row input[type=submit][disabled] {
+		background-color: #20b6db;
+	}
+	.form-row input[type=submit]:hover, .form-row input[type=submit]:focus, .form-row input[type=submit]:active {
+		background-color: #20b6db;
+	}
+	.form-row.btn-wrapper {
+		// letter-spacing: 0em;
+		
+	}
+	.form-row.btn-wrapper input, .form-row.btn-wrapper span, .form-row.btn-wrapper button {
+		letter-spacing: normal;
+	}
+	.form-row.btn-wrapper input {
+		margin-right: 0;
+	}
+	.form-row.btn-wrapper .btn-side {
+		display: inline-block;
+		width: 100px;
+		margin-right: 148px;
+		border: none;
+		line-height: 40px;
+		cursor: pointer;
+		background-color: #49d0f2;
+		outline: none;
+		color: #f2f2f2;
+		text-align: center;
+		visibility: hidden;
+	}
+	.form-row.btn-wrapper .btn-side.on {
+		visibility: visible;
+	}
+	.form-row.btn-wrapper .btn-side:hover {
+		background-color: #20b6db;
+	}
+	.form-row.btn-wrapper .btn-side.disabled {
+		background-color: #e6e6e6;
+		cursor: wait;
+		color: #aaa;
+	}
+	.login-help, .login-tip {
+		margin-left: 250px;
+		width: 300px;
+		text-align: center;
+	}
+	.login-help {
+		margin-top: -20px;
+	}
+	.login-help a {
+		color: #49d0f2;
+		font-size: 14px;
+		margin: 0 3px;
+	}
+	.login-help a:hover {
+		color: blue;
+	}
+	.login-help i {
+		display: inline-block;
+		width: 0;
+		height: 10px;
+		border-left: 1px solid #49d0f2;
+	}
+	.tip {
+		margin-top: -20px;
+		margin-bottom: -20px;
+		display: none;
+		text-align: center;
+	}
+	.tip.on {
+		display: block;
+		//  animation: fadeOut 5s;
+		// -webkit-animation: fadeOut 5s;
+		// -moz-animation: fadeOut 5s;
+		// -o-animation: fadeOut 5s;	
+	}
+	.tip span {
+		font-size: 14px;
+		color: red;
+	}
+	#Signup_Box .bg button {
+		letter-spacing: normal;
+		display: inline-block;
+		width: 150px;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		height: 40px;
+		line-height: 40px;
+		background-color: #f0f0f0;
+		color: #49d0f2;
+		font-size: 18px;
+	}
+	#Signup_Box.for-phone .bg button.for-phone, #Signup_Box.for-email .bg button.for-email {
+		background-color: #49d0f2;
+		color: #fff;
+	}
+	#Signup_Box .form-box .form {
+		display: none;
+	}
+	#Signup_Box.for-phone .form-box .form.for-phone, #Signup_Box.for-email .form-box .form.for-email {
+		display: block;
+	}
+}

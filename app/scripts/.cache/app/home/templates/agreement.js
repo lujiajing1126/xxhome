@@ -1,0 +1,8 @@
+/*TMODJS:{"version":2,"md5":"56082f19085638674afe05c05280c0cf"}*/
+template('app/home/templates/agreement',function($data,$filename) {
+'use strict';var $utils=this,$helpers=$utils.$helpers,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='  ';
+include('./partial/header');
+$out+='  <section class="container container0"> <div class=" p-content my-about"> <p>我们致力于精准的校园信息预报，提供强大的组织平台，为在校学生与组织创造无限的发展空间。</p> <p>我们是一群富有激情，热爱创新和进步的青年耐心，专注，坚持。不断提升产品和服务，这是我们所追求的工匠精神。</p> <p>所以我们绝对不会停止追求进步。</p> </div> </section> <section class="container"> <div class=" p-content my-wedo"> <p> <strong>1、校园消息早知道：</strong> </p> <p> 第一时间获知校园动态，不用担心错过任何你感兴趣的活动，和小伙伴们一起结伴通行，结识更多朋友，拓宽社交圈！讲座、聚会、演出、赛事、公益、招新啥都有！ </p> <p> <strong>2、教务、考务信息一手掌握</strong> ： </p> <p> 最全面的教务信息装进口袋，出国交流名额、奖学金名单、考试时间，一个也不能错过！最新加入考务功能。考试资料、经验交流、海量考试秘笈，学渣逆袭的时候到了！ </p> <p> <strong>3、校园招聘：</strong> </p> <p> 校校依托投资人背景——上海青年企业家协会最年轻会员，与众多上海最具影响力的社会企业合作，订制专属于你所在的大学的优质招聘，提供更多兼职实习信息！ </p> <p> <strong>4、一键报名活动：</strong> </p> <p> 点击参加活动，主办方自动接收您的报名信息，活动自动同步至手机日历并设置闹钟提醒，即为报名成功。更有众多优质讲座、演唱会资源对接，通过校校线上预约校校专座，无需排队领票或提前占座，通过VIP通道入场享受VIP服务。 </p> </div> </section> <section class="container"> <div class="p-content my-contact clearfix"> <div class="contact"> <h3> <a href="mailto:hr@xiaoxiao.la"> <div class="circle">加入我们</div> </a> </h3> <p>若你跟我们有相同的梦想，或者对我们感兴趣，欢迎你的加入</p> <p>请发送简历至hr@xiaoxiao.la</p> </div> <div class="contact"> <h3> <a href="mailto:service@xiaoxiao.la"> <div class="circle">联系我们</div> </a> </h3> <p>如果你对我们的产品有任何建议</p> <p>请发送邮件至service@xiaoxiao.la</p> </div> </div> </section>  ';
+include('./partial/footer');
+return new String($out);
+});

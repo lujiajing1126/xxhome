@@ -1,0 +1,20 @@
+@import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+@import "home/global";
+@import "home/index";
+@import "home/header";
+@import "home/footer";
+@import "home/login";
+@import "home/about";
+@import "home/orgIcon";
+@import "home/eventIcon";
+@import "home/icon";
+//活动
+@import "home/event";
+body,html {
+	// 黑体的标准写法
+	font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+}
+input {
+	// 黑体的标准写法
+	font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+}

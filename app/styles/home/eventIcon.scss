@@ -1,0 +1,184 @@
+
+.xx-popbox-container, .xx-img-container, .xx-img-wrapper, .xx-idx-container, .xx-title-container {
+	position: relative;
+	overflow: hidden;
+}
+.xx-popbox-container .xx-img-wrapper {
+	display: inline-block;
+	border: none;
+}
+.xx-popbox-container .xx-img-wrapper img {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+.xx-idx-container {
+	z-index: 999;
+	text-align: center;
+}
+.xx-idx-wrapper {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin: 0 5px 0px;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.xx-idx-wrapper.curimg {
+	background-image: url(images/01_10.png);
+}
+.xx-idx-wrapper.defimg {
+	background-image: url(images/01_16.png);
+}
+.xx-title-wrapper {
+	padding:0 20px;
+	background-color: #fff;
+}
+.xx-title-wrapper.inline{
+	display: inline-block;
+}
+
+.xx-title-wrapper .focus {
+	float: left;
+	width: 50px;
+	height: 100%;
+}
+.xx-title-wrapper .info {
+	width: auto;
+	margin-left: 50px;
+	height: 100%;
+}
+.xx-title-wrapper .info p{
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+	text-indent: 1em;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.xx-title-wrapper .info p.date{
+	font-size: 14px;
+	color: #808080;
+}
+.xx-title-wrapper .info p.title{
+	font-size: 18px;
+}
+.xx-title-wrapper .info p.title .org{
+	font-size: 20px;
+	color: #49d0f2;
+}
+/* * 活动类型的标识* */
+.type-wrapper {
+	width: 40px;
+	border-radius: 3px;
+	position: relative;
+	text-align: center;
+	line-height: 45px;
+	height: 45px;
+	display: inline-block;
+	color: #fff;
+	font-size: 18px;	
+}
+.type-wrapper .square {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 100%;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.type-wrapper .triangle {
+	position: absolute;
+	z-index: 9;
+	bottom: -12px;
+	border-bottom: 12px solid transparent;
+}
+.type-wrapper .triangle.left {
+	left: 0;
+	border-left-width: 20px;
+	border-left-style: solid;
+	border-bottom-left-radius: 5px;
+}
+.type-wrapper .triangle.right {
+	right: 0;
+	border-right-width: 20px;
+	border-right-style: solid;
+	border-bottom-right-radius: 5px;
+}
+
+/* 讲座 */
+.type-wrapper.lecture .square {
+	background-color: #ee4d4d;
+}
+.type-wrapper.lecture .triangle {
+	border-left-color: #ee4d4d;
+	border-right-color: #ee4d4d;
+}
+
+/* 演出 */
+.type-wrapper.show .square {
+	background-color: rgb(255, 0, 167);
+	/* color: #c74ace;
+	*/
+}
+.type-wrapper.show .triangle {
+	border-left-color: rgb(255, 0, 167);
+	border-right-color: rgb(255, 0, 167);
+}
+
+/* 公益 */
+.type-wrapper.benefit  .square {
+	background-color: rgb(157, 0, 239);
+	/* color: #fc8f91;
+	*/
+}
+.type-wrapper.benefit .triangle {
+	border-left-color: rgb(157, 0, 239);
+	border-right-color: rgb(157, 0, 239);
+}
+
+/* 赛事 */
+.type-wrapper.competition  .square {
+	background-color: rgb(73, 41, 239);
+	/* color: #ed7b5e;
+	*/
+}
+.type-wrapper.competition .triangle {
+	border-left-color: rgb(73, 41, 239);
+	border-right-color: rgb(73, 41, 239);
+}
+
+/* 聚会 */
+.type-wrapper.party .square {
+	background-color: rgb(0, 190, 238);
+	/* color: #4186fc;
+	*/
+}
+.type-wrapper.party .triangle {
+	border-left-color: rgb(0, 190, 238);
+	border-right-color: rgb(0, 190, 238);
+}
+
+/* 招新 */
+.type-wrapper.attract  .square {
+	background-color: rgb(0, 252, 125);
+	/* color: #f43d3d;
+	*/
+}
+.type-wrapper.attract .triangle {
+	border-left-color: rgb(0, 252, 125);
+	border-right-color: rgb(0, 252, 125);
+}
+
+/* 其他 */
+.type-wrapper.else  .square {
+	background-color: rgb(121, 121, 121);
+	/* color: #8493c9;
+	*/
+}
+.type-wrapper.else .triangle {
+	border-left-color: rgb(121, 121, 121);
+	border-right-color: rgb(121, 121, 121);
+}

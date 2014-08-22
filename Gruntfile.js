@@ -64,6 +64,10 @@ module.exports = function (grunt) {
                     '.tmp/styles/{,*/}*.css',
                     '<%= config.app %>/images/{,*/}*'
                 ]
+            },
+            template: {
+                files: ['<%= config.app %>/templates/**/*.html'],
+                tasks: ['tmod:templateHome']
             }
         },
 
@@ -358,7 +362,8 @@ module.exports = function (grunt) {
         concurrent: {
             server: [
                 'sass:server',
-                'copy:styles'
+                'copy:styles',
+                'tmod:templateHome'
             ],
             test: [
                 'copy:styles'
@@ -369,6 +374,18 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
+        },
+        // TmodJs to Compile
+        tmod: {
+            templateHome: {
+                src: 'app/templates/**/*.html',
+                dest: 'app/build/template.js',
+                options: {
+                    combo: true,
+                    syntax: 'simple',
+                    minify: true,
+                }
+            }
         }
     });
 

@@ -18,7 +18,7 @@ define(function(require, exports, module) {
 				if (box.length > 0) {
 					box.addClass("on");
 				} else {
-					$("body").append(template("app/home/templates/partial/login", {}));
+					$("body").append(template("app/templates/partial/login", {}));
 				}
 				$("#USERNAME").trigger("focus");
 				$(document).on("keydown." + that.namespace, function(e) {
@@ -37,7 +37,7 @@ define(function(require, exports, module) {
 				if (box.length > 0) {
 					box.addClass("on");
 				} else {
-					$("body").append(template("app/home/templates/partial/signup", {}));
+					$("body").append(template("app/templates/partial/signup", {}));
 					$(document).on("keyup." + that.namespace, "#PHONENUM", function() {
 						showAuthButton(this);
 					});

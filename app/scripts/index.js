@@ -5,7 +5,7 @@ define(function(require, exports, module) {
 		loginController = require('scripts/controllers/loginController');
 	require("sui/bootstrap/bootstrap");
 
-	$('.body').html(template('app/home/templates/index', {}));
+	$('.body').html(template('app/templates/index', {}));
 	(new indexController()).init();
 	(new loginController()).init();
 	// 轮播图插件

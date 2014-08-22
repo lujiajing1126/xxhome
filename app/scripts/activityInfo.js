@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
-	var activityController = require('home/scripts/controllers/activityController'),
-		loginController = require('home/scripts/controllers/loginController'),
-		Helper = require('home/scripts/public/helper');
+	var activityController = require('scripts/controllers/activityController'),
+		loginController = require('scripts/controllers/loginController'),
+		Helper = require('scripts/public/helper');
 
 	var eventId = Helper.getParam("event");
 	

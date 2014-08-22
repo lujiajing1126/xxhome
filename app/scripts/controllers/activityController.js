@@ -12,7 +12,7 @@ define(function(require, exports, module) {
 	Controller.prototype.init = function(session) {
 		var eventId = this.eventId;
 		if (!eventId) {
-			$('.body').html(template('app/home/templates/activityInfo', {
+			$('.body').html(template('app/templates/activityInfo', {
 				stage: "drafting"
 			}));
 			return;
@@ -23,7 +23,7 @@ define(function(require, exports, module) {
 			var orgInfo = data.static;
 			if (data.status == "OK") {
 				orgInfo.descriptions = orgInfo.description ? orgInfo.description.split(/\r\n/g) : ["活动无简介"];
-				$('.body').html(template('app/home/templates/activityInfo', orgInfo));
+				$('.body').html(template('app/templates/activityInfo', orgInfo));
 			}
 		}).catch(function(error) {
 			console.log(error);

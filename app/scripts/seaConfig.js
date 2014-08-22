@@ -9,12 +9,7 @@ seajs.config({
 	// 别名配置
 	alias: {
 		'jquery': 'sui/vendor/jquery',
-		'artTemplate': 'scripts/template.js'
-	},
-
-	// 路径配置
-	paths: {
-		'gallery': 'https://a.alipayobjects.com/gallery'
+		'artTemplate': 'build/template.js'
 	},
 
 	// 变量配置

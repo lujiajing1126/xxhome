@@ -370,10 +370,7 @@ module.exports = function (grunt) {
             ],
             dist: [
                 'sass',
-                'copy:styles',
-                'imagemin',
-                'svgmin'
-            ]
+                'copy:styles'            ]
         },
         // TmodJs to Compile
         tmod: {
@@ -429,9 +426,6 @@ module.exports = function (grunt) {
         'useminPrepare',
         'concurrent:dist',
         'autoprefixer',
-        'concat',
-        'cssmin',
-        'uglify',
         'copy:dist',
         'modernizr',
         'rev',

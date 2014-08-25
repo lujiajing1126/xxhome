@@ -37,7 +37,7 @@ module.exports = function (grunt) {
                 files: ['<%= config.app %>/scripts/{,*/}*.js'],
                 tasks: ['jshint'],
                 options: {
-                    livereload: true
+                    livereload: false
                 }
             },
             jstest: {
@@ -55,16 +55,6 @@ module.exports = function (grunt) {
                 files: ['<%= config.app %>/styles/{,*/}*.css'],
                 tasks: ['newer:copy:styles', 'autoprefixer']
             },
-            livereload: {
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                },
-                files: [
-                    '<%= config.app %>/{,*/}*.html',
-                    '.tmp/styles/{,*/}*.css',
-                    '<%= config.app %>/images/{,*/}*'
-                ]
-            },
             template: {
                 files: ['<%= config.app %>/templates/**/*.html'],
                 tasks: ['tmod:templateHome']
@@ -74,9 +64,9 @@ module.exports = function (grunt) {
         // The actual grunt server settings
         connect: {
             options: {
-                port: 9000,
+                port: 5000,
                 open: true,
-                livereload: 35729,
+                livereload: 34730,
                 // Change this to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
             },

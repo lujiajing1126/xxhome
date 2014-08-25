@@ -60,7 +60,41 @@ module.exports = function (grunt) {
                 tasks: ['tmod:templateHome']
             }
         },
-
+        // cmd-transport
+        transport: {
+            options: {
+                paths: ['app'],
+                debug: false
+            },
+            release: {
+                files: [{
+                    expand: true,
+                    cwd: 'app',
+                    src: ['scripts/activityInfo.js',
+                        'scripts/baseController.js',
+                        'scripts/email.js',
+                        'build/template.js',
+                        'sui/**/*.js',
+                        'scripts/controllers/*.js',
+                        'scripts/models/*.js',
+                        'scripts/services/*.js',
+                        'scripts/public/*.js'],
+                    dest: 'dist'
+                }]
+            }
+        },
+        // concate
+        concat: {
+            dist: {
+                options: {
+                    include: 'relative'
+                },
+                files: {
+                    'dist/scripts/index.js': ['app/scripts/index.js', 'dist/scripts/**/*.js','dist/build/template.js'],
+                    'dist/scripts/seaConfig.js': ['app/scripts/seaConfig.js','dist/sui/async/q.js','dist/sui/bootstrap/bootstrap.js','dist/sui/core/*.js']
+                }
+            }
+        },
         // The actual grunt server settings
         connect: {
             options: {
@@ -115,7 +149,28 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
-            server: '.tmp'
+            server: '.tmp',
+            build: {
+                files: [{
+                    dot: true,
+                    src: [
+                        'dist/build',
+                        'dist/sui/seed.js',
+                        'dist/sui/core',
+                        'dist/sui/bootstrap',
+                        'dist/sui/async',
+                        'dist/sui/mvc',
+                        'dist/scripts/controllers',
+                        'dist/scripts/models',
+                        'dist/scripts/services',
+                        'dist/scripts/public',
+                        'dist/scripts/activityInfo.js',
+                        'dist/scripts/email.js',
+                        'dist/scripts/baseController.js',
+                        'dist/templates'
+                    ]
+                }]
+            }
         },
 
         // Make sure code styles are up to par and there are no obvious mistakes
@@ -320,6 +375,12 @@ module.exports = function (grunt) {
                     cwd: '.',
                     src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'],
                     dest: '<%= config.dist %>'
+                },{
+                    expand: true,
+                    dot: true,
+                    cwd: '.tmp',
+                    src: 'styles/home.css',
+                    dest: '<%= config.dist %>'
                 }]
             },
             styles: {
@@ -328,7 +389,7 @@ module.exports = function (grunt) {
                 cwd: '<%= config.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
-            }
+            },
         },
 
         // Generates a custom Modernizr build that includes only the tests you
@@ -419,8 +480,12 @@ module.exports = function (grunt) {
         'copy:dist',
         'modernizr',
         'rev',
+        'imagemin',
         'usemin',
-        'htmlmin'
+        'htmlmin',
+        'transport',
+        'concat',
+        'clean:build'
     ]);
 
     grunt.registerTask('default', [

@@ -2,8 +2,8 @@ define(function(require, exports, module) {
 	var $ = SUI.$,
 		baseController = require('scripts/baseController'),
 		bC = new baseController(),
-		template = require('artTemplate'),
-		EventService = require('home/scripts/services/EventService');
+		template = require('build/template'),
+		EventService = require('scripts/services/EventService');
 	var Controller = function(eventId) {
 		this.namespace = "activityInformation";
 		this.eventId = eventId;

@@ -2,6 +2,7 @@ node_modules
 dist
 .tmp
 .sass-cache
+.cache
 app/build/.cache
 bower_components
 test/bower_components

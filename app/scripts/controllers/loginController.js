@@ -3,7 +3,7 @@ define(function(require, exports, module) {
 		baseController = require('scripts/baseController'),
 		bC = new baseController(),
 		userModel = require("scripts/models/UserModel"),
-		template = require('artTemplate'),
+		template = require('build/template'),
 		helper = require('scripts/public/helper');
 
 	var expPhoneNumber = /(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/,

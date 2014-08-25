@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
-	var $ = require('jquery'),
-		template = require('artTemplate'),
+	var $ = SUI.$,
+		template = require('build/template'),
 		indexController = require('scripts/controllers/indexController'),
 		loginController = require('scripts/controllers/loginController');
 	require("sui/bootstrap/bootstrap");

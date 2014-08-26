@@ -6090,34 +6090,80 @@ a:hover.carousel-bottom-text {
 	width: 1180px;
 	height: 300px;
 }
-
 // Defined By Megrez
 .HotOrg {
 	margin-bottom: 20px;
 	.HotOrg-container {
 		padding: 20px 20px;
 		.HotOrg-Right-Selector {
-			width: 80%;
+			width: 70%;
 			float: right;
 			height: 35px;
-			span {
-				background-color: #00D4F7;
-				width: 100px;
-				height: 150px;
+			.org-add {
+				font-size: 14px;
+				background-color: $theme-color;
+				padding: 5px 10px;
+				border-radius: 5px;
+				color: #ffffff;
+				&:hover {
+					background-color: $deep-theme-color;
+				}
 			}
 		}
 		.HotOrg-Left-Selector {
 			float: left;
-			width: 20%;
+			width: 30%;
 			height: 35px;
 			h4 {
-				margin: 8px auto 0;
+				margin: 0px auto 0;
+				float: left;
+			}
+			.nav.nav-org {
+				float: left;
+				margin-left: 20px;
+				li {
+					float: left;
+					margin: 0 5px;
+					line-height: 20px;
+					cursor: pointer;
+					border-radius: 50%;
+					span {
+						color: $theme-color;
+						width: 20px;
+						height: 20px;
+						padding: 0 6px;
+					}
+					&.active {
+						background-color: $theme-color;
+						span {
+							color: #fff;
+						}
+					}
+				}
 			}
 		}
 		.HotOrg-Img {
 			float: left;
 			width: 100%;
 			height: 80px;
+		}
+		.HotOrg-Img-List {
+			margin-top: 0px;
+			li {
+				float: left;
+				margin: 0;
+				margin-right: 37px;
+				overflow: hidden;
+				text-align: center;
+				img {
+					border: 2px solid #d8d8d8;
+					margin: 0;
+				}
+				h4 {
+					font-weight: normal;
+					font-size: 12px;
+				}
+			}
 		}
 	}
 }

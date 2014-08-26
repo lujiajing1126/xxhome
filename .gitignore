@@ -6,3 +6,4 @@ dist
 app/build/.cache
 bower_components
 test/bower_components
+.DS_Store

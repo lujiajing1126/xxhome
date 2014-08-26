@@ -81,7 +81,7 @@ define(function(require, exports, module) {
 					}).then(function(session) {
 						seajs.log("session:" + session);
 						$("#Login_Box_Wrapper").removeClass("on");
-						var html = "<a href='/home.html#index'><span>组织管理</span></a>";
+						var html = "<a href='/home.html#index'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
 						$("#userBox").html(html);
 						//window.location.href = "/home.html#index";
 					})["catch"])(function(error) {
@@ -212,6 +212,9 @@ define(function(require, exports, module) {
 					});
 				}
 				return false;
+			},
+			Logout:function(){
+				AppUser.logout();
 			}
 		};
 	};
@@ -307,7 +310,7 @@ define(function(require, exports, module) {
 		if (!login) {
 			AppUser.clearSession();
 		};
-		var html = login ? '<a href="/home.html#index"><span>组织管理</span></a>' : '<span id="BTN_LOGIN" data-xx-login-action="loginBox">登陆</span> <i></i><span id="BTN_SIGNUP" data-xx-login-action="signupBox">注册</span>';
+		var html = login ? '<a href="/home.html#index"><span>组织管理</span></a> <i></i><a href="javascript:void(0);" data-xx-login-action="Logout">退出</a>' : '<span id="BTN_LOGIN" data-xx-login-action="loginBox">登陆</span> <i></i><span id="BTN_SIGNUP" data-xx-login-action="signupBox">注册</span>';
 		$("#userBox").html(html);
 	};
 

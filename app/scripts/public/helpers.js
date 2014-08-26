@@ -1,4 +1,5 @@
 define(function(require, exports, module) {
+    // Define Scope Vars
     var $ = SUI.$,
         Q = require("sui/async/q"),
         throttle = function(method, delay) { // 节流函数
@@ -22,7 +23,10 @@ define(function(require, exports, module) {
                 return ({}).toString.call(obj) === "[object " + type + "]";
             }
         },
-        typeOfNumber = typeOf("Number");
+        typeOfNumber = typeOf("Number"),
+        homepage = '/index.html';
+    // Require Things
+    require('sui/core/cookie');
     $.test = function() {
         alert("test");
     };
@@ -32,9 +36,8 @@ define(function(require, exports, module) {
     $.goHome = function(msg) {
         if (msg)
             alert(msg);
-        window.location.href = "/home/index.html";
+        window.location.href = homepage;
     },
-    require('sui/core/cookie');
     /**
      * 弹出Mailbox
      */
@@ -211,7 +214,6 @@ define(function(require, exports, module) {
      */
     $.globalResponseHandler = function(data, options) {
         var handle = function(data) {
-            var homepage = "/home/index.html";
             switch (data.status) {
                 case 'OK':
                     return data;

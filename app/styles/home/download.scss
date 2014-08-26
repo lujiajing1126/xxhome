@@ -1,0 +1,22 @@
+.download {
+	h2 {
+		font-size: 20px;
+		text-align: center;
+		color: #888;
+	}
+	div{
+		text-align:center;
+		margin-top: 20px;
+		a{
+			display: inline-block;
+			margin: 0 20px;
+			dl{
+				dt{
+					line-height: 30px;
+					font-size: 16px;
+					color: $theme-color;
+				}
+			}
+		}
+	}
+}

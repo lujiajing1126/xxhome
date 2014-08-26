@@ -154,19 +154,11 @@ module.exports = function (grunt) {
                 files: [{
                     dot: true,
                     src: [
-                        'dist/build',
                         'dist/sui/seed.js',
                         'dist/sui/core',
                         'dist/sui/bootstrap',
                         'dist/sui/async',
                         'dist/sui/mvc',
-                        'dist/scripts/controllers',
-                        'dist/scripts/models',
-                        'dist/scripts/services',
-                        'dist/scripts/public',
-                        'dist/scripts/activityInfo.js',
-                        'dist/scripts/email.js',
-                        'dist/scripts/baseController.js',
                         'dist/templates'
                     ]
                 }]

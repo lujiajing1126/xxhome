@@ -15,7 +15,7 @@ define(function(require, exports, module) {
 	 */
 	var globalResponseHandler = function(data, options) {
 		var handle = function(data) {
-			var homepage = "/home/index.html";
+			var homepage = "/index.html";
 			switch (data.status) {
 				case 'OK':
 					return data;

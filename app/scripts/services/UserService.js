@@ -7,7 +7,7 @@ define(function(require, exports, module) {
      * @param  {string} session [当前用户的Session]
      * @return {obj}         [返回$.globalResponseHandler对象]
      */
-    exports.getOwnerUserInfo = function(orgId, userId, session) {
+    exports.getOwnerUserInfo = function(userId, session, orgId) {
         var fields = ['userInfo.gender',
             'userInfo.nickname',
             'userInfo.name',
@@ -35,10 +35,11 @@ define(function(require, exports, module) {
             'dynamic.numberOfExecutingEvents',
             'dynamic.isfriend', //不是好友 返回 是否关注 isFollower
             'dynamic.executingEvent', //executingEvent  countPraiser
-
+            'membership.tags'
         ];
+        var url = orgId ? '/api/org/' + orgId + '/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(',') : '/api/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(',');
         return $.globalResponseHandler({
-            url: '/api/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(','),
+            url: url,
             type: 'GET',
             dataType: 'JSON'
         });
@@ -53,24 +54,24 @@ define(function(require, exports, module) {
     exports.getUserInfo = function(userId, session, orgId) {
         var fields = ['userInfo.gender',
             'userInfo.nickname',
-            //'userInfo.name',
-            //'userInfo.emails',
-            //'userInfo.phoneNumbers',
-            // 'studentInfo.studentId',
-            // 'studentInfo.city',
+            'userInfo.name',
+            'studentInfo.city',
             'studentInfo.school',
             'studentInfo.department', //院系
             'studentInfo.grade', //年级
-            //'studentInfo.district',
-            //'studentInfo.major',//专业
-            // 'studentInfo.classId',
-            // 'extendedUserInfo.dayOfBirth',
             'extendedUserInfo.hobby',
             'extendedUserInfo.hometown',
-            //'extendedUserInfo.instanceMessageAccounts',//微信号
             'extendedUserInfo.isInRelation',
             'extendedUserInfo.location',
             'extendedUserInfo.sexualOrientation', //性取向
+            // 'userInfo.emails',
+            // 'userInfo.phoneNumbers',
+            //'studentInfo.studentId',
+            //'studentInfo.district',
+            //'studentInfo.major',//专业
+            // 'studentInfo.classId',
+            //'extendedUserInfo.dayOfBirth',
+            //'extendedUserInfo.instanceMessageAccounts',//微信号
             //'extendedUserInfo.monthOfBirth',
             // 'extendedUserInfo.yearOfBirth',
             // 'dynamic.numberOfFriends',
@@ -78,7 +79,7 @@ define(function(require, exports, module) {
             // 'dynamic.numberOfExecutingEvents',
             // 'dynamic.isfriend', //不是好友 返回 是否关注 isFollower
             // 'dynamic.executingEvent' //executingEvent  countPraiser
-
+            'membership.tags'
         ];
         return $.globalResponseHandler({
             url: '/api/org/' + orgId + '/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(','),
@@ -108,7 +109,7 @@ define(function(require, exports, module) {
      * @return {Promise}
      */
     exports.getStudentResidenceInfoDirectory = function(session, id) {
-        id = id || 1;
+        id = id || 0;
         return $.globalResponseHandler({
             url: '/api/info/load_student_residence_info_directory?session=' + session + '&id=' + id,
             dataType: 'json'

@@ -56,7 +56,7 @@ define(function(require, exports, module) {
 	User.prototype.auth = function(fn) {
 		var session = this.getSession();
 		if (!session)
-			window.location.href = "/home/index.html";
+			window.location.href = "/index.html";
 		this.getLoginStatus(session, fn);
 	}
 	/**
@@ -75,20 +75,12 @@ define(function(require, exports, module) {
 		 *  Access-Control-Max-Age:86400
 		*/
 		return Q($.ajax({
-			url: 'https://'+location.host+'/api/account/login',
-			type: 'OPTIONS',
-			dataType: 'JSON',
-			crossDomain: false
-		}))
-		.then(function(){
-			return Q($.ajax({
 				url: 'https://'+location.host+'/api/account/login',
 				type: 'POST',
 				dataType: 'JSON',
 				data: data,
 				crossDomain: false
-			}));
-		})
+			}))
 		.then(function(data,textStatus) {
 			console.log(textStatus);
 			if (data.status == "OK") {

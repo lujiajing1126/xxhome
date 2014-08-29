@@ -6095,10 +6095,12 @@ a:hover.carousel-bottom-text {
 	margin-bottom: 20px;
 	.HotOrg-container {
 		padding: 20px 20px;
+		position:relative;
+		height: 160px;
 		.HotOrg-Right-Selector {
 			width: 70%;
 			float: right;
-			height: 35px;
+			height: 40px;
 			.org-add {
 				font-size: 14px;
 				background-color: $theme-color;
@@ -6113,7 +6115,7 @@ a:hover.carousel-bottom-text {
 		.HotOrg-Left-Selector {
 			float: left;
 			width: 30%;
-			height: 35px;
+			height: 40px;
 			h4 {
 				margin: 0px auto 0;
 				float: left;
@@ -6143,16 +6145,18 @@ a:hover.carousel-bottom-text {
 			}
 		}
 		.HotOrg-Img {
-			float: left;
-			width: 100%;
-			height: 80px;
+			left: 0;
+			top: 65px;
+			width: 500%;
+			position:absolute;
 		}
 		.HotOrg-Img-List {
 			margin-top: 0px;
+			width: 100%;
 			li {
 				float: left;
-				margin: 0;
-				margin-right: 37px;
+				width: 118px;
+
 				overflow: hidden;
 				text-align: center;
 				img {

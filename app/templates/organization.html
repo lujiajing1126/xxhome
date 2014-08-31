@@ -1,0 +1,60 @@
+<!-- application template -->
+<!-- section header -->
+{{include './partial/header'}}
+<!-- section content -->
+<div class="wrapper">
+<header class="content-header">
+	<div class="home-org-bg xx-logo" style="background-image:url(images/default/101.jpg);"></div>
+	<div class="home-org-base-info row no-margin">
+		<div class="col-sm-2 col-xs-2 home-org-logo-wrapper">
+			<div class="home-org-logo xx-logo xx-logo-100" style="background-image:url(/api/org/{{organizationInfo.id}}/logo),url(images/default/2.png)"></div>
+			<div class="org-type-icon-wrapper width30 right-bottom-20">
+				{{if extendedOrganizationInfo&&extendedOrganizationInfo.type=="学术"}}
+				<div class="org-type-icon width30 academic"></div>
+				{{else if extendedOrganizationInfo&&extendedOrganizationInfo.type=="艺术"}}
+				<div class="org-type-icon width30 arts"></div>
+				{{else if extendedOrganizationInfo&&extendedOrganizationInfo.type=="体育"}}
+				<div class="org-type-icon width30 sports"></div>
+				{{else if extendedOrganizationInfo&&extendedOrganizationInfo.type=="实践"}}
+				<div class="org-type-icon width30 practice"></div>
+				{{else if extendedOrganizationInfo&&extendedOrganizationInfo.type=="公益"}}
+				<div class="org-type-icon width30 public"></div>
+				{{else}}
+				<div class="org-type-icon width30 else"></div>
+				{{/if}}
+			</div>
+		</div>
+		<div class="col-sm-6 col-xs-6">
+			<p class="org-title">
+				<span class="helper-font-24 xx-theme-color">{{organizationInfo.name}}</span>
+			</p>  
+		</div>
+		<div class="col-sm-4 col-xs-4 home-org-label-wrapper">
+			<!-- <span data-toggle="tooltip" data-placement="top" data-original-title="组织成员数"> <i class="fa fa-group xx-theme-color"></i>
+				{{dynamic.numberOfMembers}}
+			</span>
+			<span data-toggle="tooltip" data-placement="top" data-original-title="粉丝人数"> <i class="fa fa-heart xx-theme-color"></i>
+				{{dynamic.numberOfFollowers}}
+			</span>
+			<span data-toggle="tooltip" data-placement="top" data-original-title="发布活动数">
+				<i class="fa fa-list-alt xx-theme-color"></i>
+				{{dynamic.numberOfExecutingEvents||0}}
+			</span> -->
+		</div>
+	</div>
+</header>
+<section class="content-body">
+	<div class="home-org-description">
+		{{each organizationInfo.descriptions as des i}}
+		<p>{{des}}</p>
+		{{/each}}
+	</div>
+	<div class="home-org-contact">
+		<p>类型：{{extendedOrganizationInfo.type||其他}}</p>
+		<p>联系人：{{organizationInfo.contactName}}</p>
+		<p>联系邮箱：{{organizationInfo.email}}</p>
+	</div>
+</section>
+</div>
+<!-- section footer -->
+{{include './partial/footer'}}

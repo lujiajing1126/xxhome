@@ -1,0 +1,65 @@
+.content-header {
+	margin-bottom: 5px;
+	border-bottom: 1px solid #49d0f2;
+}
+.home-org-bg {
+	height: 500px;
+}
+.home-org-base-info {
+	height: 80px;
+	background-color: #eafaff;
+	.home-org-logo-wrapper {
+		position: relative;
+		height: 100%;
+	}
+	.home-org-logo {
+		border: 4px solid #fff;
+		position: absolute;
+		right: 0;
+		bottom: 10px;
+	}
+	.home-msg {
+		height: 100%;
+		line-height: 80px;
+		span {
+			margin-right: 5px;
+		}
+		i {
+			display: inline-block;
+			width: 0;
+			height: 10px;
+			border-left: 1px solid #999;
+			margin-right: 5px;
+		}
+		i:after {
+			content: ".";
+			display: none;
+			height: 0;
+		}
+	}
+	.home-org-label-wrapper {
+		line-height: 80px;
+		>span {
+			font-size: 18px;
+			margin-right: 10px;
+		}
+	}
+	.org-title {
+		line-height: 80px;
+	}
+}
+.home-org-description {
+	font-size: 14px;
+	line-height: 20px;
+	color: #666;
+	text-indent: 2em;
+	padding: 10px 0;
+	border-bottom: 1px solid $theme-color;
+}
+.home-org-contact {
+	padding: 10px;
+	p {
+		font-size: 14px;
+		color: #444;
+	}
+}

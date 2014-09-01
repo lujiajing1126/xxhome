@@ -12,21 +12,18 @@ define(function(require, exports, module) {
 	Controller.prototype.init = function(session) {
 		var eventId = this.eventId;
 		if (!eventId) {
-			$('.body').html(template('app/templates/activityInfo', {
-				stage: "drafting"
-			}));
+			window.location.href="http://xiaoxiao.la/404.html";
 			return;
 		}
-		
+
 		EventService.getEventInfo(eventId, session).then(function(data) {
-			console.log(data);
-			var orgInfo = data.static;
 			if (data.status == "OK") {
-				orgInfo.descriptions = orgInfo.description ? orgInfo.description.split(/\r\n/g) : ["活动无简介"];
-				$('.body').html(template('app/templates/activityInfo', orgInfo));
+			var eventInfo = data.static;
+				eventInfo.descriptions = eventInfo.description ? eventInfo.description.split(/\r\n/g) : ["活动无简介"];
+				$('.body').html(template('app/templates/event', eventInfo));
 			}
 		}).catch(function(error) {
-			console.log(error);
+			window.location.href="http://xiaoxiao.la/404.html";
 		}).done();
 	};
 	module.exports = Controller;

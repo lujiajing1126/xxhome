@@ -6095,22 +6095,12 @@ a:hover.carousel-bottom-text {
 	margin-bottom: 20px;
 	.HotOrg-container {
 		padding: 20px 20px;
-		position:relative;
+		position: relative;
 		height: 160px;
 		.HotOrg-Right-Selector {
 			width: 70%;
 			float: right;
 			height: 40px;
-			.org-add {
-				font-size: 14px;
-				background-color: $theme-color;
-				padding: 5px 10px;
-				border-radius: 5px;
-				color: #ffffff;
-				&:hover {
-					background-color: $deep-theme-color;
-				}
-			}
 		}
 		.HotOrg-Left-Selector {
 			float: left;
@@ -6148,7 +6138,7 @@ a:hover.carousel-bottom-text {
 			left: 0;
 			top: 65px;
 			width: 500%;
-			position:absolute;
+			position: absolute;
 		}
 		.HotOrg-Img-List {
 			margin-top: 0px;
@@ -6156,7 +6146,6 @@ a:hover.carousel-bottom-text {
 			li {
 				float: left;
 				width: 118px;
-
 				overflow: hidden;
 				text-align: center;
 				img {
@@ -6169,5 +6158,15 @@ a:hover.carousel-bottom-text {
 				}
 			}
 		}
+	}
+}
+.org-add {
+	font-size: 14px;
+	background-color: $theme-color;
+	padding: 5px 10px;
+	border-radius: 5px;
+	color: #ffffff;
+	&:hover {
+		background-color: $deep-theme-color;
 	}
 }

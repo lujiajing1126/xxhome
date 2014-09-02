@@ -81,8 +81,8 @@ define(function(require, exports, module) {
 					}).then(function(session) {
 						seajs.log("session:" + session);
 						$("#Login_Box_Wrapper").removeClass("on");
-						var html = "<a href='/home.html#index' target='_blank'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
-						$("#userBox").html(html);
+						userNavigation(session);
+
 						//window.location.href = "/home.html#index";
 					})["catch"])(function(error) {
 						loginErrorHandler(error);
@@ -213,7 +213,7 @@ define(function(require, exports, module) {
 				}
 				return false;
 			},
-			Logout:function(){
+			Logout: function() {
 				AppUser.logout();
 			}
 		};
@@ -280,8 +280,8 @@ define(function(require, exports, module) {
 			msg = "密码不能为空！";
 		else if (repsw != psw)
 			msg = "两次密码不同！";
-		else if(psw.length<3||psw.length>12){
-			msg="密码长度为3-12位";
+		else if (psw.length < 3 || psw.length > 12) {
+			msg = "密码长度为3-12位";
 		}
 		if (msg != "") {
 			signupPhoneErrorHandler(msg);
@@ -302,8 +302,8 @@ define(function(require, exports, module) {
 			msg = "密码不能为空！";
 		else if (repsw != psw)
 			msg = "两次密码不同！";
-		else if(psw.length<3||psw.length>12){
-			msg="密码长度为3-12位";
+		else if (psw.length < 3 || psw.length > 12) {
+			msg = "密码长度为3-12位";
 		}
 		if (msg != "") {
 			signupEmailErrorHandler(msg);
@@ -312,13 +312,33 @@ define(function(require, exports, module) {
 		return true;
 	}
 
-	function userStatus(login) {
+	function userStatus(login,session) {
 		if (!login) {
 			AppUser.clearSession();
-		};
-		var html = login ? '<a href="/home.html#index" target="_blank"><span>组织管理</span></a> <i></i><a href="javascript:void(0);" data-xx-login-action="Logout">退出</a>' : '<span id="BTN_LOGIN" data-xx-login-action="loginBox">登陆</span> <i></i><span id="BTN_SIGNUP" data-xx-login-action="signupBox">注册</span>';
-		$("#userBox").html(html);
+		} else {
+			userNavigation(session);
+		}
+
 	};
+
+	function userNavigation(session){
+		var html;
+			$.ajax({
+				url: '/api/account/list_administrated_organizations?session=' + session,
+				dataType: 'json',
+				success: function(data) {
+					if (data.organizations.length > 0) {
+						html = "<a href='/home.html#index' target='_blank'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
+					} else {
+						html = "<a href='javascript:void(0);' data-xx-action='createOrganization'><span class='org-add'>+创建组织</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
+					}
+					$("#userBox").html(html);
+				},
+				error: function(error) {
+					throw "组织信息获取失败！"
+				}
+			});
+	}
 
 	function loginErrorHandler(msg) {
 		var tip = $("#Login_Box_Wrapper").find(".tip");

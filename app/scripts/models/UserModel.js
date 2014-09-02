@@ -133,7 +133,7 @@ define(function(require, exports, module) {
 				isLogin = false;
 			}
 		}).done(function() {
-			fn(isLogin);
+			fn(isLogin,session);
 		});
 	};
 	// 根据session取得用户账户信息
@@ -150,10 +150,9 @@ define(function(require, exports, module) {
 				}
 			});
 		}, function(error) {
-			console.log(error);
+			//console.log(error);
 		}).then(function() {
 			return $.ajax({
-				//url: '/api/user/' + userId + '/list_organizations?session=' + session,
 				url: '/api/account/list_administrated_organizations?session=' + session,
 				type: 'GET',
 				dataType: 'JSON'

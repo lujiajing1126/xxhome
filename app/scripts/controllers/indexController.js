@@ -26,8 +26,10 @@ define(function(require, exports, module) {
 							session: session
 						}
 					}).then(function(data) {
-						if (data.status == "OK")
+						if (data.status == "OK"){
 							alert("组织创建成功，您可以进入组织管理系统！");
+							window.location.reload();
+						}
 					})["catch"])(function(err) {
 						alert(msg);
 						console.log(msg);

@@ -1,0 +1,18 @@
+@media (max-width:1200px) {
+	body {
+		min-width: 0;
+	}
+	.container {
+		width: 100%;
+	}
+	.wrapper {
+		&.responsive {
+			width: 100%;
+		}
+	}
+	.header, .section, .footer {
+		&.responsive {
+			min-width: 0;
+		}
+	}
+}

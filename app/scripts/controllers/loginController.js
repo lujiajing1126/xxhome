@@ -280,6 +280,9 @@ define(function(require, exports, module) {
 			msg = "密码不能为空！";
 		else if (repsw != psw)
 			msg = "两次密码不同！";
+		else if(psw.length<3||psw.length>12){
+			msg="密码长度为3-12位";
+		}
 		if (msg != "") {
 			signupPhoneErrorHandler(msg);
 			return false;
@@ -299,6 +302,9 @@ define(function(require, exports, module) {
 			msg = "密码不能为空！";
 		else if (repsw != psw)
 			msg = "两次密码不同！";
+		else if(psw.length<3||psw.length>12){
+			msg="密码长度为3-12位";
+		}
 		if (msg != "") {
 			signupEmailErrorHandler(msg);
 			return false;

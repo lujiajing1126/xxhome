@@ -67,9 +67,12 @@ define(function(require, exports, module) {
 			dataType: "JSON"
 		}).then(function(data) {
 			seajs.log(data);
-			return data.session;
+			if (data.status == "OK")
+				return data.session;
+			else
+				throw "session create failed";
 		}, function(error) {
-			seajs.log(error);
+			throw "session create failed";
 		});
 	};
 	exports.getSession = getSession;
@@ -107,7 +110,7 @@ define(function(require, exports, module) {
 		}
 	};
 
-	exports.getParam=function(param){
+	exports.getParam = function(param) {
 		param = param || null;
 		if (param) {
 			var tmpReg = new RegExp("[\\?\\&]" + param + "=([\\w\\d]*)"),

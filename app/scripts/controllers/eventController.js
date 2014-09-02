@@ -19,6 +19,8 @@ define(function(require, exports, module) {
 		EventService.getEventInfo(eventId, session).then(function(data) {
 			if (data.status == "OK") {
 			var eventInfo = data.static;
+				eventInfo.pageType="responsive";//响应式
+				eventInfo.eventId=eventId;
 				eventInfo.descriptions = eventInfo.description ? eventInfo.description.split(/\r\n/g) : ["活动无简介"];
 				$('.body').html(template('app/templates/event', eventInfo));
 			}

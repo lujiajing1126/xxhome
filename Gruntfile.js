@@ -73,6 +73,8 @@ module.exports = function (grunt) {
                     src: ['scripts/activityInfo.js',
                         'scripts/baseController.js',
                         'scripts/email.js',
+                        'scripts/event.js',
+                        'scripts/organization.js',
                         'build/template.js',
                         'sui/**/*.js',
                         'scripts/controllers/*.js',

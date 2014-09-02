@@ -2,10 +2,7 @@
 	body {
 		min-width: 0;
 	}
-	.container {
-		width: 100%;
-	}
-	.wrapper {
+	.wrapper, .container {
 		&.responsive {
 			width: 100%;
 		}

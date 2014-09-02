@@ -3,9 +3,9 @@
 {{include './partial/header'}}
 <!-- section content -->
 {{if stage=="drafting"}}
-<section class="container container0">暂无此活动！</section>
+<section class="container container0 responsive">暂无此活动！</section>
 {{else}}
-<section class="container container0">
+<section class="container container0 responsive">
 	<div class="wrapper popbox-wrapper responsive">
 		<div class="imgbox image-back" style="background-image:url(api/event/{{eventId}}/poster/load),url('../images/default/101.jpg');">
 			{{if category=="讲座"}}
@@ -58,7 +58,7 @@
 		<p>主办方：<a href="http://xiaoxiao.la/organization.html?oid={{organizationId}}">{{organizationName}}</a></p>
 	</div>
 </section>
-<section class="container">
+<section class="container responsive">
 	<div class="wrapper article-wrapper responsive">
 		<article  class="article-content">
 			{{each descriptions as des i}}

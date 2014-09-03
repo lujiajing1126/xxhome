@@ -1,8 +1,11 @@
 define(function(require, exports, module) {
 	var passwordController = require('scripts/controllers/passwordController'),
-		loginController = require('scripts/controllers/loginController'),
-		Helper = require('scripts/public/helper');
+		loginController = require('scripts/controllers/loginController');
 
-	(new passwordController()).init();
-	(new loginController()).init();
+	exports.init = function(templateName, data) {
+		data=data||{};
+		(new passwordController()).init(templateName, data);
+		(new loginController()).init();
+	};
+
 });

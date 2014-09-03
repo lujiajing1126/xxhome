@@ -39,7 +39,11 @@ define(function(require, exports, module) {
 					$.removeCookie("userSession", {
 						path: '/'
 					});
-					window.location.href = homepage;
+					if ($("#BTN_LOGIN").length > 0) {
+						$("#BTN_LOGIN").trigger("click");
+					} else {
+						window.location.href = homepage;
+					}
 					break;
 				case 'Permission Denied':
 					throw "Permission Denied";
@@ -129,6 +133,15 @@ define(function(require, exports, module) {
 		}
 	};
 
-	exports.validateUserName = function() {};
+	/**
+	 * 验证用户名的有效性，用户名必须为手机号码或邮箱
+	 */
+	exports.validateUserName = function(userName) {
+		var result = false;
+		if (expPhoneNumber.test(userName) || expEmail.test(userName)) {
+			result = true;
+		}
+		return result;
+	};
 	//exports.goHome
 });

@@ -34,6 +34,9 @@ body {
 .body {
 	padding-top: 60px;
 	overflow:hidden;
+	&.relative{
+		padding-top:0;
+	}
 }
 ::selection {
 	background: #72d0eb;
@@ -152,4 +155,7 @@ ul, li {
 	&.no-margin{
 		margin: 0;
 	}
+}
+.error{
+	color:red;
 }

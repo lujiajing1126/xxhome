@@ -11,6 +11,9 @@ $header-height: 60px;
 	a {
 		color: $theme-color;
 	}
+	&.relative{
+		position: relative;
+	}
 }
 .logo-wrapper {
 	width: 10%;

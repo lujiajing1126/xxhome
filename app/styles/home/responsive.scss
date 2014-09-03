@@ -7,6 +7,11 @@
 			width: 100%;
 		}
 	}
+	.container{
+		&.responsive {
+			padding: 0 10px;
+		}
+	}
 	.header, .section, .footer {
 		&.responsive {
 			min-width: 0;

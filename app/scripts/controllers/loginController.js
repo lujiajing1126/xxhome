@@ -100,7 +100,7 @@ define(function(require, exports, module) {
 			getAuthCode: function() {
 				var $this = $(this),
 					phoneNumber = $("input#PHONENUM").val();
-				console.log(this);
+				
 				if (expPhoneNumber.test($.trim(phoneNumber))) {
 					if (!$this.hasClass("disabled")) {
 						$this.addClass("disabled");

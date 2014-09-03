@@ -1,5 +1,8 @@
 define(function(require, exports, module) {
-	var Q = require('sui/async/q');
+	var Q = require('sui/async/q'),
+		expPhoneNumber = /(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/,
+		expEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
 	/**
 	 * 全局异步请求处理器
 	 * @required Q.js jQuery
@@ -126,5 +129,6 @@ define(function(require, exports, module) {
 		}
 	};
 
+	exports.validateUserName = function() {};
 	//exports.goHome
 });

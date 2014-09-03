@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
-    var $ = SUI.$;
-    require('scripts/public/helpers');
+    var $ = SUI.$,
+    Helper=require('scripts/public/helper');
     /**
      * 获取当前用户信息
      * @param  {int} userId  [用户ID]
@@ -38,7 +38,7 @@ define(function(require, exports, module) {
             'membership.tags'
         ];
         var url = orgId ? '/api/org/' + orgId + '/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(',') : '/api/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(',');
-        return $.globalResponseHandler({
+        return Helper.globalResponseHandler({
             url: url,
             type: 'GET',
             dataType: 'JSON'
@@ -81,38 +81,10 @@ define(function(require, exports, module) {
             // 'dynamic.executingEvent' //executingEvent  countPraiser
             'membership.tags'
         ];
-        return $.globalResponseHandler({
+        return Helper.globalResponseHandler({
             url: '/api/org/' + orgId + '/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(','),
             type: 'GET',
             dataType: 'JSON'
         });
     };
-
-    /**
-     * 更新用户信息
-     * @param  {Integer} userId 用户ID
-     * @param  {Object} data   需要更新的资料&session
-     * @return {Promise}        $.globalResponseHandler对象
-     */
-    exports.updateUserInfo = function(userId, data) {
-        return $.globalResponseHandler({
-            url: '/api/user/' + userId + '/update',
-            type: 'POST',
-            dataType: 'JSON',
-            data: data
-        });
-    };
-    /**
-     * 获取学生居住地信息
-     * @param  {UUID} session 用户的Session令牌
-     * @param  {Integer} id 用户ID
-     * @return {Promise}
-     */
-    exports.getStudentResidenceInfoDirectory = function(session, id) {
-        id = id || 0;
-        return $.globalResponseHandler({
-            url: '/api/info/load_student_residence_info_directory?session=' + session + '&id=' + id,
-            dataType: 'json'
-        });
-    }
 });

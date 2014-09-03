@@ -68,7 +68,7 @@ define(function(require, exports, module) {
 	 */
 	var getSession = function() {
 		$.removeCookie('userSession');
-		return $.globalResponseHandler({
+		return globalResponseHandler({
 			url: "/api/session/create",
 			type: "POST",
 			dataType: "JSON"

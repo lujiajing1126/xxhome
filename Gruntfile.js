@@ -80,7 +80,8 @@ module.exports = function (grunt) {
                         'scripts/controllers/*.js',
                         'scripts/models/*.js',
                         'scripts/services/*.js',
-                        'scripts/public/*.js'],
+                        //'scripts/public/*.js'
+                        ],
                     dest: 'dist'
                 }]
             }

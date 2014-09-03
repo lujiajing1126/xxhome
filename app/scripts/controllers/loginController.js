@@ -2,7 +2,7 @@ define(function(require, exports, module) {
 	var $ = SUI.$,
 		baseController = require('scripts/baseController'),
 		bC = new baseController(),
-		userModel = require("scripts/models/UserModel"),
+		userModel = require("scripts/models/oUserModel"),
 		template = require('build/template'),
 		helper = require('scripts/public/helper');
 

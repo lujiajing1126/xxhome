@@ -32,7 +32,7 @@ define(function(require, exports, module) {
 						}
 					})["catch"])(function(err) {
 						alert(msg);
-						console.log(msg);
+						//console.log(msg);
 					});
 				}
 			}

@@ -2,9 +2,9 @@ define(function(require, exports, module) {
 	var $ = SUI.$,
 		mConst = require('scripts/public/constants').appConst,
 		Q = require('sui/async/q'),
-		UserService = require('scripts/services/UserService');
+		UserService = require('scripts/services/oUserService'),
+		Helper = require('scripts/public/helper');
 	require('sui/core/cookie');
-	require('scripts/public/helpers');
 	User = (function() {
 		/**
 		 * 私有变量
@@ -73,30 +73,30 @@ define(function(require, exports, module) {
 		 *  Access-Control-Allow-Methods:GET, POST, OPTIONS
 		 *  Access-Control-Allow-Origin:*
 		 *  Access-Control-Max-Age:86400
-		*/
+		 */
 		return Q($.ajax({
-				//url: '/api/account/login',
-				url: 'https://xiaoxiao.la/api/account/login',
+				url: '/api/account/login',
+				//url: 'https://xiaoxiao.la/api/account/login',
 				type: 'POST',
 				dataType: 'JSON',
 				data: data,
 				crossDomain: false
 			}))
-		.then(function(data,textStatus) {
-			console.log(textStatus);
-			if (data.status == "OK") {
-				user.id = data.userId;
-				return session;
-			} else if (data.status == "Error")
-				throw data.message;
-		}, function(error) {
-			throw "╮(╯▽╰)╭服务器君挂了，请稍后再试!";
-		});
+			.then(function(data, textStatus) {
+				console.log(textStatus);
+				if (data.status == "OK") {
+					user.id = data.userId;
+					return session;
+				} else if (data.status == "Error")
+					throw data.message;
+			}, function(error) {
+				throw "╮(╯▽╰)╭服务器君挂了，请稍后再试!";
+			});
 	};
 	// 根据Session取得用户登录状态
 	User.prototype.getLoginStatus = function(session, fn) {
 		var user = this;
-		$.globalResponseHandler({
+		Helper.globalResponseHandler({
 			url: "/api/account/id?session=" + session,
 			type: "GET",
 			dataType: 'JSON'
@@ -121,7 +121,7 @@ define(function(require, exports, module) {
 		if (!session) return;
 		var isLogin = false,
 			user = this;
-		$.globalResponseHandler({
+		Helper.globalResponseHandler({
 			url: "/api/account/id?session=" + session,
 			type: "GET",
 			dataType: 'JSON'
@@ -133,7 +133,7 @@ define(function(require, exports, module) {
 				isLogin = false;
 			}
 		}).done(function() {
-			fn(isLogin,session);
+			fn(isLogin, session);
 		});
 	};
 	// 根据session取得用户账户信息
@@ -209,7 +209,7 @@ define(function(require, exports, module) {
 	//登出
 	User.prototype.logout = function() {
 		var user = this;
-		$.globalResponseHandler({
+		Helper.globalResponseHandler({
 			url: '/api/account/logout',
 			type: 'POST',
 			data: {

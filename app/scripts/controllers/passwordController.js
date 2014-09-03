@@ -58,7 +58,7 @@ define(function(require, exports, module) {
 							password: oldPassword,
 							new_password: newPassword
 						}
-					}).then(function(d) {
+					}).then(function(data) {
 						//console.log(d);
 						if (data && data.status == "OK") {
 							alert("修改成功");

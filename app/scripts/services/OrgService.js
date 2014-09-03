@@ -1,11 +1,11 @@
 define(function(require, exports, module) {
-	var $ = SUI.$;
-	require('scripts/public/helper');
+	var $ = SUI.$,
+		Helper = require('scripts/public/helper');
 	/**
 	 * 获取组织信息
 	 * @param  {int} orgId   	organization id
 	 * @param  {string} session  	user session
-	 * @return {obj}         		$.globalResponseHandler ----in helpers
+	 * @return {obj}         		$.globalResponseHandler ----in helper
 	 */
 	exports.getOrganizationInfo = function(orgId, session) {
 		var fields = ['organizationInfo.id',
@@ -21,7 +21,7 @@ define(function(require, exports, module) {
 			'dynamic.numberOfExecutingEvents',
 			//'dynamic.roleType' //?: "member:admin", "member:member", "follower"
 		];
-		return $.globalResponseHandler({
+		return Helper.globalResponseHandler({
 			url: '/api/org/' + orgId + '/info?session=' + session + '&fields=' + fields.join(','),
 			type: 'GET',
 			dataType: 'JSON'

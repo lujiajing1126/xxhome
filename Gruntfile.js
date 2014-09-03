@@ -70,7 +70,9 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'app',
-                    src: ['scripts/activityInfo.js',
+                    src: [
+                        'scripts/*.js',
+                        'scripts/activityInfo.js',
                         'scripts/baseController.js',
                         'scripts/email.js',
                         'scripts/event.js',
@@ -80,7 +82,7 @@ module.exports = function (grunt) {
                         'scripts/controllers/*.js',
                         'scripts/models/*.js',
                         'scripts/services/*.js',
-                        //'scripts/public/*.js'
+                        'scripts/public/*.js'
                         ],
                     dest: 'dist'
                 }]

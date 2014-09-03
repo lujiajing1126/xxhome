@@ -1,13 +1,13 @@
 define(function(require, exports, module) {
     var $ = SUI.$,
-    Helper=require('scripts/public/helper');
+        Helper = require('scripts/public/helper');
     /**
      * 获取当前用户信息
      * @param  {int} userId  [用户ID]
      * @param  {string} session [当前用户的Session]
      * @return {obj}         [返回$.globalResponseHandler对象]
      */
-    exports.getOwnerUserInfo = function(userId, session, orgId) {
+    exports.getOwnerUserInfo = function(userId, session) {
         var fields = ['userInfo.gender',
             'userInfo.nickname',
             'userInfo.name',
@@ -37,7 +37,7 @@ define(function(require, exports, module) {
             'dynamic.executingEvent', //executingEvent  countPraiser
             'membership.tags'
         ];
-        var url = orgId ? '/api/org/' + orgId + '/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(',') : '/api/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(',');
+        var url = '/api/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(',');
         return Helper.globalResponseHandler({
             url: url,
             type: 'GET',

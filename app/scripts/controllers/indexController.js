@@ -1,8 +1,8 @@
 define(function(require, exports, module) {
 	var $ = SUI.$,
 		baseController = require('scripts/baseController'),
-		bC = new baseController();
-	require('scripts/public/helper');
+		bC = new baseController(),
+		Helper = require('scripts/public/helper');
 	var Controller = function() {
 		this.namespace = "homepage";
 		this.actions = {
@@ -14,7 +14,7 @@ define(function(require, exports, module) {
 				}
 				var orgName = prompt("请输入组织名称");
 				if (orgName) {
-					($.globalResponseHandler({
+					(Helper.globalResponseHandler({
 						"url": "/api/account/create_organization",
 						"type": "POST",
 						"dataType": "JSON",
@@ -26,7 +26,7 @@ define(function(require, exports, module) {
 							session: session
 						}
 					}).then(function(data) {
-						if (data.status == "OK"){
+						if (data.status == "OK") {
 							alert("组织创建成功，您可以进入组织管理系统！");
 							window.location.reload();
 						}

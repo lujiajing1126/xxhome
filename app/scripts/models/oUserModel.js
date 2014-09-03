@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
 	var $ = SUI.$,
-		mConst = require('scripts/public/constants').appConst,
+		//mConst = require('scripts/public/constants').appConst,
 		Q = require('sui/async/q'),
 		UserService = require('scripts/services/oUserService'),
 		Helper = require('scripts/public/helper');
@@ -75,8 +75,8 @@ define(function(require, exports, module) {
 		 *  Access-Control-Max-Age:86400
 		 */
 		return Q($.ajax({
-				url: '/api/account/login',
-				//url: 'https://xiaoxiao.la/api/account/login',
+				//url: '/api/account/login',
+				url: 'https://xiaoxiao.la/api/account/login',
 				type: 'POST',
 				dataType: 'JSON',
 				data: data,

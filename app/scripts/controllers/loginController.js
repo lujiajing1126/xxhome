@@ -117,7 +117,7 @@ define(function(require, exports, module) {
 						};
 						waiting();
 					}
-					$.getSession().then(function(session) {
+					helper.getSession().then(function(session) {
 						return helper.globalResponseHandler({
 							url: '/api/account/send_verification_request_to_phone_number',
 							type: "POST",
@@ -145,7 +145,7 @@ define(function(require, exports, module) {
 					var phoneNumber = $("input#PHONENUM").val(),
 						authcode = $("#AUTHCODE").val(),
 						password = $("#P_PWD").val();
-					$.getSession().then(function(session) {
+					helper.getSession().then(function(session) {
 						return (helper.globalResponseHandler({
 							url: '/api/account/register',
 							type: 'post',
@@ -183,7 +183,7 @@ define(function(require, exports, module) {
 					$(btn).attr("disabled", "disabled").val("注册中...");
 					var email = $("#EMAIL").val(),
 						psw = $("#E_PWD").val();
-					$.getSession().then(function(session) {
+					helper.getSession().then(function(session) {
 						return helper.globalResponseHandler({
 							url: '/api/account/register',
 							type: 'post',

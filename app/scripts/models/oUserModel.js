@@ -43,7 +43,7 @@ define(function(require, exports, module) {
 		var result = window.location.hash.match(/[\?\&]?session=([a-z0-9\-]+)/i),
 			session = result && result[1],
 			user = this;
-		console.log("NewSession is " + session);
+		//console.log("NewSession is " + session);
 		session = session || $.cookie("userSession");
 		this.setSession(session);
 		this.auth(fn);
@@ -83,7 +83,7 @@ define(function(require, exports, module) {
 				crossDomain: false
 			}))
 			.then(function(data, textStatus) {
-				console.log(textStatus);
+				//console.log(textStatus);
 				if (data.status == "OK") {
 					user.id = data.userId;
 					return session;
@@ -217,9 +217,9 @@ define(function(require, exports, module) {
 			},
 			dataType: 'JSON'
 		}).then(function(data) {
-			console.log(data);
+			//console.log(data);
 		}, function(reason) {
-			console.log(reason);
+			//console.log(reason);
 		}).done(function() {
 			user.clearSession();
 			window.location.reload();

@@ -100,7 +100,7 @@ define(function(require, exports, module) {
 			getAuthCode: function() {
 				var $this = $(this),
 					phoneNumber = $("input#PHONENUM").val();
-				
+
 				if (expPhoneNumber.test($.trim(phoneNumber))) {
 					if (!$this.hasClass("disabled")) {
 						$this.addClass("disabled");
@@ -312,7 +312,7 @@ define(function(require, exports, module) {
 		return true;
 	}
 
-	function userStatus(login,session) {
+	function userStatus(login, session) {
 		if (!login) {
 			AppUser.clearSession();
 		} else {
@@ -321,23 +321,27 @@ define(function(require, exports, module) {
 
 	};
 
-	function userNavigation(session){
+	function userNavigation(session) {
 		var html;
-			$.ajax({
-				url: '/api/account/list_administrated_organizations?session=' + session,
-				dataType: 'json',
-				success: function(data) {
-					if (data.organizations.length > 0) {
+		$.ajax({
+			url: '/api/account/list_administrated_organizations?session=' + session,
+			dataType: 'json',
+			success: function(data) {
+				if (data.status == "OK") {
+					if (data.organizations && data.organizations.length > 0) {
 						html = "<a href='/home.html#index' target='_blank'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
 					} else {
 						html = "<a href='javascript:void(0);' data-xx-action='createOrganization'><span class='org-add'>+创建组织</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
 					}
 					$("#userBox").html(html);
-				},
-				error: function(error) {
+				} else {
 					throw "组织信息获取失败！"
 				}
-			});
+			},
+			error: function(error) {
+				throw "组织信息获取失败！"
+			}
+		});
 	}
 
 	function loginErrorHandler(msg) {

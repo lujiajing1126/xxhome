@@ -6,8 +6,10 @@ define(function(require, exports, module) {
 	require("sui/bootstrap/bootstrap");
 
 	$('.body').html(template('app/templates/index', {}));
-	(new indexController()).init();
-	(new loginController()).init();
+	
+	(new loginController()).init(function(){
+		(new indexController()).init();
+	});
 	// 轮播图插件
 	$(document).on("mouseover","ul.carousel-thumb>li.node",function(){
 		$(this).parent().find("li.active").removeClass('active');

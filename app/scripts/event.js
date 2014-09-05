@@ -5,10 +5,8 @@ define(function(require, exports, module) {
 
 	var eventId = Helper.getParam("eid");
 	
-	Helper.requestWithSession(function(session) {
+	(new loginController()).init(function(){
+		var session=AppUser.getSession();
 		(new eventController(eventId)).init(session);
-		(new loginController()).init();
-	}, function(error) {
-		console.log(error);
 	});
 });

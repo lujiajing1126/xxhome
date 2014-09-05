@@ -36,14 +36,15 @@ define(function(require, exports, module) {
 					throw "对不起，您请求过于频繁，请输入验证码后再试";
 					break;
 				case 'Not Logged In':
-					$.removeCookie("userSession", {
-						path: '/'
-					});
-					if ($("#BTN_LOGIN").length > 0) {
-						$("#BTN_LOGIN").trigger("click");
-					} else {
-						window.location.href = homepage;
-					}
+					// $.removeCookie("userSession", {
+					// 	path: '/'
+					// });
+					// if ($("#BTN_LOGIN").length > 0) {
+					// 	$("#BTN_LOGIN").trigger("click");
+					// } else {
+					// 	window.location.href = homepage;
+					// }
+					return data.status;
 					break;
 				case 'Permission Denied':
 					throw "Permission Denied";
@@ -143,5 +144,10 @@ define(function(require, exports, module) {
 		}
 		return result;
 	};
-	//exports.goHome
+	exports.isEmail=function(value){
+		return expEmail.test(value);
+	};
+	exports.isPhoneNumber=function(value){
+		return expPhoneNumber.test(value);
+	};
 });

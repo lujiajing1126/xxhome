@@ -7,7 +7,7 @@
 			width: 100%;
 		}
 	}
-	.container{
+	.container {
 		&.responsive {
 			padding: 0 10px;
 		}
@@ -15,6 +15,21 @@
 	.header, .section, .footer {
 		&.responsive {
 			min-width: 0;
+		}
+	}
+	.p-content {
+		&.responsive {
+			width: 100%;
+		}
+	}
+}
+@media (max-width:786px) {
+	.p-content {
+		&.responsive {
+			width: 100%;
+			>.contact {
+				width: 100%;
+			}
 		}
 	}
 }

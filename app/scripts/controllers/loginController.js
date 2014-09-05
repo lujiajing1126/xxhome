@@ -4,7 +4,8 @@ define(function(require, exports, module) {
 		bC = new baseController(),
 		userModel = require("scripts/models/oUserModel"),
 		template = require('build/template'),
-		helper = require('scripts/public/helper');
+		helper = require('scripts/public/helper'),
+		OrganizationService = require('scripts/services/OrgService');
 
 	var expPhoneNumber = /(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/,
 		expEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
@@ -26,7 +27,6 @@ define(function(require, exports, module) {
 					if (e.keyCode == 27) //escape
 						that.actions.closeLoginBox();
 					if (e.keyCode == 13) { //enter
-						// that.actions.login();
 						$("#BOX_BTN_SIGNIN").trigger("click");
 					}
 				});
@@ -72,23 +72,22 @@ define(function(require, exports, module) {
 						};
 					}
 					$(btn).attr("disabled", "disabled").val("正在登陆...");
-					(helper.getSession().then(function(session) {
-						// user = new userModel();
-						return AppUser.login($.extend({
+					var session = AppUser.getSession();
+					if (session) {
+						(AppUser.login($.extend({
 							session: session,
 							password: password
-						}, usernameType));
-					}).then(function(session) {
-						seajs.log("session:" + session);
-						$("#Login_Box_Wrapper").removeClass("on");
-						userNavigation(session);
-
-						//window.location.href = "/home.html#index";
-					})["catch"])(function(error) {
-						loginErrorHandler(error);
-					}).done(function() {
-						$(btn).removeAttr("disabled").val("登陆");
-					});
+						}, usernameType)).then(function(session) {
+							$("#Login_Box_Wrapper").removeClass("on");
+							//userNavigation(session);
+						}))["catch"](function(error) {
+							loginErrorHandler(error);
+						}).done(function() {
+							$(btn).removeAttr("disabled").val("登陆");
+						});
+					} else {
+						window.location.reload();
+					}
 				}
 			},
 			changeModule: function() {
@@ -117,18 +116,19 @@ define(function(require, exports, module) {
 						};
 						waiting();
 					}
-					helper.getSession().then(function(session) {
-						return helper.globalResponseHandler({
-							url: '/api/account/send_verification_request_to_phone_number',
-							type: "POST",
-							dataType: "JSON",
-							data: {
-								phone_number: phoneNumber,
-								session: session
-							}
-						});
+					var session = AppUser.getSession();
+					(helper.globalResponseHandler({
+						url: '/api/account/send_verification_request_to_phone_number',
+						type: "POST",
+						dataType: "JSON",
+						data: {
+							phone_number: phoneNumber,
+							session: session
+						}
 					}).then(function(data) {
 						data.status == "OK" && console.log("验证码申请成功！");
+					}))["catch"](function(error) {
+						signupPhoneErrorHandler(error);
 					}).done();
 					return false;
 				} else {
@@ -145,8 +145,10 @@ define(function(require, exports, module) {
 					var phoneNumber = $("input#PHONENUM").val(),
 						authcode = $("#AUTHCODE").val(),
 						password = $("#P_PWD").val();
-					helper.getSession().then(function(session) {
-						return (helper.globalResponseHandler({
+
+					var session = AppUser.getSession();
+					if (session) {
+						(helper.globalResponseHandler({
 							url: '/api/account/register',
 							type: 'post',
 							dataType: 'json',
@@ -157,21 +159,21 @@ define(function(require, exports, module) {
 								password: password
 							}
 						}).then(function(data) {
-							if (data.status == "OK")
-								return "注册成功";
-							else
+							if (data.status == "OK") {
+								that.actions.closeSignupBox();
+								alert("注册成功");
+							} else
 								throw "注册失败";
 						})["catch"])(function(error) {
-							throw error;
+							signupPhoneErrorHandler(error);
+						}).done(function() {
+							$(btn).removeAttr("disabled").val("注册");
 						});
-					}).then(function(data) {
-						alert(data);
-						that.actions.closeSignupBox();
-					}, function(reason) {
-						alert(reason);
-					}).done(function() {
-						$(btn).removeAttr("disabled").val("注册");
-					});
+					} else {
+						signupPhoneErrorHandler("session不存在");
+						window.location.reload();
+					}
+
 				}
 
 			},
@@ -183,8 +185,10 @@ define(function(require, exports, module) {
 					$(btn).attr("disabled", "disabled").val("注册中...");
 					var email = $("#EMAIL").val(),
 						psw = $("#E_PWD").val();
-					helper.getSession().then(function(session) {
-						return helper.globalResponseHandler({
+
+					var session = AppUser.getSession();
+					if (session) {
+						(helper.globalResponseHandler({
 							url: '/api/account/register',
 							type: 'post',
 							dataType: 'json',
@@ -195,38 +199,52 @@ define(function(require, exports, module) {
 							}
 						}).then(function(data) {
 							console.log(data);
-							if (data.status == "OK")
-								return "请求成功，请查收您的邮箱并验证！";
-							else
+							if (data.status == "OK") {
+								alert("请求成功，请查收您的邮箱并验证！");
+								that.actions.closeSignupBox();
+							} else
 								throw "注册失败";
-						}, function(error) {
-							throw error;
+						}))["catch"](function(error) {
+							signupEmailErrorHandler(error);
+						}).done(function() {
+							$(btn).removeAttr("disabled").val("注册并验证邮箱");
 						});
-					}).then(function(data) {
-						alert(data);
-						that.actions.closeSignupBox();
-					}, function(error) {
-						signupEmailErrorHandler(error);
-					}).done(function() {
-						$(btn).removeAttr("disabled").val("注册并验证邮箱");
-					});
+					} else {
+						signupPhoneErrorHandler("session不存在");
+						window.location.reload();
+					}
 				}
 				return false;
 			},
 			Logout: function() {
 				AppUser.logout();
+			},
+			createOrganization: function() {
+				var session = AppUser.getSession();
+				if (!session) {
+					alert("请先登录！");
+					return;
+				}
+				var orgName = prompt("请输入组织名称");
+				if (orgName) {
+					(OrganizationService.createOrganization(orgName, session).then(function(data) {
+						if (data.status == "OK") {
+							alert("组织创建成功，您可以进入组织管理系统！");
+							window.location.reload();
+						}
+					}))["catch"](function(error) {
+						alert(error);
+					}).done();
+				}
 			}
 		};
 	};
 	bC.extend(Controller);
-	Controller.prototype.init = function() {
+	Controller.prototype.init = function(fnc) {
 		var _controller = this;
 		// 初始化用户，全局唯一的用户示例
 		window.AppUser = new userModel();
-		var session = $.cookie("userSession");
-		if (session) {
-			AppUser.isUserLogin(session, userStatus);
-		}
+		AppUser.init(fnc);
 
 		$(document).on("click", "[data-xx-login-action]", function(ev) {
 			var fn = $(this).attr("data-xx-login-action");
@@ -310,38 +328,6 @@ define(function(require, exports, module) {
 			return false;
 		}
 		return true;
-	}
-
-	function userStatus(login, session) {
-		if (!login) {
-			AppUser.clearSession();
-		} else {
-			userNavigation(session);
-		}
-
-	};
-
-	function userNavigation(session) {
-		var html;
-		$.ajax({
-			url: '/api/account/list_administrated_organizations?session=' + session,
-			dataType: 'json',
-			success: function(data) {
-				if (data.status == "OK") {
-					if (data.organizations && data.organizations.length > 0) {
-						html = "<a href='/home.html#index' target='_blank'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
-					} else {
-						html = "<a href='javascript:void(0);' data-xx-action='createOrganization'><span class='org-add'>+创建组织</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
-					}
-					$("#userBox").html(html);
-				} else {
-					throw "组织信息获取失败！"
-				}
-			},
-			error: function(error) {
-				throw "组织信息获取失败！"
-			}
-		});
 	}
 
 	function loginErrorHandler(msg) {

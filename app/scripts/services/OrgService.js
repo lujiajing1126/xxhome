@@ -27,4 +27,19 @@ define(function(require, exports, module) {
 			dataType: 'JSON'
 		});
 	};
+
+	exports.createOrganization = function(orgName, session) {
+		return Helper.globalResponseHandler({
+			"url": "/api/account/create_organization",
+			"type": "POST",
+			"dataType": "JSON",
+			"data": {
+				parentId: "",
+				email: "",
+				name: orgName,
+				decription: "",
+				session: session
+			}
+		});
+	};
 });

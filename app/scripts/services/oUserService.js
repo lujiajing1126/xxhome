@@ -64,27 +64,50 @@ define(function(require, exports, module) {
             'extendedUserInfo.isInRelation',
             'extendedUserInfo.location',
             'extendedUserInfo.sexualOrientation', //性取向
-            // 'userInfo.emails',
-            // 'userInfo.phoneNumbers',
-            //'studentInfo.studentId',
-            //'studentInfo.district',
-            //'studentInfo.major',//专业
-            // 'studentInfo.classId',
-            //'extendedUserInfo.dayOfBirth',
-            //'extendedUserInfo.instanceMessageAccounts',//微信号
-            //'extendedUserInfo.monthOfBirth',
-            // 'extendedUserInfo.yearOfBirth',
-            // 'dynamic.numberOfFriends',
-            // 'dynamic.numberOfFollowers',
-            // 'dynamic.numberOfExecutingEvents',
-            // 'dynamic.isfriend', //不是好友 返回 是否关注 isFollower
-            // 'dynamic.executingEvent' //executingEvent  countPraiser
             'membership.tags'
         ];
         return Helper.globalResponseHandler({
             url: '/api/org/' + orgId + '/user/' + userId + '/info?session=' + session + '&fields=' + fields.join(','),
             type: 'GET',
             dataType: 'JSON'
+        });
+    };
+
+
+    /**
+     * 邮箱获取验证码
+     */
+    exports.getAuthCode = function(userName, session) {
+        return Helper.globalResponseHandler({
+            url: '/api/account/find_password',
+            type: 'post',
+            dataType: 'JSON',
+            data: {
+                contact: userName,
+                session: session
+            }
+        });
+    };
+    /**
+     * 重置密码
+     */
+    exports.resetPassword = function(userName, authCode, newPassword, session) {
+        var data = {
+            new_password: newPassword,
+            token: authCode,
+            session: session
+        };
+        if (Helper.isEmail(userName)) {
+            data.email = userName;
+        }
+        if (Helper.isPhoneNumber(userName)) {
+            data.phone_number = userName;
+        }
+        return Helper.globalResponseHandler({
+            url: '/api/account/reset_password',
+            type: 'post',
+            dataType: 'JSON',
+            data: data
         });
     };
 });

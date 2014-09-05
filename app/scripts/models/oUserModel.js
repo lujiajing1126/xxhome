@@ -40,13 +40,19 @@ define(function(require, exports, module) {
 	 * init UserModel get Session from hash or cookie
 	 */
 	User.prototype.init = function(fn) {
-		var result = window.location.hash.match(/[\?\&]?session=([a-z0-9\-]+)/i),
-			session = result && result[1],
-			user = this;
-		//console.log("NewSession is " + session);
-		session = session || $.cookie("userSession");
-		this.setSession(session);
-		this.auth(fn);
+		var user = this,
+			session = $.cookie("userSession");
+		if (session) {
+			//user.setSession(session);
+			user.isUserLogin(session, fn);
+		} else {
+			(Helper.getSession().then(function(session) {
+				//user.setSession(session);
+				user.isUserLogin(session, fn);
+			}))["catch"](function(error) {
+				alert(error);
+			}).done();
+		}
 
 	};
 	/**
@@ -66,7 +72,6 @@ define(function(require, exports, module) {
 	User.prototype.login = function(data) {
 		var session = data.session,
 			user = this;
-		user.setSession(session);
 		/**
 		 *  send OPTIONS to validate Access-Control-Allow-Headers
 		 *  Access-Control-Allow-Headers:reqid, nid, host, x-real-ip, x-forwarded-ip, event-type, event-id, accept, content-type, x-requested-with
@@ -75,16 +80,16 @@ define(function(require, exports, module) {
 		 *  Access-Control-Max-Age:86400
 		 */
 		return Q($.ajax({
-				//url: '/api/account/login',
-				url: 'https://xiaoxiao.la/api/account/login',
+				url: '/api/account/login',
+				//url: 'https://xiaoxiao.la/api/account/login',
 				type: 'POST',
 				dataType: 'JSON',
 				data: data,
 				crossDomain: false
-			}))
-			.then(function(data, textStatus) {
+			})).then(function(data) {
 				//console.log(textStatus);
 				if (data.status == "OK") {
+					userNavigation(session);
 					user.id = data.userId;
 					return session;
 				} else if (data.status == "Error")
@@ -98,7 +103,6 @@ define(function(require, exports, module) {
 		var user = this;
 		Helper.globalResponseHandler({
 			url: "/api/account/id?session=" + session,
-			type: "GET",
 			dataType: 'JSON'
 		}).then(function(data) {
 			if (data && data.userId) {
@@ -119,21 +123,26 @@ define(function(require, exports, module) {
 	 */
 	User.prototype.isUserLogin = function(session, fn) {
 		if (!session) return;
-		var isLogin = false,
-			user = this;
+		var user = this;
+		user.isLogin=false;
+		user.setSession(session);
 		Helper.globalResponseHandler({
 			url: "/api/account/id?session=" + session,
-			type: "GET",
 			dataType: 'JSON'
 		}).then(function(data) {
 			if (data && data.userId) {
 				user.id = data.userId;
-				isLogin = true;
+				user.setSession(session);
+				user.isLogin=true;
+				userNavigation(session);
+			}else if(data=="Not Logged In"){
+				//session有效，但未登录
 			} else {
-				isLogin = false;
+				user.clearSession();
+				window.location.reload();
 			}
 		}).done(function() {
-			fn(isLogin, session);
+			fn && $.isFunction(fn) && fn(session);
 		});
 	};
 	// 根据session取得用户账户信息
@@ -229,6 +238,30 @@ define(function(require, exports, module) {
 		this.id = data.id;
 		this.name = data.name;
 		this.org = data.org;
+	}
+
+
+	function userNavigation(session) {
+		var html;
+		$.ajax({
+			url: '/api/account/list_administrated_organizations?session=' + session,
+			dataType: 'json',
+			success: function(data) {
+				if (data.status == "OK") {
+					if (data.organizations && data.organizations.length > 0) {
+						html = "<a href='/home.html#index' target='_blank'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
+					} else {
+						html = "<a href='javascript:void(0);' data-xx-login-action='createOrganization'><span class='org-add'>+创建组织</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
+					}
+					$("#userBox").html(html);
+				} else {
+					throw "组织信息获取失败！"
+				}
+			},
+			error: function(error) {
+				throw "组织信息获取失败！"
+			}
+		});
 	}
 	module.exports = User;
 });

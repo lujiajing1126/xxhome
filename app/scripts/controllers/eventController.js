@@ -16,7 +16,7 @@ define(function(require, exports, module) {
 			return;
 		}
 
-		EventService.getEventInfo(eventId, session).then(function(data) {
+		(EventService.getEventInfo(eventId, session).then(function(data) {
 			if (data.status == "OK") {
 			var eventInfo = data.static;
 				eventInfo.pageType="responsive";//响应式
@@ -24,7 +24,7 @@ define(function(require, exports, module) {
 				eventInfo.descriptions = eventInfo.description ? eventInfo.description.split(/\r\n/g) : ["活动无简介"];
 				$('.body').html(template('app/templates/event', eventInfo));
 			}
-		}).catch(function(error) {
+		}))["catch"](function(error) {
 			window.location.href="http://xiaoxiao.la/404.html";
 		}).done();
 	};

@@ -3,17 +3,51 @@ define(function(require, exports, module) {
 		baseController = require('scripts/baseController'),
 		bC = new baseController(),
 		template = require('build/template'),
-		Helper = require('scripts/public/helper');
+		Helper = require('scripts/public/helper'),
+		UserService = require('scripts/services/oUserService');
 
 	var Controller = function(eventId) {
 		this.namespace = "password";
 		this.actions = {
-			//忘记密码
-			getPassword: function(event) {
+			//获取验证码
+			getAuthCode: function(event) {
 				event.preventDefault();
+				var btn_auth_code = this;
 				var userName = $.trim($("#userName").val());
 				if (Helper.validateUserName(userName)) {
-					//ajax请求后台发送短信或邮箱
+					var btnMessage, session = AppUser.getSession();
+					if (Helper.isEmail(userName)) {
+						btnMessage = "邮箱验证码已在路上...";
+					}
+					if (Helper.isPhoneNumber(userName)) {
+						btnMessage = "短信验证码已在路上...";
+					}
+					btn_auth_code.attr("disabled", "disabled").text(btnMessage);
+
+					if (session) {
+						getAuthCode(userName, session, btn_auth_code);
+					} else {
+						window.location.reload();
+					}
+				} else {
+					alert("无效的用户名");
+				}
+			},
+			//重置密码
+			resetPassword: function() {
+				event.preventDefault();
+				var userName = $.trim($("#userName").val()),
+					authCode = $("#authCode").val(),
+					newPassword = $("#newPassword").val(),
+					session = AppUser.getSession();
+				if (Helper.validateUserName(userName)) {
+					(UserService.resetPassword(userName, authCode, newPassword, session).then(function(data) {
+						if (data && data.status == "OK") {
+							alert("密码修改成功");
+						}
+					}))["catch"](function(error) {
+						alert(error);
+					}).done();
 				} else {
 					alert("无效的用户名");
 				}
@@ -36,8 +70,8 @@ define(function(require, exports, module) {
 					msg = "请确认新密码";
 				} else if (newPassword != confirmPassword) {
 					msg = "两次新密码不一致";
-				}else if(newPassword.length<3||newPassword.length>12){
-					msg="密码长度必须为3-12位";
+				} else if (newPassword.length < 3 || newPassword.length > 12) {
+					msg = "密码长度必须为3-12位";
 				} else if (oldPassword == newPassword) {
 					msg = "新密码不能与旧密码一样";
 				}
@@ -49,7 +83,7 @@ define(function(require, exports, module) {
 				Helper.requestWithSession(success, error);
 
 				function success(session) {
-					Helper.globalResponseHandler({
+					(Helper.globalResponseHandler({
 						url: '/api/account/change_password',
 						type: 'post',
 						dtaType: 'json',
@@ -65,7 +99,7 @@ define(function(require, exports, module) {
 						} else {
 							throw data || "请求失败";
 						}
-					}).catch(function(error) {
+					}))["catch"](function(error) {
 						alert(error);
 					}).done();
 				}
@@ -86,11 +120,25 @@ define(function(require, exports, module) {
 			event = event || window.event;
 			_controller.actions && _controller.actions[$action] && $.isFunction(_controller.actions[$action]) && _controller.actions[$action].call($this, event);
 		});
-
+		$(document).on("keyup." + this.namespace, "#userName", function(event) {
+			event = event || window.event;
+			var userName = $(this).val();
+			if (Helper.isEmail(userName) || Helper.isPhoneNumber(userName)) {
+				$("#btn_auth_code").show();
+			} else {
+				$("#btn_auth_code").hide();
+			}
+		});
 	};
 
-	function validate() {
-
+	function getAuthCode(userName, session, btn_auth_code) {
+		(UserService.getAuthCode(userName, session).then(function(data) {
+			if (data && data.status == "OK") {
+				btn_auth_code.text("验证码发送成功！");
+			}
+		}))["catch"](function(error) {
+			btn_auth_code.removeAttr("disabled").text("验证码发送失败，请重试！");
+		}).done();
 	}
 
 

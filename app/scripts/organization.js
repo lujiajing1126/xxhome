@@ -4,12 +4,9 @@ define(function(require, exports, module) {
 		Helper = require('scripts/public/helper');
 
 	var orgId = Helper.getParam("oid");
-	
-	Helper.requestWithSession(function(session) {
-		(new organizationController(orgId)).init(session);
-		(new loginController()).init();
-	}, function(error) {
 
-		console.log(error);
+	(new loginController()).init(function() {
+		var session = AppUser.getSession();
+		(new organizationController(orgId)).init(session);
 	});
 });

@@ -36,21 +36,32 @@ define(function(require, exports, module) {
 			//重置密码
 			resetPassword: function() {
 				event.preventDefault();
+				var msg;
 				var userName = $.trim($("#userName").val()),
 					authCode = $("#authCode").val(),
 					newPassword = $("#newPassword").val(),
+					reNewPassword=$("#reNewPassword").val(),
 					session = AppUser.getSession();
-				if (Helper.validateUserName(userName)) {
-					(UserService.resetPassword(userName, authCode, newPassword, session).then(function(data) {
-						if (data && data.status == "OK") {
-							alert("密码修改成功");
-						}
-					}))["catch"](function(error) {
-						alert(error);
-					}).done();
-				} else {
-					alert("无效的用户名");
+				if (!Helper.validateUserName(userName)) {
+					msg="用户名必须为手机号码或者邮箱！";
+				} else if(authCode.length<=0){
+					msg="验证码不能为空！";
+				}else if(newPassword.length<3||newPassword.length>12){
+					msg="密码长度必须为3-12位";
+				}else if(newPassword!=reNewPassword){
+					msg="两次新密码不一致";
 				}
+				if(msg){
+					alert(msg);
+					return;
+				}
+				(UserService.resetPassword(userName, authCode, newPassword, session).then(function(data) {
+					if (data && data.status == "OK") {
+						alert("密码修改成功");
+					}
+				}))["catch"](function(error) {
+					alert(error);
+				}).done();
 			},
 			//修改密码
 			changePassword: function(event) {
@@ -141,6 +152,11 @@ define(function(require, exports, module) {
 		}).done();
 	}
 
+	// function validate(){
+	// 	var msg;
+	// 	var userName=$("#userName").val();
+	// 	if(!Helper.isEmail(userName)&&!Helper.isPhoneNumber(userName))
+	// }
 
 	module.exports = Controller;
 });

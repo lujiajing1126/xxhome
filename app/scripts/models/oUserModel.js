@@ -80,8 +80,8 @@ define(function(require, exports, module) {
 		 *  Access-Control-Max-Age:86400
 		 */
 		return Q($.ajax({
-				url: '/api/account/login',
-				//url: 'https://xiaoxiao.la/api/account/login',
+				//url: '/api/account/login',
+				url: 'https://xiaoxiao.la/api/account/login',
 				type: 'POST',
 				dataType: 'JSON',
 				data: data,

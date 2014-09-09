@@ -126,7 +126,9 @@ define(function(require, exports, module) {
 							session: session
 						}
 					}).then(function(data) {
-						data.status == "OK" && console.log("验证码申请成功！");
+						if(data.status == "OK"){
+							alert("验证码已经在路上了！");
+						}
 					}))["catch"](function(error) {
 						signupPhoneErrorHandler(error);
 					}).done();
@@ -198,7 +200,6 @@ define(function(require, exports, module) {
 								password: psw
 							}
 						}).then(function(data) {
-							console.log(data);
 							if (data.status == "OK") {
 								alert("请求成功，请查收您的邮箱并验证！");
 								that.actions.closeSignupBox();

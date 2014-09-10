@@ -77,13 +77,25 @@ define(function(require, exports, module) {
     /**
      * 邮箱获取验证码
      */
-    exports.getAuthCode = function(userName, session) {
+    exports.getAuthCodeForEmail = function(userName, session) {
         return Helper.globalResponseHandler({
-            url: '/api/account/find_password',
-            type: 'post',
+            url: '/api/account/find_password_by_email',
             dataType: 'JSON',
             data: {
-                contact: userName,
+                email: userName,
+                session: session
+            }
+        });
+    };
+    /**
+     * 手机获取验证码
+     */
+    exports.getAuthCodeForPhone = function(userName, session) {
+        return Helper.globalResponseHandler({
+            url: '/api/account/find_password_by_phone_number',
+            dataType: 'JSON',
+            data: {
+                phone_number: userName,
                 session: session
             }
         });
@@ -92,19 +104,21 @@ define(function(require, exports, module) {
      * 重置密码
      */
     exports.resetPassword = function(userName, authCode, newPassword, session) {
-        var data = {
+        var url, data = {
             new_password: newPassword,
             token: authCode,
             session: session
         };
         if (Helper.isEmail(userName)) {
             data.email = userName;
+            url = "/api/account/reset_password_by_email";
         }
         if (Helper.isPhoneNumber(userName)) {
             data.phone_number = userName;
+            url = "/api/account/reset_password_by_phone_number";
         }
         return Helper.globalResponseHandler({
-            url: '/api/account/reset_password',
+            url: url,
             type: 'post',
             dataType: 'JSON',
             data: data

@@ -15,17 +15,19 @@ define(function(require, exports, module) {
 				var btn_auth_code = this;
 				var userName = $.trim($("#userName").val());
 				if (Helper.validateUserName(userName)) {
-					var btnMessage, session = AppUser.getSession();
+					var btnMessage, userNameType, session = AppUser.getSession();
 					if (Helper.isEmail(userName)) {
 						btnMessage = "邮箱验证码已在路上...";
+						userNameType = "email";
 					}
 					if (Helper.isPhoneNumber(userName)) {
 						btnMessage = "短信验证码已在路上...";
+						userNameType = "phone";
 					}
 					btn_auth_code.attr("disabled", "disabled").text(btnMessage);
 
 					if (session) {
-						getAuthCode(userName, session, btn_auth_code);
+						getAuthCode(userName, session, btn_auth_code, userNameType);
 					} else {
 						window.location.reload();
 					}
@@ -40,18 +42,18 @@ define(function(require, exports, module) {
 				var userName = $.trim($("#userName").val()),
 					authCode = $("#authCode").val(),
 					newPassword = $("#newPassword").val(),
-					reNewPassword=$("#reNewPassword").val(),
+					reNewPassword = $("#reNewPassword").val(),
 					session = AppUser.getSession();
 				if (!Helper.validateUserName(userName)) {
-					msg="用户名必须为手机号码或者邮箱！";
-				} else if(authCode.length<=0){
-					msg="验证码不能为空！";
-				}else if(newPassword.length<3||newPassword.length>12){
-					msg="密码长度必须为3-12位";
-				}else if(newPassword!=reNewPassword){
-					msg="两次新密码不一致";
+					msg = "用户名必须为手机号码或者邮箱！";
+				} else if (authCode.length <= 0) {
+					msg = "验证码不能为空！";
+				} else if (newPassword.length < 3 || newPassword.length > 12) {
+					msg = "密码长度必须为3-12位";
+				} else if (newPassword != reNewPassword) {
+					msg = "两次新密码不一致";
 				}
-				if(msg){
+				if (msg) {
 					alert(msg);
 					return;
 				}
@@ -142,8 +144,9 @@ define(function(require, exports, module) {
 		});
 	};
 
-	function getAuthCode(userName, session, btn_auth_code) {
-		(UserService.getAuthCode(userName, session).then(function(data) {
+	function getAuthCode(userName, session, btn_auth_code, type) {
+		var service = type == "email" ? "getAuthCodeForEmail" : "getAuthCodeForPhone";
+		(UserService[service](userName, session).then(function(data) {
 			if (data && data.status == "OK") {
 				btn_auth_code.text("验证码发送成功！");
 			}
@@ -151,12 +154,6 @@ define(function(require, exports, module) {
 			btn_auth_code.removeAttr("disabled").text("验证码发送失败，请重试！");
 		}).done();
 	}
-
-	// function validate(){
-	// 	var msg;
-	// 	var userName=$("#userName").val();
-	// 	if(!Helper.isEmail(userName)&&!Helper.isPhoneNumber(userName))
-	// }
 
 	module.exports = Controller;
 });

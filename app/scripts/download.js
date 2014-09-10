@@ -16,10 +16,11 @@ define(function(require, exports, module) {
 		} else {
 			templateName = 'app/templates/download_pc';
 		}
-		templateName = 'app/templates/download_phone';
+		//templateName = 'app/templates/download_phone';
 
 		$(".body").append(template(templateName, {}));
 
+		//微信不能下载哦亲
 		if (b.wx) {
 			$(".wx-wrapper").show();
 		}

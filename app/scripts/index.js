@@ -16,7 +16,7 @@ define(function(require, exports, module) {
 		$(this).addClass('active');
 		$("ul.carousel-image").find("li:visible").css({display:"none"});
 		var index = $(this).attr("index");
-		console.log(index);
+		//console.log(index);
 		$("ul.carousel-image li").eq(index).css({display:'list-item'});
 	});
 	$(document).on("click",".nav.nav-org>li:not(.active)",function(){

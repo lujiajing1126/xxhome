@@ -16,7 +16,7 @@ define(function(require, exports, module) {
 		}
 		
 		(OrganizationService.getOrganizationInfo(orgId, session).then(function(data) {
-			console.log(data);
+			//console.log(data);
 			if (data.status == "OK") {
 				data.organizationInfo.descriptions = data.organizationInfo.description ? data.organizationInfo.description.split(/\r\n/g) : ["无简介"];
 				$('.body').html(template('app/templates/organization', data));

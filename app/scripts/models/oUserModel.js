@@ -255,11 +255,11 @@ define(function(require, exports, module) {
 					}
 					$("#userBox").html(html);
 				} else {
-					throw "组织信息获取失败！"
+					throw data;
 				}
 			},
 			error: function(error) {
-				throw "组织信息获取失败！"
+				alert("组织信息获取失败！");
 			}
 		});
 	}

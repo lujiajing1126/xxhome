@@ -70,8 +70,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'app',
-                    src: [
-                        'scripts/*.js',
+                    src: ['scripts/*.js',
                         'scripts/activityInfo.js',
                         'scripts/baseController.js',
                         'scripts/email.js',
@@ -82,8 +81,7 @@ module.exports = function (grunt) {
                         'scripts/controllers/*.js',
                         'scripts/models/*.js',
                         'scripts/services/*.js',
-                        'scripts/public/*.js'
-                        ],
+                        'scripts/public/*.js'],
                     dest: 'dist'
                 }]
             }
@@ -418,7 +416,7 @@ module.exports = function (grunt) {
             ],
             dist: [
                 'sass',
-                'copy:styles'            ]
+                'copy:styles']
         },
         // TmodJs to Compile
         tmod: {

@@ -103,6 +103,9 @@
 				//background-position-y: -100%;
 				background-position-x: -100%;	
 			}
+			&.waiting{
+				background-image: url(../images/download/ph-iPhone-waiting.png);
+			}
 		}
 		&.android {
 			top: 75%;

@@ -12,7 +12,6 @@ define(function(require, exports, module) {
 
 		if (b.android || b.ios || b.wx) {
 			templateName = 'app/templates/download_phone';
-
 		} else {
 			templateName = 'app/templates/download_pc';
 		}

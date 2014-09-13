@@ -416,7 +416,8 @@ module.exports = function (grunt) {
             ],
             dist: [
                 'sass',
-                'copy:styles']
+                'copy:styles'
+            ]
         },
         // TmodJs to Compile
         tmod: {

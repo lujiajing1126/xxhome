@@ -149,6 +149,8 @@ define(function(require, exports, module) {
 		(UserService[service](userName, session).then(function(data) {
 			if (data && data.status == "OK") {
 				btn_auth_code.text("验证码发送成功！");
+			} else if (data.status == "Error") {
+				btn_auth_code.text(data.message);
 			}
 		}))["catch"](function(error) {
 			btn_auth_code.removeAttr("disabled").text("验证码发送失败，请重试！");

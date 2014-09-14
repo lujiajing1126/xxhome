@@ -4,7 +4,9 @@ define(function(require, exports, module) {
 		bC = new baseController(),
 		template = require('build/template'),
 		Helper = require('scripts/public/helper'),
-		UserService = require('scripts/services/oUserService');
+		UserService = require('scripts/services/oUserService'),
+		bowser = require('scripts/public/bowser'),
+		b = bowser.bowser;
 
 	var Controller = function(eventId) {
 		this.namespace = "password";
@@ -125,7 +127,11 @@ define(function(require, exports, module) {
 	};
 	bC.extend(Controller);
 	Controller.prototype.init = function(templateName, data) {
-		$(".body").append(template(templateName, data || {}));
+		if (b.android || b.ios || b.wx) {
+			$(".body").append(template(templateName, data || {mobile:true}));
+		} else {
+			$(".body").append(template(templateName, data || {}));
+		}
 		var _controller = this;
 		$(document).on("click." + this.namespace, "[data-xx-action]", function(event) {
 			var $this = $(this),

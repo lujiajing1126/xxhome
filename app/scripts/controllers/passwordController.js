@@ -159,7 +159,7 @@ define(function(require, exports, module) {
 				btn_auth_code.text(data.message);
 			}
 		}))["catch"](function(error) {
-			btn_auth_code.removeAttr("disabled").text("验证码发送失败，请重试！");
+			btn_auth_code.removeAttr("disabled").text(error);
 		}).done();
 	}
 

@@ -79,21 +79,23 @@ define(function(require, exports, module) {
 		 *  Access-Control-Allow-Origin:*
 		 *  Access-Control-Max-Age:86400
 		 */
+		var DEBUG=Helper.getParam("dev");
+		var url = DEBUG ? '/api/account/login' : 'https://xiaoxiao.la/api/account/login';
 		return Q($.ajax({
-				url: '/api/account/login',
-				//url: 'https://xiaoxiao.la/api/account/login',
+				url: url,
 				type: 'POST',
 				dataType: 'JSON',
 				data: data,
 				crossDomain: false
 			})).then(function(data) {
-				//console.log(textStatus);
 				if (data.status == "OK") {
 					userNavigation(session);
 					user.id = data.userId;
 					return session;
 				} else if (data.status == "Error")
 					throw data.message;
+				else
+					throw data.status;
 			}, function(error) {
 				throw "╮(╯▽╰)╭服务器君挂了，请稍后再试!";
 			});

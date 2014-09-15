@@ -4,7 +4,8 @@
 <!-- section content -->
 <div class="wrapper responsive">
 	<header class="content-header">
-		<div class="home-org-bg xx-logo" style="background-image:url(images/default/101.jpg);">
+		<div class="home-org-bg" >
+		<div class="org-back-image image-back  blur  xx-logo" style="background-image:url(images/default/101.jpg);"></div>
 			<div class="home-org-logo-wrapper">
 				<div class="home-org-logo xx-logo xx-logo-100" style="background-image:url(/api/org/{{organizationInfo.id}}/logo),url(images/default/2.png)"></div>
 				<div class="org-type-icon-wrapper width30 right-bottom-20">
@@ -26,25 +27,24 @@
 		</div>
 		<div class="home-org-base-info row no-margin">
 			<!-- <div class="col-sm-2 col-xs-2 home-org-logo-wrapper"></div> -->
-			<div class="col-sm-8 col-xs-8">
+			<div class="col-sm-12 col-xs-12 base-info-wrapper" >
 				<p class="org-title">
-					<span class="helper-font-24 xx-theme-color">{{organizationInfo.name}}</span>
+					<span class="helper-font-18 xx-theme-color">{{organizationInfo.name}}</span>
 				</p>
 			</div>
-			<div class="col-sm-4 col-xs-4 home-org-label-wrapper">
-				<!-- <span data-toggle="tooltip" data-placement="top" data-original-title="组织成员数"> <i class="fa fa-group xx-theme-color"></i>
+			<!-- <div class="col-sm-4 col-xs-4 home-org-label-wrapper">
+				<span data-toggle="tooltip" data-placement="top" data-original-title="组织成员数"> <i class="fa fa-group xx-theme-color"></i>
 				{{dynamic.numberOfMembers}}
-			</span>
-			<span data-toggle="tooltip" data-placement="top" data-original-title="粉丝人数"> <i class="fa fa-heart xx-theme-color"></i>
-				{{dynamic.numberOfFollowers}}
-			</span>
-			<span data-toggle="tooltip" data-placement="top" data-original-title="发布活动数">
-				<i class="fa fa-list-alt xx-theme-color"></i>
-				{{dynamic.numberOfExecutingEvents||0}}
-			</span>
-			-->
+				</span>
+				<span data-toggle="tooltip" data-placement="top" data-original-title="粉丝人数"> <i class="fa fa-heart xx-theme-color"></i>
+					{{dynamic.numberOfFollowers}}
+				</span>
+				<span data-toggle="tooltip" data-placement="top" data-original-title="发布活动数">
+					<i class="fa fa-list-alt xx-theme-color"></i>
+					{{dynamic.numberOfExecutingEvents||0}}
+				</span>
+			</div>-->
 		</div>
-	</div>
 </header>
 <section class="content-body">
 	<div class="home-org-description">
@@ -53,7 +53,7 @@
 		{{/each}}
 	</div>
 	<div class="home-org-contact">
-		<p>类型：{{extendedOrganizationInfo.type||"其他"}}</p>
+		<p>类型：{{(extendedOrganizationInfo&&extendedOrganizationInfo.type)||"其他"}}</p>
 		<p>联系人：{{organizationInfo.contactName}}</p>
 		<p>联系邮箱：{{organizationInfo.email}}</p>
 	</div>

@@ -4,10 +4,18 @@
 }
 .home-org-bg {
 	height: 500px;
+	.org-back-image {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
 }
 .home-org-base-info {
-	height: 60px;
+	//height: 60px;
 	background-color: #eafaff;
+	.base-info-wrapper {
+		padding-top: 10px;
+	}
 	.home-msg {
 		height: 100%;
 		line-height: 60px;
@@ -35,7 +43,7 @@
 		}
 	}
 	.org-title {
-		line-height: 60px;
+		line-height: 30px;
 	}
 }
 .home-org-description {
@@ -55,23 +63,24 @@
 }
 .home-org-logo-wrapper {
 	position: relative;
-	height:100px;
-	width:100px;
-	margin:0 auto;
-	top:200px;
-}
-.home-org-logo {
-	border: 4px solid #fff;
-	position: absolute;
-	right: 0;
-	bottom: 10px;
+	//height: 100px;
+	width: 100px;
+	margin: 0 auto;
+	bottom: 200px;
+	.home-org-logo {
+		border: 4px solid #fff;
+		position: absolute;
+		right: 0;
+		bottom: 10px;
+		border-radius: 10%;
+	}
 }
 @media (max-width:786px) {
 	.home-org-bg {
 		height: 300px;
-		position:relative;
+		position: relative;
 	}
 	.home-org-logo-wrapper {
-		top: 100px;
+		bottom: 100px;
 	}
 }

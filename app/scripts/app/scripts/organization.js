@@ -1,0 +1,1 @@
+define(function(a){var b=a("scripts/controllers/organizationController"),c=a("scripts/controllers/loginController"),d=a("scripts/public/helper"),e=d.getParam("oid");(new c).init(function(){var a=AppUser.getSession();new b(e).init(a)})});

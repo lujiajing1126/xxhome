@@ -162,9 +162,9 @@ ul, li {
 //模糊
 .blur {
 	filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
-	-webkit-filter: blur(20px); /* Chrome, Opera */
-	-moz-filter: blur(20px);
-	-ms-filter: blur(20px);
-	filter: blur(20px);
-	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=20, MakeShadow=false); /* IE6~IE9 */
+	-webkit-filter: blur(5px); /* Chrome, Opera */
+	-moz-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=5, MakeShadow=false); /* IE6~IE9 */
 }

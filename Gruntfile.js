@@ -322,6 +322,15 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        // jsmin:{
+        //     dist:{
+        //         files:[{
+        //             cwd:'<%= config.dist %>',
+        //             src:'<%= config.dist %>/scripts/**/*.js',
+        //             dest:'<%= config.dist %>/scripts'
+        //         }]
+        //     }
+        // },
 
         // By default, your `index.html`'s <!-- Usemin block --> will take care of
         // minification. These next options are pre-configured if you do not wish
@@ -338,11 +347,15 @@ module.exports = function (grunt) {
         // },
         // uglify: {
         //     dist: {
-        //         files: {
-        //             '<%= config.dist %>/scripts/scripts.js': [
-        //                 '<%= config.dist %>/scripts/scripts.js'
-        //             ]
-        //         }
+        //         options:{
+        //             mangle:true,
+        //             preserveComments:false
+        //         },
+        //         files: [{
+        //             expand:true,
+        //             src:'<%= config.app %>/scripts/**/*.js',
+        //             dest:'<%= config.dist %>/scripts'
+        //         }]
         //     }
         // },
         // concat: {
@@ -473,10 +486,9 @@ module.exports = function (grunt) {
         'concurrent:dist',
         'autoprefixer',
         'copy:dist',
-        'modernizr',
         'rev',
         'imagemin',
-        'usemin',
+        'modernizr',
         'tmod',
         'htmlmin',
         'transport',

@@ -1,0 +1,1 @@
+define(function(a,b){var c=a("scripts/controllers/passwordController"),d=a("scripts/controllers/loginController");b.init=function(a,b){b=b||{},(new d).init(function(){(new c).init(a,b)})}});

@@ -127,10 +127,15 @@ define(function(require, exports, module) {
 	};
 	bC.extend(Controller);
 	Controller.prototype.init = function(templateName, data) {
+		data = data || {};
 		if (b.android || b.ios || b.wx) {
-			$(".body").append(template(templateName, data || {mobile:true}));
+			$(".body").css({
+				"padding-top": 0
+			});
+			data.mobile=true;
+			$(".body").append(template(templateName, data));
 		} else {
-			$(".body").append(template(templateName, data || {}));
+			$(".body").append(template(templateName, data));
 		}
 		var _controller = this;
 		$(document).on("click." + this.namespace, "[data-xx-action]", function(event) {

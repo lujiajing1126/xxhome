@@ -5,6 +5,7 @@ define(function(require, exports, module) {
 		UserService = require('scripts/services/oUserService'),
 		Helper = require('scripts/public/helper');
 	require('sui/core/cookie');
+	var isLocalStorage = window.localStorage ? true : false;
 	User = (function() {
 		/**
 		 * 私有变量
@@ -20,6 +21,9 @@ define(function(require, exports, module) {
 				$.cookie("userSession", iSession, {
 					path: "/"
 				});
+				if (isLocalStorage) {
+					window.localStorage.setItem("userSession", iSession);
+				}
 			};
 			/**
 			 * fix 手动清除 '/' 下的userSession cookie
@@ -30,6 +34,9 @@ define(function(require, exports, module) {
 				$.removeCookie('userSession', {
 					path: "/"
 				});
+				if (isLocalStorage) {
+					window.localStorage.removeItem("userSession");
+				}
 			};
 			this.getSession = function() {
 				return session;
@@ -41,13 +48,11 @@ define(function(require, exports, module) {
 	 */
 	User.prototype.init = function(fn) {
 		var user = this,
-			session = $.cookie("userSession");
+			session = isLocalStorage ? (window.localStorage.getItem("userSession") || $.cookie("userSession")) : $.cookie("userSession");
 		if (session) {
-			//user.setSession(session);
 			user.isUserLogin(session, fn);
 		} else {
 			(Helper.getSession().then(function(session) {
-				//user.setSession(session);
 				user.isUserLogin(session, fn);
 			}))["catch"](function(error) {
 				alert(error);
@@ -79,26 +84,26 @@ define(function(require, exports, module) {
 		 *  Access-Control-Allow-Origin:*
 		 *  Access-Control-Max-Age:86400
 		 */
-		var DEBUG=Helper.getParam("dev");
+		var DEBUG = Helper.getParam("dev");
 		var url = DEBUG ? '/api/account/login' : 'https://xiaoxiao.la/api/account/login';
 		return Q($.ajax({
-				url: url,
-				type: 'POST',
-				dataType: 'JSON',
-				data: data,
-				crossDomain: false
-			})).then(function(data) {
-				if (data.status == "OK") {
-					userNavigation(session);
-					user.id = data.userId;
-					return session;
-				} else if (data.status == "Error")
-					throw data.message;
-				else
-					throw data.status;
-			}, function(error) {
-				throw "╮(╯▽╰)╭服务器君挂了，请稍后再试!";
-			});
+			url: url,
+			type: 'POST',
+			dataType: 'JSON',
+			data: data,
+			crossDomain: false
+		})).then(function(data) {
+			if (data.status == "OK") {
+				userNavigation(session);
+				user.id = data.userId;
+				return session;
+			} else if (data.status == "Error")
+				throw data.message;
+			else
+				throw data.status;
+		}, function(error) {
+			throw "╮(╯▽╰)╭服务器君挂了，请稍后再试!";
+		});
 	};
 	// 根据Session取得用户登录状态
 	User.prototype.getLoginStatus = function(session, fn) {
@@ -126,7 +131,7 @@ define(function(require, exports, module) {
 	User.prototype.isUserLogin = function(session, fn) {
 		if (!session) return;
 		var user = this;
-		user.isLogin=false;
+		user.isLogin = false;
 		user.setSession(session);
 		Helper.globalResponseHandler({
 			url: "/api/account/id?session=" + session,
@@ -135,9 +140,9 @@ define(function(require, exports, module) {
 			if (data && data.userId) {
 				user.id = data.userId;
 				user.setSession(session);
-				user.isLogin=true;
+				user.isLogin = true;
 				userNavigation(session);
-			}else if(data=="Not Logged In"){
+			} else if (data == "Not Logged In") {
 				//session有效，但未登录
 			} else {
 				user.clearSession();

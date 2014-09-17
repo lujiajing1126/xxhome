@@ -276,7 +276,8 @@ module.exports = function (grunt) {
                 assetsDirs: ['<%= config.dist %>', '<%= config.dist %>/images']
             },
             html: ['<%= config.dist %>/{,*/}*.html'],
-            css: ['<%= config.dist %>/styles/{,*/}*.css']
+            css: ['<%= config.dist %>/styles/{,*/}*.css'],
+            //js: ['<%= config.dist %>/scripts/{,*/}*.js']
         },
 
         // The following *-min tasks produce minified files in the dist folder
@@ -488,6 +489,7 @@ module.exports = function (grunt) {
         'copy:dist',
         'rev',
         'imagemin',
+        'usemin',
         'modernizr',
         'tmod',
         'htmlmin',

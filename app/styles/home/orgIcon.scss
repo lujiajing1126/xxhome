@@ -21,55 +21,55 @@
 		}
 		//艺术类
 		&.arts {
-			background-color: rgba(238, 77, 77, .8);
+			background-color: rgba(238, 77, 183, .8);
 		}
 		&.arts:before {
-			border-color: rgba(238, 77, 77, .8);
-			color: rgba(238, 77, 77, .8);
+			border-color: rgba(238, 77,183, .8);
+			color: rgba(238, 77, 183, .8);
 		}
 		&.arts:after {
 			content: "艺";
 		}
 		//体育类
 		&.sports {
-			background-color: rgba(238, 77, 77, .8);
+			background-color: rgba(76, 194, 237,.8);
 		}
 		&.sports:before {
-			border-color: rgba(238, 77, 77, .8);
-			color: rgba(238, 77, 77, .8);
+			border-color: rgba(76, 194, 237,.8);
+			color: rgba(76, 194, 237,.8);
 		}
 		&.sports:after {
 			content: "体";
 		}
 		//实践类
 		&.practice {
-			background-color: rgba(238, 77, 77, .8);
+			background-color: rgba(76, 194, 237, .8);
 		}
 		&.practice:before {
-			border-color: rgba(238, 77, 77, .8);
-			color: rgba(238, 77, 77, .8);
+			border-color: rgba(76, 194, 237, .8);
+			color: rgba(76, 194, 237, .8);
 		}
 		&.practice:after {
 			content: "践";
 		}
 		//公益类
 		&.public {
-			background-color: rgba(238, 77, 77, .8);
+			background-color: rgba(76, 237, 143, .8);
 		}
 		&.public:before {
-			border-color: rgba(238, 77, 77, .8);
-			color: rgba(238, 77, 77, .8);
+			border-color: rgba(76, 237, 143, .8);
+			color: rgba(76, 237, 143, .8);
 		}
 		&.public:after {
 			content: "益";
 		}
 		//其他类
 		&.else {
-			background-color: rgba(238, 77, 77, .8);
+			background-color: rgba(140, 140, 140, .8);
 		}
 		&.else:before {
-			border-color: rgba(238, 77, 77, .8);
-			color: rgba(238, 77, 77, .8);
+			border-color: rgba(140, 140, 140, .8);
+			color: rgba(140, 140, 140, .8);
 		}
 		&.else:after {
 			content: "其";

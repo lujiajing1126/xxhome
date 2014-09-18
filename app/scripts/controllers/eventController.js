@@ -37,7 +37,8 @@ define(function(require, exports, module) {
 				$('.body').html(template('app/templates/event', eventInfo));
 			}
 		}))["catch"](function(error) {
-			window.location.href = "http://xiaoxiao.la/404.html";
+			console.log(error);
+			//window.location.href = "http://xiaoxiao.la/404.html";
 		}).done();
 	};
 	module.exports = Controller;

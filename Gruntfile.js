@@ -70,18 +70,20 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'app',
-                    src: ['scripts/*.js',
-                        'scripts/activityInfo.js',
-                        'scripts/baseController.js',
-                        'scripts/email.js',
-                        'scripts/event.js',
-                        'scripts/organization.js',
+                    src: ['scripts/**/*.js',
+                        //'scripts/activityInfo.js',
+                        //'scripts/baseController.js',
+                        //'scripts/email.js',
+                        //'scripts/event.js',
+                        //'scripts/organization.js',
                         'build/template.js',
                         'sui/**/*.js',
-                        'scripts/controllers/*.js',
-                        'scripts/models/*.js',
-                        'scripts/services/*.js',
-                        'scripts/public/*.js'],
+                        //'scripts/controllers/*.js',
+                        //'scripts/models/*.js',
+                        //'scripts/services/*.js',
+                        //'scripts/public/*.js',
+                        //'scripts/lib/*.js'
+                        ],
                     dest: 'dist'
                 }]
             }

@@ -92,12 +92,12 @@
 	left: 0;
 	width: 40px;
 	height: 100%;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	//border-top-left-radius: 5px;
+	//border-top-right-radius: 5px;
 }
 .type-wrapper .triangle {
 	position: absolute;
-	z-index: 9;
+	z-index: 7;
 	bottom: -12px;
 	border-bottom: 12px solid transparent;
 }

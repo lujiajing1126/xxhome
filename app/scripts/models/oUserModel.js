@@ -44,7 +44,7 @@ define(function(require, exports, module) {
 		};
 	})();
 	/**
-	 * init UserModel get Session from hash or cookie
+	 * init UserModel get Session from localStorage or cookie
 	 */
 	User.prototype.init = function(fn) {
 		var user = this,

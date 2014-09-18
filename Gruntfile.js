@@ -71,18 +71,8 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'app',
                     src: ['scripts/**/*.js',
-                        //'scripts/activityInfo.js',
-                        //'scripts/baseController.js',
-                        //'scripts/email.js',
-                        //'scripts/event.js',
-                        //'scripts/organization.js',
                         'build/template.js',
                         'sui/**/*.js',
-                        //'scripts/controllers/*.js',
-                        //'scripts/models/*.js',
-                        //'scripts/services/*.js',
-                        //'scripts/public/*.js',
-                        //'scripts/lib/*.js'
                         ],
                     dest: 'dist'
                 }]
@@ -96,7 +86,9 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'dist/scripts/index.js': ['app/scripts/index.js', 'dist/scripts/**/*.js','dist/build/template.js'],
-                    'dist/scripts/seaConfig.js': ['app/scripts/seaConfig.js','dist/sui/async/q.js','dist/sui/bootstrap/bootstrap.js','dist/sui/core/*.js']
+                    'dist/scripts/seaConfig.js': ['app/scripts/seaConfig.js','dist/sui/async/q.js','dist/sui/bootstrap/bootstrap.js','dist/sui/core/*.js'],
+                    'dist/scripts/base.js':['dist/scripts/public/helper.js','dist/scripts/services/oUserService.js','dist/build/template.js','dist/scripts/models/*.js','dist/scripts/public/bowser.js','dist/scripts/baseController.js','dist/scripts/controllers/loginController.js'],
+                    'dist/scripts/controllers/eventController.js':['dist/scripts/controllers/eventController.js','dist/scripts/lib/moment.js']
                 }
             }
         },
@@ -164,7 +156,15 @@ module.exports = function (grunt) {
                         'dist/sui/bootstrap',
                         'dist/sui/async',
                         'dist/sui/mvc',
-                        'dist/templates'
+                        'dist/templates',
+                        'dist/scripts/controllers/loginController.js',
+                        'dist/scripts/app',
+                        'dist/scripts/models',
+                        'dist/scripts/public/bowser.js',
+                        'dist/scripts/public/helper.js',
+                        'dist/scripts/services/oUserService.js',
+                        'dist/scripts/baseController.js',
+                        'dist/scripts/lib/moment.js'
                     ]
                 }]
             }

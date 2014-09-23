@@ -3,6 +3,7 @@ define(function(require, exports, module) {
 		baseController = require('scripts/baseController'),
 		bC = new baseController(),
 		template = require('build/template'),
+		helper=require('scripts/public/helper'),
 		OrganizationService = require('scripts/services/OrgService'),
 		bowser = require('scripts/public/bowser'),
 		b = bowser.bowser;
@@ -31,7 +32,9 @@ define(function(require, exports, module) {
 			}
 		}))["catch"](function(error) {
 			//console.log(error);
-		}).done();
+		}).done(function(){
+			helper.userStatus();
+		});
 	};
 	module.exports = Controller;
 });

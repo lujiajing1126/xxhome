@@ -50,8 +50,8 @@ define(function(require, exports, module) {
 					msg = "用户名必须为手机号码或者邮箱！";
 				} else if (authCode.length <= 0) {
 					msg = "验证码不能为空！";
-				} else if (newPassword.length < 3 || newPassword.length > 12) {
-					msg = "密码长度必须为3-12位";
+				} else if (!Helper.isPassword(newPassword)) {
+					msg = Helper.tips.password;
 				} else if (newPassword != reNewPassword) {
 					msg = "两次新密码不一致";
 				}
@@ -85,8 +85,8 @@ define(function(require, exports, module) {
 					msg = "请确认新密码";
 				} else if (newPassword != confirmPassword) {
 					msg = "两次新密码不一致";
-				} else if (newPassword.length < 3 || newPassword.length > 12) {
-					msg = "密码长度必须为3-12位";
+				} else if (!Helper.isPassword(newPassword)) {
+					msg = Helper.tips.password;
 				} else if (oldPassword == newPassword) {
 					msg = "新密码不能与旧密码一样";
 				}
@@ -132,11 +132,12 @@ define(function(require, exports, module) {
 			$(".body").css({
 				"padding-top": 0
 			});
-			data.mobile=true;
+			data.mobile = true;
 			$(".body").append(template(templateName, data));
 		} else {
 			$(".body").append(template(templateName, data));
 		}
+		Helper.userStatus();
 		var _controller = this;
 		$(document).on("click." + this.namespace, "[data-xx-action]", function(event) {
 			var $this = $(this),

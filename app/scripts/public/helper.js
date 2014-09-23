@@ -1,8 +1,11 @@
 define(function(require, exports, module) {
 	var Q = require('sui/async/q'),
-		expPhoneNumber = /(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/,
-		expEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-
+		sysConfig = require('scripts/public/sysConfig'),
+		expPhoneNumber = sysConfig.regulars.phoneNumber,
+		expEmail = sysConfig.regulars.email,
+		expPassword = sysConfig.regulars.password,
+		expAuthCode = sysConfig.regulars.authCode;
+	exports.tips = sysConfig.tips;
 	/**
 	 * 全局异步请求处理器
 	 * @required Q.js jQuery
@@ -117,7 +120,9 @@ define(function(require, exports, module) {
 			}).done();
 		}
 	};
-
+	/**
+	 * get params of the uri
+	 */
 	exports.getParam = function(param) {
 		param = param || null;
 		if (param) {
@@ -133,6 +138,36 @@ define(function(require, exports, module) {
 			}
 		}
 	};
+	/**
+	 * make sure of the user status
+	 */
+	exports.userStatus = function() {
+		var html,
+			session = AppUser.getSession(),
+			isLogin = AppUser.isLogin;
+		if (!isLogin) {
+			return;
+		}
+		$.ajax({
+			url: '/api/account/list_administrated_organizations?session=' + session,
+			dataType: 'json',
+			success: function(data) {
+				if (data.status == "OK") {
+					if (data.organizations && data.organizations.length > 0) {
+						html = "<a href='/home.html#index' target='_blank'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
+					} else {
+						html = "<a href='javascript:void(0);' data-xx-login-action='createOrganization'><span class='org-add'>+创建组织</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
+					}
+					$("#userBox").html(html);
+				} else {
+					throw data;
+				}
+			},
+			error: function(error) {
+				alert("组织信息获取失败！");
+			}
+		});
+	}
 
 	/**
 	 * 验证用户名的有效性，用户名必须为手机号码或邮箱
@@ -144,10 +179,17 @@ define(function(require, exports, module) {
 		}
 		return result;
 	};
-	exports.isEmail=function(value){
+	exports.isEmail = function(value) {
 		return expEmail.test(value);
 	};
-	exports.isPhoneNumber=function(value){
+	exports.isPhoneNumber = function(value) {
 		return expPhoneNumber.test(value);
 	};
+	exports.isPassword = function(value) {
+		return expPassword.test(value);
+	};
+	exports.isAuthCode = function(value) {
+		return expAuthCode.test(value);
+	};
+	exports.tips = sysConfig.tips;
 });

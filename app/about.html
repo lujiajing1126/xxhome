@@ -2,19 +2,43 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="我们致力于精准的校园信息预报，提供强大的组织平台，为在校学生与组织创造无限的发展空间。我们是一群富有激情，热爱创新和进步的青年耐心，专注，坚持。不断提升产品和服务，这是我们所追求的工匠精神。所以我们绝对不会停止追求进步。" />
 	<title>关于我们</title>
 	<link rel="stylesheet" type="text/css" href="styles/home.css">
 	<link rel="shortcut icon" href="favicon.ico"/>
+
 </head>
 <body class="dark">
 	<div class="body"></div>
 	<script src="scripts/seaConfig.js"></script>
 	<script type="text/javascript">
-	SUI.use('./scripts/public/import',function(exports){
+	SUI.use(['./scripts/base','./scripts/public/import'],function(base,exports){
 		exports.init('app/templates/about',{
 			pageType:"responsive"
 		});
 	});
 	</script>
+	<script type="text/javascript" src="http://widget.renren.com/js/rrshare.js"></script>
+	<a name="xn_share" onclick="shareClick()" type="button_large" href="javascript:;"></a>
+	<script type="text/javascript">
+	var share_data = {
+		title: document.title,
+		resourceUrl: 'xiaoxiao.la',
+		srcUrl: 'xiaoxiao.la',
+		pic: 'http://xiaoxiao.la/images/logo-1024x1024.png',
+		description: document.getElementsByTagName('meta')['description'].content
+	};
+	function shareClick() {
+		var rrShareParam = {
+			resourceUrl : share_data.resourceUrl,	//分享的资源Url
+			srcUrl : share_data.srcUrl,	//分享的资源来源Url,默认为header中的Referer,如果分享失败可以调整此值为resourceUrl试试
+			pic : share_data.pic,		//分享的主题图片Url
+			title : share_data.title,		//分享的标题
+			description : share_data.description	//分享的详细描述
+		};
+		console.log(rrShareParam);
+		rrShareOnclick(rrShareParam);
+	}
+</script>
 </body>
 </html>

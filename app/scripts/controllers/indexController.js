@@ -19,6 +19,7 @@ define(function(require, exports, module) {
 			var fn = $(this).attr("data-xx-action");
 			_controller.actions[fn] && $.isFunction(_controller.actions[fn]) && _controller.actions[fn].call(this);
 		});
+		Helper.userStatus();
 	};
 	module.exports = Controller;
 });

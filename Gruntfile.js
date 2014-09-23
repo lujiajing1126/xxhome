@@ -87,7 +87,7 @@ module.exports = function (grunt) {
                 files: {
                     'dist/scripts/index.js': ['app/scripts/index.js', 'dist/scripts/**/*.js','dist/build/template.js'],
                     'dist/scripts/seaConfig.js': ['app/scripts/seaConfig.js','dist/sui/async/q.js','dist/sui/bootstrap/bootstrap.js','dist/sui/core/*.js'],
-                    'dist/scripts/base.js':['dist/scripts/public/helper.js','dist/scripts/services/oUserService.js','dist/build/template.js','dist/scripts/models/*.js','dist/scripts/public/bowser.js','dist/scripts/baseController.js','dist/scripts/controllers/loginController.js'],
+                    'dist/scripts/base.js':['dist/scripts/public/helper.js','dist/scripts/public/sysConfig.js','dist/scripts/services/oUserService.js','dist/build/template.js','dist/scripts/models/*.js','dist/scripts/public/bowser.js','dist/scripts/baseController.js','dist/scripts/controllers/loginController.js'],
                     'dist/scripts/controllers/eventController.js':['dist/scripts/controllers/eventController.js','dist/scripts/lib/moment.js']
                 }
             }
@@ -162,9 +162,10 @@ module.exports = function (grunt) {
                         'dist/scripts/models',
                         'dist/scripts/public/bowser.js',
                         'dist/scripts/public/helper.js',
+                        'dist/scripts/public/sysConfig.js',
                         'dist/scripts/services/oUserService.js',
                         'dist/scripts/baseController.js',
-                        'dist/scripts/lib/moment.js'
+                        'dist/scripts/lib/'
                     ]
                 }]
             }
@@ -348,19 +349,18 @@ module.exports = function (grunt) {
         //         }
         //     }
         // },
-        // uglify: {
-        //     dist: {
-        //         options:{
-        //             mangle:true,
-        //             preserveComments:false
-        //         },
-        //         files: [{
-        //             expand:true,
-        //             src:'<%= config.app %>/scripts/**/*.js',
-        //             dest:'<%= config.dist %>/scripts'
-        //         }]
-        //     }
-        // },
+        uglify: {
+            dist: {
+                options:{
+                    mangle:true,
+                    preserveComments:false //保存注释
+                },
+                files: [{
+                    expand:true,
+                    src:'<%= config.dist %>/scripts/**/*.js'
+                }]
+            }
+        },
         // concat: {
         //     dist: {}
         // },
@@ -497,6 +497,7 @@ module.exports = function (grunt) {
         'htmlmin',
         'transport',
         'concat',
+        'uglify',
         'clean:build'
     ]);
 

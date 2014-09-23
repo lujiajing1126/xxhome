@@ -7,9 +7,7 @@ define(function(require, exports, module) {
 		helper = require('scripts/public/helper'),
 		OrganizationService = require('scripts/services/OrgService');
 
-	var expPhoneNumber = /(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/,
-		expEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-		delay = 3000; //错误提示时间
+	var delay = 3000; //错误提示时间
 	var Controller = function() {
 		var that = this;
 		this.namespace = "login";
@@ -62,7 +60,7 @@ define(function(require, exports, module) {
 				event = event || window.event;
 				event.preventDefault();
 				if (login_validate()) {
-					if (expEmail.test(username)) {
+					if (helper.isEmail(username)) {
 						var usernameType = {
 							email: username
 						};
@@ -100,7 +98,7 @@ define(function(require, exports, module) {
 				var $this = $(this),
 					phoneNumber = $("input#PHONENUM").val();
 
-				if (expPhoneNumber.test($.trim(phoneNumber))) {
+				if (helper.isPhoneNumber(phoneNumber)) {
 					if (!$this.hasClass("disabled")) {
 						$this.addClass("disabled");
 						var time = 60;
@@ -126,7 +124,7 @@ define(function(require, exports, module) {
 							session: session
 						}
 					}).then(function(data) {
-						if(data.status == "OK"){
+						if (data.status == "OK") {
 							alert("验证码已经在路上了！");
 						}
 					}))["catch"](function(error) {
@@ -260,7 +258,7 @@ define(function(require, exports, module) {
 	// 根据用户输入判断是否显示验证码发送按钮
 	var showAuthButton = function(obj) {
 		var phone = $(obj).val();
-		if (expPhoneNumber.test($.trim(phone))) {
+		if (helper.isPhoneNumber(phone)) {
 			$("#authButton").addClass("on");
 		} else
 			$("#authButton").removeClass("on");
@@ -271,10 +269,10 @@ define(function(require, exports, module) {
 		var userName = $("#USERNAME").val(),
 			password = $("#PASSWORD").val();
 
-		if (!expEmail.test(userName) && !expPhoneNumber.test(userName)) {
+		if (!helper.validateUserName(userName)) {
 			msg = "账号格式为邮箱或手机号！";
-		} else if (password == "") {
-			msg = "密码不能为空！";
+		} else if (!helper.isPassword(password)) {
+			msg = helper.tips.password;
 		}
 		if (msg != "") {
 			loginErrorHandler(msg);
@@ -288,21 +286,16 @@ define(function(require, exports, module) {
 			acode = $("#AUTHCODE").val(),
 			psw = $("#P_PWD").val(),
 			repsw = $("#P_REPWD").val();
-		var rePhone = /(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/; //phone number
-		var reAcode = /[0-9]{6}/; //6位数字
-		var msg = "";
-		if (!rePhone.test(un))
+		var msg;
+		if (!helper.isPhoneNumber(un))
 			msg = "手机号码格式不对！";
-		else if (!reAcode.test(acode))
-			msg = "验证码格式为6位数字";
-		else if (psw == "")
-			msg = "密码不能为空！";
+		else if (!helper.isAuthCode(acode))
+			msg = helper.tips.authCode;
+		else if (!helper.isPassword(psw))
+			msg = helper.tips.password;
 		else if (repsw != psw)
 			msg = "两次密码不同！";
-		else if (psw.length < 3 || psw.length > 12) {
-			msg = "密码长度为3-12位";
-		}
-		if (msg != "") {
+		if (msg) {
 			signupPhoneErrorHandler(msg);
 			return false;
 		}
@@ -313,18 +306,14 @@ define(function(require, exports, module) {
 		var un = $("#EMAIL").val(),
 			psw = $("#E_PWD").val(),
 			repsw = $("#E_REPWD").val();
-		var reEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/; //email
-		var msg = "";
-		if (!reEmail.test(un))
+		var msg;
+		if (!helper.isEmail(un))
 			msg = "邮箱格式不对！";
-		else if (psw == "")
-			msg = "密码不能为空！";
+		else if (!helper.isPassword(psw))
+			msg = helper.tips.password;
 		else if (repsw != psw)
 			msg = "两次密码不同！";
-		else if (psw.length < 3 || psw.length > 12) {
-			msg = "密码长度为3-12位";
-		}
-		if (msg != "") {
+		if (msg) {
 			signupEmailErrorHandler(msg);
 			return false;
 		}

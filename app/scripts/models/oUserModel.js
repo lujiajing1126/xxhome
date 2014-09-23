@@ -12,9 +12,10 @@ define(function(require, exports, module) {
 		 */
 		var session = null;
 		return function() {
-			this.id = "";
-			this.name = "";
-			this.org = "";
+			this.id = null;
+			this.name = null;
+			this.isLogin = false;
+			this.org = null;
 			this.orgs = [];
 			this.setSession = function(iSession) {
 				session = iSession;
@@ -94,8 +95,9 @@ define(function(require, exports, module) {
 			crossDomain: false
 		})).then(function(data) {
 			if (data.status == "OK") {
-				userNavigation(session);
 				user.id = data.userId;
+				user.isLogin = true;
+				Helper.userStatus();
 				return session;
 			} else if (data.status == "Error")
 				throw data.message;
@@ -138,10 +140,10 @@ define(function(require, exports, module) {
 			dataType: 'JSON'
 		}).then(function(data) {
 			if (data && data.userId) {
-				user.id = data.userId;
 				user.setSession(session);
+				user.id = data.userId;
 				user.isLogin = true;
-				userNavigation(session);
+				//userNavigation(session);
 			} else if (data == "Not Logged In") {
 				//session有效，但未登录
 			} else {
@@ -248,27 +250,27 @@ define(function(require, exports, module) {
 	}
 
 
-	function userNavigation(session) {
-		var html;
-		$.ajax({
-			url: '/api/account/list_administrated_organizations?session=' + session,
-			dataType: 'json',
-			success: function(data) {
-				if (data.status == "OK") {
-					if (data.organizations && data.organizations.length > 0) {
-						html = "<a href='/home.html#index' target='_blank'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
-					} else {
-						html = "<a href='javascript:void(0);' data-xx-login-action='createOrganization'><span class='org-add'>+创建组织</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
-					}
-					$("#userBox").html(html);
-				} else {
-					throw data;
-				}
-			},
-			error: function(error) {
-				alert("组织信息获取失败！");
-			}
-		});
-	}
+	// function userNavigation(session) {
+	// 	var html;
+	// 	$.ajax({
+	// 		url: '/api/account/list_administrated_organizations?session=' + session,
+	// 		dataType: 'json',
+	// 		success: function(data) {
+	// 			if (data.status == "OK") {
+	// 				if (data.organizations && data.organizations.length > 0) {
+	// 					html = "<a href='/home.html#index' target='_blank'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
+	// 				} else {
+	// 					html = "<a href='javascript:void(0);' data-xx-login-action='createOrganization'><span class='org-add'>+创建组织</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
+	// 				}
+	// 				$("#userBox").html(html);
+	// 			} else {
+	// 				throw data;
+	// 			}
+	// 		},
+	// 		error: function(error) {
+	// 			alert("组织信息获取失败！");
+	// 		}
+	// 	});
+	// }
 	module.exports = User;
 });

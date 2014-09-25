@@ -9,6 +9,7 @@ define(function(require, exports, module) {
     exports.bowser = {
         ios: _iOS,
         android: _Android,
-        wx: _WX
+        wx: _WX,
+        isMobile: _iOS || _Android || _WX
     };
 });

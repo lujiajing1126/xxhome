@@ -1,10 +1,15 @@
 /* * content */
 .container {
 	margin-top: 20px;
+	margin-left:auto;
+	margin-right:auto;
 	&.container0 {
 		//$header-height在header.scss中定义
-		// margin-top: $header-height;
-		// padding-top: 20px;
+		margin-top: $header-height;
+		padding-top: 20px;
+	}
+	&.container100{
+		margin-top: 80px;
 	}
 }
 .p-content {

@@ -1,0 +1,31 @@
+<!-- application template -->
+<!-- section header -->
+{{include './partial/header'}}
+<!-- section content -->
+<div class="wrapper responsive clearfix container0 vote-outer {{if mobile}}mobile{{/if}}">
+	<div class="voteplayer-wrapper">
+		<div class="voteplayer-avatar">
+			<img src="images/default/1.png" />
+			<div class="rank"> <i>1</i>
+			</div>
+		</div>
+		<div class="voteplayer-name">绿茶婊</div>
+		<div class="voteplayer-info-wrapper">
+			<p>1.    资源/组件浏览器：在这里，您可以看到您所创建或添加到您的项目中的不同的资源和场景。您还可以选择不同类型的节点（Nodes）并将其拖动到场景中。</p>
+			<p>2.    第一阶段：该阶段将预览您的当前场景。在这里，你可以安排属于一个场景的所有节点。</p>
+			<p>3.    时间轴：时间轴用于在SpriteBuilder中创建动画。更多的时间轴细节我们将在以后详细讨论。</p>
+			<p>4.    详情查看：一旦你选择场景中的节点，这个细节视图将显示大量关于该节点可编辑的信息。您可以修改位置，内容（例如一个标签的文本）和物理性质等。</p>
+		</div>
+		<div class="voteplayer-footer">
+			<div class="voteplayer-ticket-wrapper">
+				<span>1024</span>
+				票
+			</div>
+			<div class="voteplayer-btn-wrapper">
+				<button class="btn btn-vote">我要投票</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- section footer -->
+{{include './partial/footer'}}

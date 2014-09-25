@@ -1,14 +1,17 @@
 /* * content */
 .container {
 	margin-top: 20px;
-	margin-left:auto;
-	margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 	&.container0 {
 		//$header-height在header.scss中定义
 		margin-top: $header-height;
 		padding-top: 20px;
+		&.mobile {
+			margin-top: 10px;
+		}
 	}
-	&.container100{
+	&.container100 {
 		margin-top: 80px;
 	}
 }

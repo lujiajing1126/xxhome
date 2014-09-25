@@ -106,6 +106,9 @@ ul, li {
 .container0 {
 	margin-top: $header-height;
 	padding-top:10px;
+	&.mobile{
+		margin-top: 10px;
+	}
 }
 // 图篇背景
 .image-back {

@@ -5,8 +5,9 @@ define(function(require, exports, module) {
 
 	var voteId = Helper.getParam("vid");
 	
-	(new loginController()).init(function(){
-		var session=AppUser.getSession();
-		(new voteController(voteId)).init(session);
-	});
+	// (new loginController()).init(function(){
+	// 	var session=AppUser.getSession();
+	// 	(new voteController(voteId)).init(session);
+	// });
+	(new voteController(voteId)).init("");
 });

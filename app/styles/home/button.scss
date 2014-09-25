@@ -1,0 +1,12 @@
+.btn-vote {
+	background-color: #f06060;
+	color: #fff;
+	width: 100%;
+	border-radius: 5px;
+	outline: none;
+	&:hover {
+		background-color: #f93636;
+		border-color: #f93636;
+		color: #fff;
+	}
+}

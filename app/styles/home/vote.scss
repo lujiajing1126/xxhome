@@ -53,16 +53,5 @@ $vote-theme-color:#ffba00;
 	}
 	.vote-btn-wrapper {
 		text-align: center;
-		.btn {
-			background-color: #f06060;
-			color: #fff;
-			width: 100%;
-			border-radius: 5px;
-			&:hover {
-				background-color: #f93636;
-				border-color: #f93636;
-				color: #fff;
-			}
-		}
 	}
 }

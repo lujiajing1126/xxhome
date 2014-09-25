@@ -1,5 +1,6 @@
 @import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 @import "home/global";
+@import "home/button";
 @import "home/index";
 @import "home/header";
 @import "home/footer";
@@ -17,6 +18,7 @@
 @import "home/responsive";
 @import "home/password";
 @import "home/vote";
+@import "home/voteplayer";
 @import "home/animate";
 
 body,html {

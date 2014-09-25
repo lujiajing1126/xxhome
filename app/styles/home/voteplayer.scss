@@ -1,0 +1,67 @@
+.voteplayer-wrapper {
+	width: 100%;
+	padding: 10px;
+	max-width: 500px;
+	margin: 0 auto;
+	overflow: hidden;
+	.voteplayer-avatar {
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+		position: relative;
+		img {
+			width: 100%;
+		}
+		.rank {
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			width: 30px;
+			height: 30px;
+			background-color: $vote-theme-color;
+			color: #fff;
+			border-radius: 50%;
+			text-align: center;
+			line-height: 30px;
+			font-size: 20px;
+			font-weight: bold;
+		}
+	}
+	.voteplayer-name {
+		width: 100%;
+		padding: 5px 0px;
+		font-size: 24px;
+		text-align: center;
+		color: #666;
+	}
+	.voteplayer-info-wrapper {
+		border-top: 1px dashed #666;
+		border-bottom: 1px dashed #666;
+		padding: 10px 0;
+		p {
+			font-size: 14px;
+			line-height: 20px;
+			color: #777;
+		}
+	}
+	.voteplayer-footer {
+		padding: 10px;
+		.voteplayer-ticket-wrapper {
+			float: left;
+			width: auto;
+			color: $vote-theme-color;
+			font-size: 16px;
+			span {
+				font-size: 28px;
+			}
+		}
+		.voteplayer-btn-wrapper {
+			float: right;
+			width: auto;
+			color: #fff;
+			border-radius: 4px;
+			padding: 0 5px;
+			font-size: 16px;
+		}
+	}
+}

@@ -4,52 +4,66 @@ define(function(require, exports, module) {
 		bC = new baseController(),
 		template = require('build/template'),
 		moment = require('scripts/lib/moment'),
-		helper = require('scripts/public/helper'),
+		Helper = require('scripts/public/helper'),
 		bowser = require('scripts/public/bowser'),
-		b = bowser.bowser;
+		b = bowser.bowser,
+		VoteService = require('scripts/services/oVoteService');
 
 	var Controller = function(voteId) {
 		this.namespace = "vote";
 		this.voteId = voteId;
+		this.actions = {
+			voteCast: function() {
+				var btn = this,
+					session = AppUser.getSession(),
+					playerId = btn.attr("data-value");
+				Helper.btnLoadingStart(btn, "正在提交...");
+				(VoteService.cast(voteId, playerId, session).then(function(data) {
+					if (data && data.status == "OK") {
+						Helper.btnLoadingStart(btn, "投票成功");
+					} else throw data;
+				}))["catch"](function(error) {
+					Helper.errorHandler(error);
+					Helper.btnLoadingEnd(btn);
+				}).done();
+			}
+		};
 	};
 	bC.extend(Controller);
 	Controller.prototype.init = function(session) {
-		// var eventId = this.eventId;
-		// if (!eventId) {
-		// 	window.location.href = "http://xiaoxiao.la/404.html";
-		// 	return;
-		// }
-		// (EventService.getEventInfo(eventId, session).then(function(data) {
-		// 	if (data.status == "OK") {
-		// 		var eventInfo = data.static;
-		// 		eventInfo.pageType = "responsive"; //响应式
-		// 		eventInfo.eventId = eventId;
-		// 		eventInfo.descriptions = eventInfo.description ? eventInfo.description.split(/\r\n/g) : ["活动无简介"];
-		// 		eventInfo.beginDate = moment(eventInfo.begin.$date).format("YYYY-MM-DD HH:mm");
-		// 		eventInfo.endDate = moment(eventInfo.end.$date).format("YYYY-MM-DD HH:mm");
-		// 		if(b.android || b.ios || b.wx){
-		// 			$(".body").css({
-		// 				"padding-top":0
-		// 			});
-		// 			eventInfo.mobile=true;
-		// 		}
-		// 		$('.body').html(template('app/templates/event', eventInfo));
-		// 	}
-		// }))["catch"](function(error) {
-		// 	console.log(error);
-		// 	//window.location.href = "http://xiaoxiao.la/404.html";
-		// }).done(function(){
-		// 	helper.userStatus();
-		// });
-		var data={};
-		if (b.isMobile) {
-			data.mobile=true;
-			$('.body').html(template('app/templates/vote', data));
-			var winWidth = $(window).width();
-			$(".vote-avatar").height(winWidth / 2-30);
-		}else{
-			$('.body').html(template('app/templates/vote', data));
+		var _controller = this;
+		var voteId = this.voteId;
+		if (!voteId) {
+			window.location.href = "http://xiaoxiao.la/404.html";
+			return;
 		}
+		(VoteService.getVotePlayers(voteId, session).then(function(data) {
+			if (data.status == "OK") {
+				data.pageType = "responsive"; //响应式
+				if (b.isMobile) {
+					data.mobile = true;
+					$('.body').html(template('app/templates/vote', data));
+					var winWidth = $(window).width();
+					$(".vote-avatar").height(winWidth / 2 - 30);
+				} else {
+					$('.body').html(template('app/templates/vote', data));
+				}
+			}
+		}))["catch"](function(error) {
+			Helper.errorHandler(error);
+			//window.location.href = "http://xiaoxiao.la/404.html";
+		}).done(function() {
+			Helper.userStatus();
+		});
+
+		$(document).on("click", "[data-xx-action]", function(event) {
+			var event = event || window.event;
+			Helper.preventDefault(event);
+			var target = $(this),
+				actionName = target.attr("data-xx-action"),
+				action = _controller.actions[actionName];
+			action && $.isFunction(action) && action.call(target, event);
+		});
 	};
 	module.exports = Controller;
 });

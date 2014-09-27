@@ -126,7 +126,7 @@ define(function(require, exports, module) {
 	exports.getParam = function(param) {
 		param = param || null;
 		if (param) {
-			var tmpReg = new RegExp("[\\?\\&]" + param + "=([\\w\\d]*)"),
+			var tmpReg = new RegExp("[\\?\\&]" + param + "=([\\w\\d-]*)"),
 				result = window.location.href.match(tmpReg);
 			return result ? result[1] : null;
 		} else {
@@ -167,7 +167,39 @@ define(function(require, exports, module) {
 				alert("组织信息获取失败！");
 			}
 		});
-	}
+	};
+
+	/**
+	 * 全局错误处理函数
+	 */
+	exports.errorHandler = function(message) {
+		window.console && window.console.log && window.console.log(message);
+		//alert(message);
+	};
+	/**
+	 * disable 掉提交中的按钮
+	 * @param  {jquery obj} btn         	按钮的jquery对象
+	 * @param  {string} loadingText 	loading状态中按钮文字
+	 */
+	exports.btnLoadingStart = function(btn, loadingText) {
+		var oText = btn.text();
+		btn.data("data-text", oText);
+		loadingText = loadingText || '处理中...';
+		btn.text(loadingText).siblings('.btn').addBack().attr('disabled', 'disabled');
+	};
+	exports.btnLoadingEnd = function(btn, text) {
+		text = text || btn.data("data-text") || "确定";
+		btn.text(text).siblings('.btn').addBack().removeAttr('disabled');
+	};
+	/**
+	 * 取消event默认事件
+	 */
+	exports.preventDefault = function(event) {
+		if (event.preventDefault)
+			event.preventDefault();
+		else
+			event.returnValue = false;
+	};
 
 	/**
 	 * 验证用户名的有效性，用户名必须为手机号码或邮箱

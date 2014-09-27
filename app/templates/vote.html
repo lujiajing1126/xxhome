@@ -3,105 +3,23 @@
 {{include './partial/header'}}
 <!-- section content -->
 <div class="wrapper responsive clearfix container0 vote-outer {{if mobile}}mobile{{/if}}">
+	{{each options as option i}}
 	<div class="vote-wrapper">
 		<div class="vote-avatar">
-			<img src="images/default/1.png" />
-			<div class="rank"><i>1</i></div>
+			<a href="./voteplayer.html?vid={{option.option.voteId}}&pid={{option.option.id}}">
+			<img src="{{option.option.imgUrl}}" onerror="this.src='images/default/3.png';" />
+			</a>
+			{{if i<3}}<div class="rank"><i>{{i+1}}</i></div>{{/if}}
 		</div>
 		<div class="vote-info-wrapper clearfix">
-			<div class="vote-ticket-number">1234</div>
-			<div class="vote-member-name">MT</div>
+			<div class="vote-ticket-number">{{option.tickets}}</div>
+			<div class="vote-member-name">{{option.option.optionName}}</div>
 		</div>
 		<div class="vote-btn-wrapper">
-			<button class="btn btn-vote">我要投票</button>
+			<button class="btn btn-vote" data-xx-action="voteCast" data-value="{{option.option.id}}">我要投票</button>
 		</div>
 	</div>
-	<div class="vote-wrapper">
-		<div class="vote-avatar">
-			<img src="images/default/1.png" />
-			<div class="rank"><i>2</i></div>
-		</div>
-		<div class="vote-info-wrapper clearfix">
-			<div class="vote-ticket-number">1234</div>
-			<div class="vote-member-name">MT</div>
-		</div>
-		<div class="vote-btn-wrapper">
-			<button class="btn btn-vote">我要投票</button>
-		</div>
-	</div>
-	<div class="vote-wrapper">
-		<div class="vote-avatar">
-			<img src="images/default/1.png" />
-			<div class="rank"><i>3</i></div>
-		</div>
-		<div class="vote-info-wrapper clearfix">
-			<div class="vote-ticket-number">1234</div>
-			<div class="vote-member-name">MT</div>
-		</div>
-		<div class="vote-btn-wrapper">
-			<button class="btn btn-vote">我要投票</button>
-		</div>
-	</div>
-	<div class="vote-wrapper">
-		<div class="vote-avatar">
-			<img src="images/default/1.png" />
-		</div>
-		<div class="vote-info-wrapper clearfix">
-			<div class="vote-ticket-number">1234</div>
-			<div class="vote-member-name">MT</div>
-		</div>
-		<div class="vote-btn-wrapper">
-			<button class="btn btn-vote">我要投票</button>
-		</div>
-	</div>
-	<div class="vote-wrapper">
-		<div class="vote-avatar">
-			<img src="images/default/1.png" />
-		</div>
-		<div class="vote-info-wrapper clearfix">
-			<div class="vote-ticket-number">1234</div>
-			<div class="vote-member-name">MT</div>
-		</div>
-		<div class="vote-btn-wrapper">
-			<button class="btn btn-vote">我要投票</button>
-		</div>
-	</div>
-	<div class="vote-wrapper">
-		<div class="vote-avatar">
-			<img src="images/default/1.png" />
-		</div>
-		<div class="vote-info-wrapper clearfix">
-			<div class="vote-ticket-number">1234</div>
-			<div class="vote-member-name">MT</div>
-		</div>
-		<div class="vote-btn-wrapper">
-			<button class="btn btn-vote">我要投票</button>
-		</div>
-	</div>
-	<div class="vote-wrapper">
-		<div class="vote-avatar">
-			<img src="images/default/1.png" />
-		</div>
-		<div class="vote-info-wrapper clearfix">
-			<div class="vote-ticket-number">1234</div>
-			<div class="vote-member-name">MT</div>
-		</div>
-		<div class="vote-btn-wrapper">
-			<button class="btn btn-vote">我要投票</button>
-		</div>
-	</div>
-	<div class="vote-wrapper">
-		<div class="vote-avatar">
-			<img src="images/default/1.png" />
-		</div>
-		<div class="vote-info-wrapper clearfix">
-			<div class="vote-ticket-number">1234</div>
-			<div class="vote-member-name">MT</div>
-		</div>
-		<div class="vote-btn-wrapper">
-			<button class="btn btn-vote">我要投票</button>
-		</div>
-	</div>
+	{{/each}}
 </div>
 <!-- section footer -->
 {{include './partial/footer'}}

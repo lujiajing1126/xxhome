@@ -2,7 +2,6 @@ define(function(require, exports, module) {
 
 	var $ = SUI.$;
 	var template = require('build/template');
-	//alert(require('scripts/public/bowser'));
 	var bowser = require('scripts/public/bowser');
 	var loginController = require('scripts/controllers/loginController');
 	

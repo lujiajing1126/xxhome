@@ -3,9 +3,9 @@
 {{include './partial/header'}}
 <!-- section content -->
 {{if stage=="drafting"}}
-<section class="container container0 responsive">暂无此活动！</section>
+<section class="container container0 responsive {{if mobile}}mobile{{/if}}">暂无此活动！</section>
 {{else}}
-<section class="container container0 responsive">
+<section class="container container0 responsive {{if mobile}}mobile{{/if}}">
 	<div class="wrapper popbox-wrapper responsive">
 		<div class="imgbox image-back" style="background-image:url(api/event/{{eventId}}/poster/load),url('../images/default/101.jpg');">
 			{{if category=="讲座"}}

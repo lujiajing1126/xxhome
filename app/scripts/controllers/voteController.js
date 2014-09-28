@@ -14,6 +14,7 @@ define(function(require, exports, module) {
 		this.voteId = voteId;
 		this.actions = {
 			voteCast: function() {
+				Helper.preventDefault(event);
 				var btn = this,
 					session = AppUser.getSession(),
 					playerId = btn.attr("data-value");
@@ -23,7 +24,7 @@ define(function(require, exports, module) {
 						Helper.btnLoadingStart(btn, "投票成功");
 					} else throw data;
 				}))["catch"](function(error) {
-					Helper.errorHandler(error);
+					Helper.alert(error);
 					Helper.btnLoadingEnd(btn);
 				}).done();
 			}
@@ -48,22 +49,17 @@ define(function(require, exports, module) {
 				} else {
 					$('.body').html(template('app/templates/vote', data));
 				}
-			}
+			} else throw data;
 		}))["catch"](function(error) {
-			Helper.errorHandler(error);
-			//window.location.href = "http://xiaoxiao.la/404.html";
+			if (error == "Not Logged In")
+				window.location.href = "./login.html?go=vote|" + _controller.voteId;
+			else
+				Helper.errorHandler(error);
 		}).done(function() {
 			Helper.userStatus();
 		});
 
-		$(document).on("click", "[data-xx-action]", function(event) {
-			var event = event || window.event;
-			Helper.preventDefault(event);
-			var target = $(this),
-				actionName = target.attr("data-xx-action"),
-				action = _controller.actions[actionName];
-			action && $.isFunction(action) && action.call(target, event);
-		});
+		Helper.eventListener("click", _controller.actions);
 	};
 	module.exports = Controller;
 });

@@ -9,11 +9,21 @@ define(function(require, exports, module) {
 		VoteService = require('scripts/services/oVoteService');
 
 	var voteId = Helper.getParam("vid"),
-		playerId = Helper.getParam("pid");
+		playerId = Helper.getParam("pid"),
+		session = Helper.getParam("session");
+
+	if (session) {
+		var isLocalStorage = window.localStorage ? true : false;
+		$.cookie("userSession", session, {
+			path: "/"
+		});
+		if (isLocalStorage)
+			window.localStorage.setItem("userSession", session);
+	}
 
 	var Controller = function() {
 		this.namespace = "vote";
-		this.actions={
+		this.actions = {
 			voteCast: function() {
 				var btn = this,
 					session = AppUser.getSession();
@@ -23,7 +33,7 @@ define(function(require, exports, module) {
 						Helper.btnLoadingStart(btn, "投票成功");
 					} else throw data;
 				}))["catch"](function(error) {
-					Helper.errorHandler(error);
+					Helper.alert(error);
 					Helper.btnLoadingEnd(btn);
 				}).done();
 			}
@@ -31,6 +41,8 @@ define(function(require, exports, module) {
 	};
 	bC.extend(Controller);
 	Controller.prototype.init = function() {
+		var _controller = this;
+
 		(new loginController()).init(function() {
 			var session = AppUser.getSession();
 			(VoteService.getVotePlayer(voteId, playerId, session).then(function(data) {
@@ -47,8 +59,13 @@ define(function(require, exports, module) {
 					}
 				} else throw data;
 			}))["catch"](function(error) {
-				Helper.errorHandler(error);
-			}).done(); 
+				if (error == "Not Logged In")
+					window.location.href = "./login.html?go=vote|" + voteId + '|player|' + playerId;
+				else
+					Helper.errorHandler(error);
+			}).done(function() {
+				Helper.eventListener("click", _controller.actions);
+			});
 		});
 	};
 	module.exports = Controller;

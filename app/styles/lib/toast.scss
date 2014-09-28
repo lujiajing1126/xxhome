@@ -1,0 +1,60 @@
+.ly-toast-box-contaner {
+	position: fixed;
+	width: 100%;
+	height: auto;
+	right: 0;
+	padding:0 10px;
+	z-index: 2000;
+	.ly-toast-box {
+		display: block;
+		width: auto;
+		margin: 0;
+		&.center {
+			text-align: center;
+		}
+		&.left {
+			text-align: left;
+		}
+		&.right {
+			text-align: right;
+		}
+		.ly-toast-box-body {
+			padding: 3px 10px;
+			border-radius: 4px;
+			font-size: 12px;
+			display: inline;
+			display: inline-block;
+			width: auto;
+		}
+		&.default {
+			.ly-toast-box-body {
+				background-color: #000;
+				color: #eee;
+			}
+		}
+		&.theme {
+			.ly-toast-box-body {
+				background-color: #000;
+				color: blue;
+			}
+		}
+		&.success {
+			.ly-toast-box-body {
+				background-color: #2dc90a;
+				color: #fff;
+			}
+		}
+		&.danger {
+			.ly-toast-box-body {
+				background-color: #dd0404;
+				color: #fff;
+			}
+		}
+		&.warn{
+			.ly-toast-box-body {
+				background-color: #f2d21d;
+				color: #fff;
+			}
+		}
+	}
+}

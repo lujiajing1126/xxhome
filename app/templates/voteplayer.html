@@ -5,7 +5,7 @@
 <div class="wrapper responsive clearfix container0 vote-outer {{if mobile}}mobile{{/if}}">
 	<div class="voteplayer-wrapper">
 		<div class="voteplayer-avatar">
-			<img src="{{option.imgUrl}}" onerror="this.src='images/default/3.png';" />
+			<img src="api/vote/option/{{option.id}}/image" onerror="this.src='images/default/3.png';" />
 			{{if i<3}}<div class="rank"><i>{{i+1}}</i></div>{{/if}}
 		</div>
 		<div class="voteplayer-name">{{option.optionName}}</div>
@@ -16,7 +16,7 @@
 		</div>
 		<div class="voteplayer-footer">
 			<div class="voteplayer-ticket-wrapper">
-				<span>1024</span>
+				<span>{{tickets}}</span>
 				票
 			</div>
 			<div class="voteplayer-btn-wrapper">

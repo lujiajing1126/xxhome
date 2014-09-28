@@ -1,10 +1,15 @@
 define(function(require, exports, module) {
 	var Q = require('sui/async/q'),
-		sysConfig = require('scripts/public/sysConfig'),
+		sysConfig = require('scripts/public/msysconfig'),
 		expPhoneNumber = sysConfig.regulars.phoneNumber,
 		expEmail = sysConfig.regulars.email,
 		expPassword = sysConfig.regulars.password,
-		expAuthCode = sysConfig.regulars.authCode;
+		expAuthCode = sysConfig.regulars.authCode,
+		eventListener = require('scripts/public/eventListener'),
+		Alert = require('scripts/lib/Ly.alert'),
+		Toast = require('scripts/lib/Ly.toast'),
+		jumpRouter = require('scripts/public/jumpRouter');
+
 	exports.tips = sysConfig.tips;
 	/**
 	 * 全局异步请求处理器
@@ -126,7 +131,7 @@ define(function(require, exports, module) {
 	exports.getParam = function(param) {
 		param = param || null;
 		if (param) {
-			var tmpReg = new RegExp("[\\?\\&]" + param + "=([\\w\\d-]*)"),
+			var tmpReg = new RegExp("[\\?\\&]" + param + "=([\\w\\d-|]*)"),
 				result = window.location.href.match(tmpReg);
 			return result ? result[1] : null;
 		} else {
@@ -138,6 +143,7 @@ define(function(require, exports, module) {
 			}
 		}
 	};
+
 	/**
 	 * make sure of the user status
 	 */
@@ -169,13 +175,7 @@ define(function(require, exports, module) {
 		});
 	};
 
-	/**
-	 * 全局错误处理函数
-	 */
-	exports.errorHandler = function(message) {
-		window.console && window.console.log && window.console.log(message);
-		//alert(message);
-	};
+
 	/**
 	 * disable 掉提交中的按钮
 	 * @param  {jquery obj} btn         	按钮的jquery对象
@@ -224,4 +224,39 @@ define(function(require, exports, module) {
 		return expAuthCode.test(value);
 	};
 	exports.tips = sysConfig.tips;
+	exports.pages = sysConfig.pages;
+
+	exports.eventListener = eventListener.eventListener;
+
+	exports.alert = function(message, options, callback) {
+		options = $.extend({}, options);
+		Alert.alert(message, options, callback);
+	};
+
+	//exports.alert = Alert.alert;
+	exports.successToast = function(message) {
+		Toast.toast(message, {
+			theme: 'success'
+		});
+	};
+	exports.errorToast = function(message) {
+		Toast.toast(message, {
+			theme: 'danger'
+		});
+	};
+	exports.errorCenterToast = function(message) {
+		Toast.toast(message, {
+			theme: 'danger',
+			position: 'center'
+		});
+	};
+	/**
+	 * 全局错误处理函数
+	 */
+	exports.errorHandler = function(message) {
+		Toast.toast(message, {
+			theme: 'danger'
+		});
+	};
+	exports.jumpRouter = jumpRouter;
 });

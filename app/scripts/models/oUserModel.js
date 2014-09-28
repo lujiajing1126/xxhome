@@ -107,6 +107,31 @@ define(function(require, exports, module) {
 			throw "╮(╯▽╰)╭服务器君挂了，请稍后再试!";
 		});
 	};
+	User.prototype.loginOnly = function(data) {
+		var session = data.session,
+			user = this;
+		var DEBUG = Helper.getParam("dev");
+		var url = DEBUG ? '/api/account/login' : 'https://xiaoxiao.la/api/account/login';
+		return Q($.ajax({
+			url: url,
+			type: 'POST',
+			dataType: 'JSON',
+			data: data,
+			crossDomain: false
+		})).then(function(data) {
+			if (data.status == "OK") {
+				user.id = data.userId;
+				user.isLogin = true;
+				return session;
+			} else if (data.status == "Error")
+				throw data.message;
+			else
+				throw data.status;
+		}, function(error) {
+			throw "╮(╯▽╰)╭服务器君挂了，请稍后再试!";
+		});
+	};
+
 	// 根据Session取得用户登录状态
 	User.prototype.getLoginStatus = function(session, fn) {
 		var user = this;
@@ -248,29 +273,5 @@ define(function(require, exports, module) {
 		this.name = data.name;
 		this.org = data.org;
 	}
-
-
-	// function userNavigation(session) {
-	// 	var html;
-	// 	$.ajax({
-	// 		url: '/api/account/list_administrated_organizations?session=' + session,
-	// 		dataType: 'json',
-	// 		success: function(data) {
-	// 			if (data.status == "OK") {
-	// 				if (data.organizations && data.organizations.length > 0) {
-	// 					html = "<a href='/home.html#index' target='_blank'><span>组织管理</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
-	// 				} else {
-	// 					html = "<a href='javascript:void(0);' data-xx-login-action='createOrganization'><span class='org-add'>+创建组织</span></a> <i></i><a href='javascript:void(0);' data-xx-login-action='Logout'>退出</a>";
-	// 				}
-	// 				$("#userBox").html(html);
-	// 			} else {
-	// 				throw data;
-	// 			}
-	// 		},
-	// 		error: function(error) {
-	// 			alert("组织信息获取失败！");
-	// 		}
-	// 	});
-	// }
 	module.exports = User;
 });

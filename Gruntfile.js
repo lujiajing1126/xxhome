@@ -7,7 +7,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
@@ -73,7 +73,7 @@ module.exports = function (grunt) {
                     src: ['scripts/**/*.js',
                         'build/template.js',
                         'sui/**/*.js',
-                        ],
+                    ],
                     dest: 'dist'
                 }]
             }
@@ -85,10 +85,26 @@ module.exports = function (grunt) {
                     include: 'relative'
                 },
                 files: {
-                    'dist/scripts/index.js': ['app/scripts/index.js', 'dist/scripts/**/*.js','dist/build/template.js'],
-                    'dist/scripts/seaConfig.js': ['app/scripts/seaConfig.js','dist/sui/async/q.js','dist/sui/bootstrap/bootstrap.js','dist/sui/core/*.js'],
-                    'dist/scripts/base.js':['dist/scripts/public/helper.js','dist/scripts/public/sysConfig.js','dist/scripts/services/oUserService.js','dist/build/template.js','dist/scripts/models/*.js','dist/scripts/public/bowser.js','dist/scripts/baseController.js','dist/scripts/controllers/loginController.js'],
-                    'dist/scripts/controllers/eventController.js':['dist/scripts/controllers/eventController.js','dist/scripts/lib/moment.js']
+                    'dist/scripts/index.js': ['app/scripts/index.js', 'dist/scripts/**/*.js', 'dist/build/template.js'],
+                    'dist/scripts/seaConfig.js': [
+                        'app/scripts/seaConfig.js',
+                        'dist/sui/async/q.js',
+                        'dist/sui/bootstrap/bootstrap.js',
+                        'dist/sui/core/*.js'
+                    ],
+                    'dist/scripts/base.js': [
+                        'dist/scripts/public/*.js',
+                        'dist/scripts/baseController.js',
+                        'dist/scripts/services/*.js',
+                        'dist/scripts/models/*.js',
+                        'dist/scripts/lib/*.js',
+                        'dist/build/template.js',
+                        'dist/scripts/controllers/loginController.js'
+                    ],
+                    'dist/scripts/controllers/eventController.js': [
+                        'dist/scripts/controllers/eventController.js',
+                        'dist/scripts/lib/moment.js'
+                    ]
                 }
             }
         },
@@ -165,7 +181,9 @@ module.exports = function (grunt) {
                         'dist/scripts/public/sysConfig.js',
                         'dist/scripts/services/oUserService.js',
                         'dist/scripts/baseController.js',
-                        'dist/scripts/lib/'
+                        'dist/scripts/lib/',
+                        'dist/scripts/public',
+                        'dist/scripts/services'
                     ]
                 }]
             }
@@ -321,7 +339,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= config.dist %>',
-                    src: '{,*/}*.html',
+                    src: ['{,*/}*.html', '! templates/*.html'],
                     dest: '<%= config.dist %>'
                 }]
             }
@@ -351,13 +369,13 @@ module.exports = function (grunt) {
         // },
         uglify: {
             dist: {
-                options:{
-                    mangle:true,
-                    preserveComments:false //保存注释
+                options: {
+                    mangle: true,
+                    preserveComments: false //保存注释
                 },
                 files: [{
-                    expand:true,
-                    src:'<%= config.dist %>/scripts/**/*.js'
+                    expand: true,
+                    src: '<%= config.dist %>/scripts/**/*.js'
                 }]
             }
         },
@@ -386,7 +404,7 @@ module.exports = function (grunt) {
                     cwd: '.',
                     src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'],
                     dest: '<%= config.dist %>'
-                },{
+                }, {
                     expand: true,
                     dot: true,
                     cwd: '.tmp',
@@ -450,7 +468,7 @@ module.exports = function (grunt) {
     });
 
 
-    grunt.registerTask('serve', function (target) {
+    grunt.registerTask('serve', function(target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'connect:dist:keepalive']);
         }
@@ -463,12 +481,12 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('server', function (target) {
+    grunt.registerTask('server', function(target) {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
         grunt.task.run([target ? ('serve:' + target) : 'serve']);
     });
 
-    grunt.registerTask('test', function (target) {
+    grunt.registerTask('test', function(target) {
         if (target !== 'watch') {
             grunt.task.run([
                 'clean:server',

@@ -11,14 +11,8 @@ define(function(require, exports, module) {
 	bC.extend(Controller);
 	Controller.prototype.init = function() {
 		var _controller = this;
-		$(document).on("click", "[data-xx-action]", function() {
-			var fn = $(this).attr("data-xx-action");
-			_controller.actions[fn] && $.isFunction(_controller.actions[fn]) && _controller.actions[fn].call(this);
-		});
-		$(document).on("touchstart", "[data-xx-action]", function() {
-			var fn = $(this).attr("data-xx-action");
-			_controller.actions[fn] && $.isFunction(_controller.actions[fn]) && _controller.actions[fn].call(this);
-		});
+		Helper.eventListener("click",_controller.actions);
+		Helper.eventListener("touchstart",_controller.actions);
 		Helper.userStatus();
 	};
 	module.exports = Controller;

@@ -1,14 +1,14 @@
 define(function(require, exports, module) {
 	var Q = require('sui/async/q'),
 		sysConfig = require('scripts/public/msysconfig'),
-		expPhoneNumber = sysConfig.regulars.phoneNumber,
-		expEmail = sysConfig.regulars.email,
-		expPassword = sysConfig.regulars.password,
-		expAuthCode = sysConfig.regulars.authCode,
 		eventListener = require('scripts/public/eventListener'),
 		Alert = require('scripts/lib/Ly.alert'),
 		Toast = require('scripts/lib/Ly.toast'),
-		jumpRouter = require('scripts/public/jumpRouter');
+		jumpRouter = require('scripts/public/jumpRouter'),
+		expPhoneNumber = sysConfig.regulars.phoneNumber,
+		expEmail = sysConfig.regulars.email,
+		expPassword = sysConfig.regulars.password,
+		expAuthCode = sysConfig.regulars.authCode;
 
 	exports.tips = sysConfig.tips;
 	/**
@@ -228,12 +228,17 @@ define(function(require, exports, module) {
 
 	exports.eventListener = eventListener.eventListener;
 
+	/**
+	 * 弹出框插件
+	 */
 	exports.alert = function(message, options, callback) {
 		options = $.extend({}, options);
 		Alert.alert(message, options, callback);
 	};
 
-	//exports.alert = Alert.alert;
+	/**
+	 * 提示组
+	 */
 	exports.successToast = function(message) {
 		Toast.toast(message, {
 			theme: 'success'

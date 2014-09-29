@@ -3,7 +3,7 @@ define(function(require, exports, module) {
 		baseController = require('scripts/baseController'),
 		bC = new baseController(),
 		template = require('build/template'),
-		helper=require('scripts/public/helper'),
+		Helper = require('scripts/public/helper'),
 		OrganizationService = require('scripts/services/OrgService'),
 		bowser = require('scripts/public/bowser'),
 		b = bowser.bowser;
@@ -26,14 +26,14 @@ define(function(require, exports, module) {
 					});
 					data.mobile = true;
 				}
-				data.pageType="responsive";
+				data.pageType = "responsive";
 				data.organizationInfo.descriptions = data.organizationInfo.description ? data.organizationInfo.description.split(/\r\n/g) : ["无简介"];
 				$('.body').html(template('app/templates/organization', data));
 			}
 		}))["catch"](function(error) {
-			//console.log(error);
-		}).done(function(){
-			helper.userStatus();
+			Helper.errorToast(error);
+		}).done(function() {
+			Helper.userStatus();
 		});
 	};
 	module.exports = Controller;

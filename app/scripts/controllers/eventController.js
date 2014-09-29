@@ -5,7 +5,7 @@ define(function(require, exports, module) {
 		template = require('build/template'),
 		EventService = require('scripts/services/EventService'),
 		moment = require('scripts/lib/moment'),
-		helper=require('scripts/public/helper'),
+		Helper=require('scripts/public/helper'),
 		bowser = require('scripts/public/bowser'),
 		b = bowser.bowser;
 
@@ -38,10 +38,9 @@ define(function(require, exports, module) {
 				$('.body').html(template('app/templates/event', eventInfo));
 			}
 		}))["catch"](function(error) {
-			console.log(error);
-			//window.location.href = "http://xiaoxiao.la/404.html";
+			Helper.errorToast(error);
 		}).done(function(){
-			helper.userStatus();
+			Helper.userStatus();
 		});
 	};
 	module.exports = Controller;

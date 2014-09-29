@@ -23,7 +23,6 @@ define(function(require, exports, module) {
 		];
 		return Helper.globalResponseHandler({
 			url: '/api/org/' + orgId + '/info?session=' + session + '&fields=' + fields.join(','),
-			type: 'GET',
 			dataType: 'JSON'
 		});
 	};

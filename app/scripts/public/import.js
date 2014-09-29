@@ -2,7 +2,7 @@ define(function(require, exports, module) {
 	var $ = SUI.$,
 		template = require('build/template'),
 		Helper = require('scripts/public/helper'),
-		loginController = loginController = require('scripts/controllers/loginController');
+		loginController = require('scripts/controllers/loginController');
 	exports.init = function(templateName, data) {
 		$(".body").append(template(templateName, data || {}));
 		(new loginController()).init(function() {

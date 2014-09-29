@@ -139,12 +139,7 @@ define(function(require, exports, module) {
 		}
 		Helper.userStatus();
 		var _controller = this;
-		$(document).on("click." + this.namespace, "[data-xx-action]", function(event) {
-			var $this = $(this),
-				$action = $this.attr("data-xx-action");
-			event = event || window.event;
-			_controller.actions && _controller.actions[$action] && $.isFunction(_controller.actions[$action]) && _controller.actions[$action].call($this, event);
-		});
+		Helper.eventListener("click." + this.namespace, _controller.actions);
 		$(document).on("keyup." + this.namespace, "#userName", function(event) {
 			event = event || window.event;
 			var userName = $(this).val();

@@ -10,9 +10,11 @@
 	<div class="body relative"></div>
 	<script src="scripts/seaConfig.js"></script>
 	<script type="text/javascript">
-	SUI.use(['./scripts/base','./scripts/public/import'],function(base,exports){
-		exports.init('app/templates/helper',{
-			pageType:"responsive"
+	SUI.use(['./scripts/base'], function(base) {
+		SUI.use('./scripts/public/import', function(exports) {
+			exports.init('app/templates/helper', {
+				pageType: "responsive"
+			});
 		});
 	});
 	</script>

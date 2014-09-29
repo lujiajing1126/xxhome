@@ -458,7 +458,7 @@ module.exports = function(grunt) {
 		// TmodJs to Compile
 		tmod: {
 			templateHome: {
-				src: 'app/templates/**/*.html',
+				src: ['app/templates/**/*.html','!--*.html'],
 				dest: 'app/build/template.js',
 				options: {
 					combo: true,

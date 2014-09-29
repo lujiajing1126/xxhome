@@ -12,8 +12,10 @@
 	<div class="body"></div>
 	<script src="scripts/seaConfig.js"></script>
 	<script type="text/javascript">
-	SUI.use(['./scripts/base','./scripts/download'],function(base,exports){
-		exports.init();
+	SUI.use(['./scripts/base'], function(base) {
+		SUI.use('./scripts/download', function(exports) {
+			exports.init();
+		});
 	});
 	</script>
 	<!--

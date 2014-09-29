@@ -20,8 +20,12 @@
 		</div>
 	</div>
 	<script src="/scripts/seaConfig.js"></script>
-	<script type="text/javascript">SUI.use(["./scripts/base","./scripts/controllers/mLoginController"],function(base,login){
-		(new login()).init();
-	});</script>
+	<script type="text/javascript">
+	SUI.use(['./scripts/base'], function(base) {
+		SUI.use('./scripts/controllers/mLoginController', function(login) {
+			(new login()).init();
+		});
+	});
+	</script>
 </body>
 </html>

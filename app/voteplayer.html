@@ -21,8 +21,12 @@
 		</div>
 	</div>
 	<script src="/scripts/seaConfig.js"></script>
-	<script type="text/javascript">SUI.use(["./scripts/base","./scripts/controllers/voteplayerController"],function(base,voteplayer){
-		(new voteplayer()).init();
-	});</script>
+	<script type="text/javascript">
+	SUI.use(["./scripts/base"], function(base) {
+		SUI.use("./scripts/controllers/voteplayerController", function(voteplayer) {
+			(new voteplayer()).init();
+		});
+	});
+	</script>
 </body>
 </html>

@@ -6,9 +6,10 @@ define(function(require, exports, module) {
 		template = require('build/template'),
 		Helper = require('scripts/public/helper');
 
-	var go = Helper.getParam("go");
+	var go = Helper.getParam("go"),
+		param = go;
 	go && (go = Helper.jumpRouter(go));
-	go=go||Helper.pages.home;
+	go = go || Helper.pages.home;
 
 	var Controller = function() {
 		var that = this;
@@ -56,7 +57,9 @@ define(function(require, exports, module) {
 		Helper.eventListener("click." + _controller.namespace, _controller.actions);
 
 		function render() {
-			$('.body').html(template('app/templates/login', {}));
+			$('.body').html(template('app/templates/login', {
+				go: "?go=" + param
+			}));
 		}
 	};
 	module.exports = Controller;

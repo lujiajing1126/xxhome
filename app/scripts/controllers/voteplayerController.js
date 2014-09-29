@@ -31,6 +31,9 @@ define(function(require, exports, module) {
 				(VoteService.cast(voteId, playerId, session).then(function(data) {
 					if (data && data.status == "OK") {
 						Helper.btnLoadingStart(btn, "投票成功");
+						setTimeout(function() {
+							Helper.btnLoadingEnd(btn);
+						}, 2000);
 					} else throw data;
 				}))["catch"](function(error) {
 					Helper.alert(error);

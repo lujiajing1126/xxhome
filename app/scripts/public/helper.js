@@ -11,6 +11,7 @@ define(function(require, exports, module) {
 		expAuthCode = sysConfig.regulars.authCode;
 
 	exports.tips = sysConfig.tips;
+	exports.delays = sysConfig.delays;
 	/**
 	 * 全局异步请求处理器
 	 * @required Q.js jQuery
@@ -92,20 +93,20 @@ define(function(require, exports, module) {
 		});
 	};
 	exports.getSession = getSession;
+
 	/**
 	 * 不能确定是否登录的情况下请求服务器统一函数入口
 	 * @param  {Function} 		successFnc [session验证成功执行的函数]
 	 * @param  {[Function]} 	errorFnc   [session验证失败执行的函数]
 	 */
 	exports.requestWithSession = function(successFnc, errorFnc) {
-		var session = $.cookie("userSession");
+		var session = AppUser.getSession() || $.cookie("userSession");
 		//if session is existed then auth it
 		//or create a new session without login
 		if (session) {
 			(globalResponseHandler({
 				url: "/api/account/id?session=" + session,
-				type: "GET",
-				dataType: 'JSON'
+				dataType: 'json'
 			}).then(function(data) {
 				if (data.status == "OK") {
 					successFnc && $.isFunction(successFnc) && successFnc(session);
@@ -227,6 +228,7 @@ define(function(require, exports, module) {
 	exports.pages = sysConfig.pages;
 
 	exports.eventListener = eventListener.eventListener;
+	exports.globalEventListener = eventListener.globalEventListener;
 
 	/**
 	 * 弹出框插件

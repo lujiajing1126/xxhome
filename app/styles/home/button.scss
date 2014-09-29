@@ -10,3 +10,43 @@
 		color: #fff;
 	}
 }
+
+button.xx-btn {
+	@include border-radius(10px);
+	color: $theme-color;
+	background-color: #fff;
+}
+button.xx-btn-theme-color {
+	background-color: $theme-color;
+	color: #fff;
+}
+.btn-xx-theme {
+	background-color: $theme-color;
+	border-color: $theme-color;
+	color:#fff;
+	&:hover,&:visited {
+		background-color: $theme-deep-color;
+		border-color: $theme-deep-color;
+		color:#fff;
+	}
+}
+
+.btn-xx-danger {
+	background-color: $danger-color;
+	border-color: $danger-color;
+	color:#fff;
+	&:hover,&:visited {
+		background-color: $danger-deep-color;
+		border-color: $danger-deep-color;
+		color:#fff;
+	}
+}
+.btn-xx-large{
+	width:100%;
+}
+.w-p-50{
+	width:50%;
+}
+.w-p-40{
+	width:48%;
+}

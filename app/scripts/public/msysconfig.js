@@ -9,12 +9,16 @@ define(function(require, exports, module) {
 		authCode: /^[0-9]{6}$/
 	};
 	exports.tips = {
+		userName: '用户名格式不对',
 		password: '密码长度必须为6-23位',
 		authCode: '验证码格式为6位数字',
 		loginLoading: '玩命登录中...'
+
 	};
 	exports.pages = {
 		home: './index.html'
 	};
-	
+	exports.delays = {
+		authCode: 60
+	};
 });

@@ -7,7 +7,7 @@
 	<div class="vote-wrapper">
 		<div class="vote-avatar">
 			<a href="./voteplayer.html?vid={{option.option.voteId}}&pid={{option.option.id}}">
-			<img src="{{option.option.imgUrl}}" onerror="this.src='images/default/3.png';" />
+			<img src="api/vote/option/{{option.option.id}}/image" onerror="this.src='images/default/3.png';" />
 			</a>
 			{{if i < 3}}<div class="rank"><i>{{i+1}}</i></div>{{/if}}
 		</div>

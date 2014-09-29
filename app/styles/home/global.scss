@@ -1,13 +1,15 @@
 $theme-color: #49d0f2;
 $deep-theme-color: #00bbd8;
+$theme-deep-color: #00bbd8;
 $danger-color: #ff5454;
 $deep-danger-color: #ce0404;
+$danger-deep-color: #ce0404;
 $success-color: #75db59;
 $page-width: 1080px;
 $light-color: #aaa;
 $heavy-color: #666;
 $header-z-index: 9;
-$header-height:60px;
+$header-height: 60px;
 * {
 	margin: 0;
 	padding: 0;
@@ -105,8 +107,8 @@ ul, li {
 }
 .container0 {
 	margin-top: $header-height;
-	padding-top:10px;
-	&.mobile{
+	padding-top: 10px;
+	&.mobile {
 		margin-top: 10px;
 	}
 }
@@ -174,6 +176,9 @@ ul, li {
 	filter: blur(20px);
 	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=20, MakeShadow=false); /* IE6~IE9 */
 }
-.w-p-100{
-	width:100%;
+.w-p-100 {
+	width: 100%;
+}
+.off {
+	display: none;
 }

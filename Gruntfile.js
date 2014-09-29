@@ -463,7 +463,7 @@ module.exports = function(grunt) {
 				options: {
 					combo: true,
 					syntax: 'simple',
-					minify: true,
+					minify: true
 				}
 			}
 		}

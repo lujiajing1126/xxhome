@@ -32,12 +32,12 @@ define(function(require, exports, module) {
 					if (data && data.status == "OK") {
 						Helper.btnLoadingStart(btn, "投票成功");
 						setTimeout(function() {
-							Helper.btnLoadingEnd(btn);
+							Helper.btnLoadingEnd(btn,"我要投票");
 						}, 2000);
 					} else throw data;
 				}))["catch"](function(error) {
 					Helper.alert(error);
-					Helper.btnLoadingEnd(btn);
+					Helper.btnLoadingEnd(btn,"我要投票");
 				}).done();
 			}
 		};

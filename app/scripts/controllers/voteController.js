@@ -19,16 +19,15 @@ define(function(require, exports, module) {
 				var btn = this,
 					session = AppUser.getSession(),
 					playerId = btn.attr("data-value");
-					//dom_ticket = btn.parents(".vote-wrapper").find(".vote-ticket-number"),
-					//ticketNumber = +dom_ticket.text();
 				Helper.btnLoadingStart(btn, "正在提交...");
 
 				(VoteService.cast(voteId, playerId, session).then(function(data) {
 					if (data && data.status == "OK") {
 						Helper.btnLoadingStart(btn, "投票成功");
-						// dom_ticket.text(++ticketNumber);
-						// dom_ticket = null; //手动清除对象，防止内存泄露
-						_controller.init(session);
+						Helper.alert("投票成功！",{},function(){
+							_controller.init(session);
+						});
+						
 						setTimeout(function() {
 							Helper.btnLoadingEnd(btn, "我要投票");
 						}, 2000);

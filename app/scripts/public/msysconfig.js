@@ -12,11 +12,12 @@ define(function(require, exports, module) {
 		userName: '用户名格式不对',
 		password: '密码长度必须为6-23位',
 		authCode: '验证码格式为6位数字',
-		loginLoading: '玩命登录中...'
-
+		loginLoading: '玩命登录中...',
+		signuping: '玩命注册中...'
 	};
 	exports.pages = {
-		home: './index.html'
+		home: './index.html',
+		login: './login.html'
 	};
 	exports.delays = {
 		authCode: 60

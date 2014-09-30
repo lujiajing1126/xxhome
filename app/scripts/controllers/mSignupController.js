@@ -7,7 +7,7 @@ define(function(require, exports, module) {
 		Helper = require('scripts/public/helper');
 
 	var go = Helper.getParam("go"),
-		param = go;
+		param = go || "";
 	go && (go = Helper.jumpRouter(go));
 	go = go || Helper.pages.home;
 
@@ -50,29 +50,48 @@ define(function(require, exports, module) {
 					userName = signup_btn.parents("form").find("#userName").val(),
 					password = signup_btn.parents("form").find("#password").val();
 				if (!Helper.validateUserName(userName)) {
-					Helper.errorCenterToast('用户名错误');
+					Helper.errorCenterToast('用户名必须为手机号或邮箱');
 					return;
+				}
+				if (Helper.isPhoneNumber(userName)) {
+					var authCode = signup_btn.parents("form").find("#authCode").val();
+					if (!Helper.isAuthCode(authCode)) {
+						Helper.errorCenterToast(Helper.tips.authCode);
+						return;
+					}
 				}
 				if (!Helper.isPassword(password)) {
 					Helper.errorToast(Helper.tips.password);
 					return;
 				}
 
-				var logindata = {
+				var signupdata = {
 					session: AppUser.getSession(),
 					password: password
 				};
-				if (Helper.isPhoneNumber(userName))
-					logindata.phone_number = userName;
-				else
-					logindata.email = userName;
-				Helper.btnLoadingStart(signup_btn, Helper.tips.loginLoading);
-				(AppUser.loginOnly(logindata).then(function(session) {
-					session && go && (window.location.href = go);
+				if (Helper.isPhoneNumber(userName)) {
+					signupdata.phone_number = userName;
+					signupdata.phone_number_verification_code = authCode;
+				} else {
+					signupdata.email = userName;
+				}
+				Helper.btnLoadingStart(signup_btn, Helper.tips.signuping);
+				(Helper.globalResponseHandler({
+					url: '/api/account/register',
+					type: 'post',
+					dataType: 'json',
+					data: signupdata
+				}).then(function(data) {
+					if (data && data.status == "OK") {
+						AppUser.setSession(signupdata.session);
+						Helper.alert("注册成功", {}, function() {
+							window.location.href = Helper.pages.login + '?go=' + param;
+						});
+					} else throw data;
 				}))["catch"](function(error) {
-					Helper.errorCenterToast(error);
+					Helper.alert(error);
 					Helper.btnLoadingEnd(signup_btn);
-				});
+				}).done();
 			}
 		};
 	};
@@ -95,11 +114,9 @@ define(function(require, exports, module) {
 	};
 
 	function getAuthCode(userName, btn_authCode) {
+		var session = AppUser.getSession();
 		Helper.btnLoadingStart(btn_authCode, "正在发送...");
-		Helper.requestWithSession(sendAuthCode, function(error) {
-			Helper.alert(error);
-			Helper.btnLoadingEnd(btn_authCode, "重新发送");
-		});
+		Helper.requestBySession(session, sendAuthCode);
 
 		function sendAuthCode(session) {
 			(Helper.globalResponseHandler({
@@ -115,9 +132,9 @@ define(function(require, exports, module) {
 					Helper.successToast("验证码发送成功");
 					var delay = Helper.delays.authCode;
 					var waiting = function() {
-						btn_authCode.text("发送成功，"+(delay--) + "秒之后重试");
+						btn_authCode.text("发送成功，" + (delay--) + "秒之后重试");
 						if (delay == 0) {
-							btn_authCode.removeClass("disabled").text("重新发送");
+							btn_authCode.removeAttr("disabled").text("重新发送");
 							return;
 						}
 						setTimeout(function() {

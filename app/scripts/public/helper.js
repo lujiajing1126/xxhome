@@ -94,6 +94,18 @@ define(function(require, exports, module) {
 	};
 	exports.getSession = getSession;
 
+	exports.requestBySession = function(session, fnc) {
+		if (session) {
+			fnc && $.isFunction(fnc) && fnc(session);
+		} else {
+			(getSession().then(function(session) {
+				fnc && $.isFunction(fnc) && fnc(session);
+			}))["catch"](function(error) {
+				Alert.alert(error);
+			});
+		}
+	};
+
 	/**
 	 * 不能确定是否登录的情况下请求服务器统一函数入口
 	 * @param  {Function} 		successFnc [session验证成功执行的函数]

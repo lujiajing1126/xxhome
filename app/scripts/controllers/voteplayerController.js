@@ -28,14 +28,13 @@ define(function(require, exports, module) {
 			voteCast: function() {
 				var btn = this,
 					session = AppUser.getSession();
-				//dom_ticket = btn.parents(".voteplayer-footer").find(".voteplayer-ticket-wrapper>span"),
-				//ticketNumber = dom_ticket.text();
 				Helper.btnLoadingStart(btn, "正在提交...");
 				(VoteService.cast(voteId, playerId, session).then(function(data) {
 					if (data && data.status == "OK") {
 						Helper.btnLoadingStart(btn, "投票成功");
-						//dom_ticket.text(++ticketNumber);
-						_controller.render(); // 投票成功重新渲染页面
+						Helper.alert("投票成功！",{},function(){
+							_controller.render(); // 投票成功重新渲染页面
+						});
 						setTimeout(function() {
 							Helper.btnLoadingEnd(btn, "我要投票");
 						}, 2000);

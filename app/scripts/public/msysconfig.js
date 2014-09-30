@@ -13,7 +13,8 @@ define(function(require, exports, module) {
 		password: '密码长度必须为6-23位',
 		authCode: '验证码格式为6位数字',
 		loginLoading: '抢滩登录中...',
-		signuping: '玩命注册中...'
+		signuping: '玩命注册中...',
+		xiaoxiaoSupport: '—校校技术赞助'
 	};
 	exports.pages = {
 		home: './index.html',

@@ -14,6 +14,9 @@
 			margin: 20px 0 10px;
 			input {
 				padding: 20px 10px
+				&:focus{
+					color: #000;
+				}
 			}
 		}
 		.btn-login {

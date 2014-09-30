@@ -61,7 +61,7 @@ define(function(require, exports, module) {
 		(VoteService.getVotePlayers(voteId, session).then(function(data) {
 			if (data.status == "OK") {
 				residueTickets = data.residueTickets;
-				document.title = data.vote.voteName;
+				document.title = data.vote.voteName+Helper.tips.xiaoxiaoSupport;
 				data.pageType = "responsive"; //响应式
 				if (b.isMobile) {
 					data.mobile = true;

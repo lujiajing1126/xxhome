@@ -22,22 +22,27 @@ define(function(require, exports, module) {
 	}
 
 	var Controller = function() {
+		var _controller = this;
 		this.namespace = "vote";
 		this.actions = {
 			voteCast: function() {
 				var btn = this,
 					session = AppUser.getSession();
+				//dom_ticket = btn.parents(".voteplayer-footer").find(".voteplayer-ticket-wrapper>span"),
+				//ticketNumber = dom_ticket.text();
 				Helper.btnLoadingStart(btn, "正在提交...");
 				(VoteService.cast(voteId, playerId, session).then(function(data) {
 					if (data && data.status == "OK") {
 						Helper.btnLoadingStart(btn, "投票成功");
+						//dom_ticket.text(++ticketNumber);
+						_controller.render(); // 投票成功重新渲染页面
 						setTimeout(function() {
-							Helper.btnLoadingEnd(btn,"我要投票");
+							Helper.btnLoadingEnd(btn, "我要投票");
 						}, 2000);
 					} else throw data;
 				}))["catch"](function(error) {
 					Helper.alert(error);
-					Helper.btnLoadingEnd(btn,"我要投票");
+					Helper.btnLoadingEnd(btn, "我要投票");
 				}).done();
 			}
 		};
@@ -45,30 +50,33 @@ define(function(require, exports, module) {
 	bC.extend(Controller);
 	Controller.prototype.init = function() {
 		var _controller = this;
-
 		(new loginController()).init(function() {
-			var session = AppUser.getSession();
-			(VoteService.getVotePlayer(voteId, playerId, session).then(function(data) {
-				if (data && data.status == "OK") {
-					data.option.descriptions = data.option.description ? data.option.description.split(/\r\n/g) : ["无介绍"];
-					console.log(data);
-					if (b.isMobile) {
-						data.mobile = true;
-						$('.body').html(template('app/templates/voteplayer', data));
-						var winWidth = $(window).width();
-						$(".vote-avatar").height(winWidth / 2 - 30);
-					} else {
-						$('.body').html(template('app/templates/voteplayer', data));
-					}
-				} else throw data;
-			}))["catch"](function(error) {
-				if (error == "Not Logged In")
-					window.location.href = "./login.html?go=vote|" + voteId + '|player|' + playerId;
-				else
-					Helper.errorHandler(error);
-			}).done(function() {
-				Helper.eventListener("click", _controller.actions);
-			});
+			_controller.render();
+		});
+	};
+	Controller.prototype.render = function() {
+		var _controller = this;
+		var session = AppUser.getSession();
+		(VoteService.getVotePlayer(voteId, playerId, session).then(function(data) {
+			if (data && data.status == "OK") {
+				data.option.descriptions = data.option.description ? data.option.description.split(/\r\n/g) : ["无介绍"];
+				console.log(data);
+				if (b.isMobile) {
+					data.mobile = true;
+					$('.body').html(template('app/templates/voteplayer', data));
+					var winWidth = $(window).width();
+					$(".vote-avatar").height(winWidth / 2 - 30);
+				} else {
+					$('.body').html(template('app/templates/voteplayer', data));
+				}
+			} else throw data;
+		}))["catch"](function(error) {
+			if (error == "Not Logged In")
+				window.location.href = "./login.html?go=vote|" + voteId + '|player|' + playerId;
+			else
+				Helper.errorHandler(error);
+		}).done(function() {
+			Helper.eventListener("click", _controller.actions);
 		});
 	};
 	module.exports = Controller;

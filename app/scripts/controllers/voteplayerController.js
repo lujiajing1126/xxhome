@@ -61,7 +61,7 @@ define(function(require, exports, module) {
 		var session = AppUser.getSession();
 		(VoteService.getVotePlayer(voteId, playerId, session).then(function(data) {
 			if (data && data.status == "OK") {
-				document.title=data.vote.voteName+data.option.optionName+Helper.tips.xiaoxiaoSupport;
+				document.title=data.vote.voteName+"—"+data.option.optionName+Helper.tips.xiaoxiaoSupport;
 				residueTickets = data.residueTickets;
 				data.option.descriptions = data.option.description ? data.option.description.split(/\r\n/g) : ["无介绍"];
 				if (b.isMobile) {

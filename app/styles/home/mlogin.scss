@@ -13,8 +13,8 @@
 		.box-row {
 			margin: 20px 0 10px;
 			input {
-				padding: 20px 10px
-				&:focus{
+				padding: 20px 10px;
+				&:focus {
 					color: #000;
 				}
 			}
@@ -25,15 +25,14 @@
 		}
 	}
 	.box-footer {
-		a{
-			&:hover {
+		a{&:hover {
 				text-decoration: none
 			}
 			&.link-signup {
 				color: #0adef0;
 				&:hover {
-				color: #06c3d1;
-			}
+					color: #06c3d1;
+				}
 			}
 		}
 	}

@@ -12,6 +12,8 @@ define(function(require, exports, module) {
 		playerId = Helper.getParam("pid"),
 		session = Helper.getParam("session");
 
+	var residueTickets; //剩余票数
+
 	if (session) {
 		var isLocalStorage = window.localStorage ? true : false;
 		$.cookie("userSession", session, {
@@ -32,7 +34,7 @@ define(function(require, exports, module) {
 				(VoteService.cast(voteId, playerId, session).then(function(data) {
 					if (data && data.status == "OK") {
 						Helper.btnLoadingStart(btn, "投票成功");
-						Helper.alert("投票成功！",{},function(){
+						Helper.alert("投票成功！,剩余" + (--residueTickets) + "票", {}, function() {
 							_controller.render(); // 投票成功重新渲染页面
 						});
 						setTimeout(function() {
@@ -52,14 +54,16 @@ define(function(require, exports, module) {
 		(new loginController()).init(function() {
 			_controller.render();
 		});
+		Helper.eventListener("click", _controller.actions);
 	};
 	Controller.prototype.render = function() {
 		var _controller = this;
 		var session = AppUser.getSession();
 		(VoteService.getVotePlayer(voteId, playerId, session).then(function(data) {
 			if (data && data.status == "OK") {
+				document.title=data.vote.voteName;
+				residueTickets = data.residueTickets;
 				data.option.descriptions = data.option.description ? data.option.description.split(/\r\n/g) : ["无介绍"];
-				console.log(data);
 				if (b.isMobile) {
 					data.mobile = true;
 					$('.body').html(template('app/templates/voteplayer', data));
@@ -74,9 +78,7 @@ define(function(require, exports, module) {
 				window.location.href = "./login.html?go=vote|" + voteId + '|player|' + playerId;
 			else
 				Helper.errorHandler(error);
-		}).done(function() {
-			Helper.eventListener("click", _controller.actions);
-		});
+		}).done();
 	};
 	module.exports = Controller;
 });

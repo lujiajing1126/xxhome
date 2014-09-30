@@ -10,6 +10,18 @@
 		color: #fff;
 	}
 }
+.btn-vote-back {
+	background-color: $theme-color;
+	color: #fff;
+	width: 100%;
+	border-radius: 5px;
+	outline: none;
+	&:hover {
+		background-color: $theme-deep-color;
+		border-color: $theme-deep-color;
+		color: #fff;
+	}
+}
 
 button.xx-btn {
 	@include border-radius(10px);

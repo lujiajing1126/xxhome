@@ -6,7 +6,10 @@
 	<div class="voteplayer-wrapper">
 		<div class="voteplayer-avatar">
 			<img src="api/vote/option/{{option.id}}/image" onerror="this.src='images/default/3.png';" />
-			{{if i<3}}<div class="rank"><i>{{i+1}}</i></div>{{/if}}
+			{{if i
+			<3}}<div class="rank"> <i>{{i+1}}</i>
+			</div>
+			{{/if}}
 		</div>
 		<div class="voteplayer-name">{{option.optionName}}</div>
 		<div class="voteplayer-info-wrapper">
@@ -14,7 +17,7 @@
 			<p>{{desc}}</p>
 			{{/each}}
 		</div>
-		<div class="voteplayer-footer">
+		<div class="voteplayer-footer clearfix">
 			<div class="voteplayer-ticket-wrapper">
 				<span>{{option.tickets}}</span>
 				票
@@ -22,6 +25,9 @@
 			<div class="voteplayer-btn-wrapper">
 				<button class="btn btn-vote" data-xx-action="voteCast">我要投票</button>
 			</div>
+		</div>
+		<div class="voteplayer-footer">
+			<a class="btn btn-vote-back" href="./vote.html?vid={{option.voteId}}">返回投票列表</a>
 		</div>
 	</div>
 </div>

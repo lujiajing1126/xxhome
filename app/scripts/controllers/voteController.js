@@ -9,8 +9,10 @@ define(function(require, exports, module) {
 		b = bowser.bowser,
 		VoteService = require('scripts/services/oVoteService');
 
+	var residueTickets;
+
 	var Controller = function(voteId) {
-		var _controller=this;
+		var _controller = this;
 		this.namespace = "vote";
 		this.voteId = voteId;
 		this.actions = {
@@ -24,10 +26,9 @@ define(function(require, exports, module) {
 				(VoteService.cast(voteId, playerId, session).then(function(data) {
 					if (data && data.status == "OK") {
 						Helper.btnLoadingStart(btn, "投票成功");
-						Helper.alert("投票成功！",{},function(){
-							_controller.init(session);
+						Helper.alert("投票成功！,剩余" + (--residueTickets) + "票", {}, function() {
+							_controller.render(session);
 						});
-						
 						setTimeout(function() {
 							Helper.btnLoadingEnd(btn, "我要投票");
 						}, 2000);
@@ -42,6 +43,16 @@ define(function(require, exports, module) {
 	bC.extend(Controller);
 	Controller.prototype.init = function(session) {
 		var _controller = this;
+		_controller.render(session);
+		Helper.eventListener("click", _controller.actions);
+
+		//较耗性能
+		$(window).on("resize",function(){
+			$(".vote-avatar img").height($(".vote-avatar img").width());
+		});
+	};
+	Controller.prototype.render = function(session) {
+		var _controller = this;
 		var voteId = this.voteId;
 		if (!voteId) {
 			window.location.href = "http://xiaoxiao.la/404.html";
@@ -49,6 +60,8 @@ define(function(require, exports, module) {
 		}
 		(VoteService.getVotePlayers(voteId, session).then(function(data) {
 			if (data.status == "OK") {
+				residueTickets = data.residueTickets;
+				document.title = data.vote.voteName;
 				data.pageType = "responsive"; //响应式
 				if (b.isMobile) {
 					data.mobile = true;
@@ -57,18 +70,21 @@ define(function(require, exports, module) {
 					$(".vote-avatar").height(winWidth / 2 - 30);
 				} else {
 					$('.body').html(template('app/templates/vote', data));
+					$(".vote-avatar img").load(function() {
+						$(this).height($(this).width());
+					});
 				}
 			} else throw data;
 		}))["catch"](function(error) {
-			if (error == "Not Logged In")
-				window.location.href = "./login.html?go=vote|" + _controller.voteId;
-			else
+			if (error == "Not Logged In") {
+				Helper.alert("同学，你必须先登录校校才能投票哦！", {}, function() {
+					window.location.href = "./login.html?go=vote|" + _controller.voteId;
+				});
+			} else
 				Helper.errorHandler(error);
 		}).done(function() {
 			Helper.userStatus();
 		});
-
-		Helper.eventListener("click", _controller.actions);
 	};
 	module.exports = Controller;
 });

@@ -10,6 +10,7 @@ define(function(require, exports, module) {
 		VoteService = require('scripts/services/oVoteService');
 
 	var Controller = function(voteId) {
+		var _controller=this;
 		this.namespace = "vote";
 		this.voteId = voteId;
 		this.actions = {

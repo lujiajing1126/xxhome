@@ -28,7 +28,7 @@ define(function(require, exports, module) {
 				iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
 				iPad: u.indexOf('iPad') > -1, //是否iPad
 				webApp: u.indexOf('Safari') == -1,
-				WX: u.indexOf('micromessenger') != -1
+				WX: u.toLowerCase().indexOf('micromessenger') != -1
 				//是否web应该程序，没有头部与底部
 			};
 		}(),

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	a{
+		text-decoration: none;
+	}
+	.account-box{
+		margin-left: 100px;
+		margin-top: 100px;
+		width: auto;
+		display: inline-block;
+	}
+	.account-box .account-info a{
+		line-height: 28px;
+	}
+	.account-box .account-nav{
+		display: none;
+		background-color: #fff;
+		text-decoration: none;
+		list-style: none;
+		font-size: 14px;
+	}
+	.account-box .account-nav li{
+		line-height: 25px;
+		padding-left: 6px;
+	}
+	.account-box:hover .account-nav{
+		display: block;
+	}
+	.account-box:hover .caret{
+		transform:rotate(180deg);
+	}
+	.caret{
+		-webkit-animation:all 1s linear infinite;
+		display: inline-block;
+		height: 0px;
+		width: 0px;
+		border-top: 6px solid red;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-bottom: 0;
+		line-height: 20px;
+	}
+	</style>
+</head>
+<body>
+	<header class="header web-header">
+		<div class="account-box">
+			<div class="account-info">
+				<a href="#">小小皮特痒</a>
+				<span class="caret"></span>
+			</div>
+			<ul class="account-nav">
+				<li>
+					<a href="#">个人主页</a>
+				</li>
+				<li>
+					<a href="#">退出</a>
+				</li>
+			</ul>
+		</div>
+	</header>
+</body>
+</html>

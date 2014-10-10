@@ -1,0 +1,10 @@
+.xx-table{
+	width:100%;
+	display:table;
+	.xx-table-row{
+		display: table-row;
+		.xx-table-cell{
+			display: table-cell;
+		}
+	}
+}

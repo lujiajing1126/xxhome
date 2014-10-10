@@ -122,4 +122,16 @@ define(function(require, exports, module) {
 			data: data
 		});
 	};
+	/**
+	 * 获取用户订阅的学校
+	 */
+	exports.getSubscriptions = function(session) {
+		return Helper.globalResponseHandler({
+			url: '/api/account/subscriptions',
+			dataType: 'JSON',
+			data: {
+				session: session
+			}
+		});
+	};
 });

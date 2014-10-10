@@ -1,6 +1,7 @@
 @import "home/expression";
 @import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 @import "home/global";
+@import "home/global-table";
 @import "home/button";
 @import "home/index";
 @import "home/header";
@@ -22,13 +23,12 @@
 @import "home/voteplayer";
 @import "home/animate";
 @import "home/mlogin";
-
 @import "lib/alert";
 @import "lib/toast";
-
 @import "home/sd_singer_vote";
-
-body,html {
+//discovery
+@import "discovery/jobs";
+body, html {
 	// 黑体的标准写法
 	font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
 }

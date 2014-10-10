@@ -9,7 +9,13 @@ seajs.config({
 	// 别名配置
 	alias: {
 		'jquery': 'sui/vendor/jquery',
-		'artTemplate': 'build/template'
+		'template': 'build/template',
+		'helper':'scripts/public/helper',
+		'bowser':'scripts/public/bowser',
+		'moment':'scripts/lib/moment',
+		'UserModel':'scripts/models/oUserModel',
+		'UserService':'scripts/services/oUserService',
+		'JobService':'scripts/services/discovery/JobService'
 	},
 
 	// 变量配置

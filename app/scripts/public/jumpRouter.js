@@ -1,4 +1,10 @@
+/**
+ * 
+ */
 define(function(require, exports, module) {
+	/**
+	 * config & rules
+	 */
 	var jumpRouters = {
 		"vote|:voteId|player|:playerId": {
 			regExp: /^vote\|([\d]+)\|player\|([\d]+)$/,
@@ -15,8 +21,13 @@ define(function(require, exports, module) {
 		"organization|:oid": {
 			regExp: /^organization\|([\d]+)$/,
 			jumpUrl: 'organization.html?oid=:oid'
+		},
+		"job|:jid"{
+			regExp: /^job\|([\d]+)$/,
+			jumpUrl: 'discovery/job.html?jid=:jid'
 		}
 	};
+
 	var router = function(param) {
 		if (jumpRouters.hasOwnProperty(param))
 			return jumpRouters[param];

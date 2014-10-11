@@ -37,19 +37,17 @@ define(function(require, exports, module) {
 		 */
 		window.AppUser = new UserModel();
 		AppUser.init(function() {
-			$(".body").html(template("app/templates/discovery/job/job", {}));
+			//$(".body").html(template("app/templates/discovery/job/job", {}));
 			var session = AppUser.getSession();
-			// (JobService.getJob(jobId, session).then(function(data) {
-			// 	if (data && data.status == "OK") {
-			// 		$(".body").html(template("app/templates/discovery/job/job", {}));
-			// 	} else {
-			// 		throw data;
-			// 	}
-			// }))["catch"](function(error) {
-			// 	Helper.errorToast(error);
-			// }).done(function() {
-			// 	Helper.userStatus();
-			// });
+			(JobService.getJob(jobId, session).then(function(data) {
+				if (data && data.status == "OK") {
+					$(".body").html(template("app/templates/discovery/job/job", data));
+				} else throw data;
+			}))["catch"](function(error) {
+				Helper.errorToast(error);
+			}).done(function() {
+				Helper.userStatus();
+			});
 
 		});
 	};

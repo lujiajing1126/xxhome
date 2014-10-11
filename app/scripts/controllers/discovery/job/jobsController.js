@@ -50,8 +50,8 @@ define(function(require, exports, module) {
 					/**
 					 * 获取学校版块之后获取招聘列表
 					 */
-					//render();
-					$(".body").html(template("app/templates/discovery/job/jobs", {}));
+					render();
+					//$(".body").html(template("app/templates/discovery/job/jobs", {}));
 				} else {
 					throw data;
 				}

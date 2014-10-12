@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 define(function(require, exports, module) {
 	/**
@@ -22,7 +22,7 @@ define(function(require, exports, module) {
 			regExp: /^organization\|([\d]+)$/,
 			jumpUrl: 'organization.html?oid=:oid'
 		},
-		"job|:jid"{
+		"job|:jid": {
 			regExp: /^job\|([\d]+)$/,
 			jumpUrl: 'discovery/job.html?jid=:jid'
 		}

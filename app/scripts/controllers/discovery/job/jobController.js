@@ -2,11 +2,11 @@ define(function(require, exports, module) {
 	var $ = SUI.$,
 		baseController = require('scripts/baseController'),
 		bC = new baseController(),
-		template = require('template'),
-		UserModel = require('UserModel'),
-		JobService = require('JobService'),
-		Helper = require('helper'),
-		bowser = require('bowser'),
+		template = require('build/template'),
+		UserModel = require('scripts/models/oUserModel'),
+		JobService = require('scripts/services/discovery/JobService'),
+		Helper = require('scripts/public/helper'),
+		bowser = require('scripts/public/bowser'),
 		b = bowser.bowser;
 
 	var session = Helper.getParam("session"),

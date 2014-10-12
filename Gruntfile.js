@@ -99,7 +99,7 @@ module.exports = function(grunt) {
 						'dist/scripts/public/jumpRouter.js',
 						'dist/scripts/public/msysconfig.js',
 						'dist/scripts/public/helper.js',
-						'dist/scripts/services/*.js',
+						'dist/scripts/services/**/*.js',
 						'dist/scripts/models/*.js',
 						'dist/scripts/lib/*.js',
 						'dist/build/template.js',

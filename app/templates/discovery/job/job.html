@@ -1,3 +1,58 @@
 <div class="job-wrapper">
-	
+	<div class="job-header">
+		<div class="xx-table middle">
+			<div class="xx-table-row">
+				<div class="xx-table-cell job-title">
+					<h4>{{recruitment.jobsTitle}}</h4>
+				</div>
+				<div class="xx-table-cell right  job-date">
+					<span>{{recruitment.application}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="xx-table middle">
+			<div class="inner-line job-company">
+				<span>{{recruitment.company}}</span>
+			</div>
+		</div>
+		<div class="xx-table middle">
+			<div class="xx-table-row">
+				<div class="xx-table-cell job-address">{{recruitment.location}}</div>
+				<div class="xx-table-cell job-payment right">{{recruitment.salary}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="job-body">
+		<div class="job-option">
+			招聘人数：
+			<span class="v">{{recruitment.peopleNum}}</span>
+		</div>
+		<div class="job-option">
+			工作性质：
+			<span class="v">{{recruitment.jobsNature}}</span>
+		</div>
+		<div class="job-info">
+			<p class="header"> <strong>任职要求</strong>
+			</p>
+			{{each recruitment.descriptions as desc i}}
+			<p>{{desc}}</p>
+			{{/each}}
+		</div>
+		<div class="job-info">
+			<p class="header"> <strong>联系方式</strong>
+			</p>
+			<p>
+				联系人：
+				<span>{{recruitment.contact}}</span>
+			</p>
+			<p>
+				邮箱：
+				<span>{{recruitment.email}}</span>
+			</p>
+			<p>
+				联系方式：
+				<span>{{recruitment.mobile}}</span>
+			</p>
+		</div>
+	</div>
 </div>

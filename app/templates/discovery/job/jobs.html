@@ -1,8 +1,9 @@
+{{each recruitments as job i}}
 <div class="job-option-wrapper xx-table">
 	<div class="inner-line xx-table-row">
 		<div class="job-title xx-table-cell">
 			<h4>
-				<a href="#">web程序猿</a>
+				<a href="./discovery/job/{{job.id}}" class="animate-05">{{job.jobsTitle}}</a>
 			</h4>
 		</div>
 		<div class="xx-table-cell right job-date">
@@ -11,65 +12,16 @@
 	</div>
 	<div class="inner-line">
 		<div class="job-company">
-			<span>上海满意信息科技有限公司</span>
+			<span>{{job.company}}</span>
 		</div>
 	</div>
 	<div class="inner-line xx-table-row">
-		<div class="job-address xx-table-cell ">
-			<span>上海-徐汇区</span>
+		<div class="xx-table-cell job-address">
+			<span>{{job.location}}</span>
 		</div>
-		<div class="xx-table-cell right job-payment">
-			<span>5000-8000/月</span>
+		<div class="xx-table-cell job-payment right">
+			<span>{{job.salary}}</span>
 		</div>
 	</div>
 </div>
-<div class="job-wrapper xx-table">
-	<div class="inner-line xx-table-row">
-		<div class="job-title xx-table-cell">
-			<h4>
-				<a href="#">web程序猿</a>
-			</h4>
-		</div>
-		<div class="xx-table-cell right job-date">
-			<span>09-03</span>
-		</div>
-	</div>
-	<div class="inner-line">
-		<div class="job-company">
-			<span>上海满意信息科技有限公司</span>
-		</div>
-	</div>
-	<div class="inner-line xx-table-row">
-		<div class="job-address xx-table-cell">
-			<span>上海-徐汇区</span>
-		</div>
-		<div class="xx-table-cell right job-payment">
-			<span>5000-8000/月</span>
-		</div>
-	</div>
-</div>
-<div class="job-wrapper xx-table">
-	<div class="inner-line xx-table-row">
-		<div class="job-title xx-table-cell">
-			<h4>
-				<a href="#">web程序猿</a>
-			</h4>
-		</div>
-		<div class="xx-table-cell right job-date">
-			<span>09-03</span>
-		</div>
-	</div>
-	<div class="inner-line">
-		<div class="job-company">
-			<span>上海满意信息科技有限公司</span>
-		</div>
-	</div>
-	<div class="inner-line xx-table-row">
-		<div class="job-address xx-table-cell">
-			<span>上海-徐汇区</span>
-		</div>
-		<div class="xx-table-cell right job-payment">
-			<span>5000-8000/月</span>
-		</div>
-	</div>
-</div>
+{{/each}}

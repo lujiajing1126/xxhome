@@ -22,6 +22,9 @@ define(function(require, exports, module) {
 			regExp: /^organization\|([\d]+)$/,
 			jumpUrl: 'organization.html?oid=:oid'
 		},
+		"jobs":{
+			jumpUrl:'discovery/jobs.html'
+		},
 		"job|:jid": {
 			regExp: /^job\|([\d]+)$/,
 			jumpUrl: 'discovery/job.html?jid=:jid'
@@ -30,7 +33,7 @@ define(function(require, exports, module) {
 
 	var router = function(param) {
 		if (jumpRouters.hasOwnProperty(param))
-			return jumpRouters[param];
+			return jumpRouters[param]["jumpUrl"];
 		var jumpRouter, jumpUrl, routeRegExp;
 		for (routerName in jumpRouters) {
 			jumpRouter = jumpRouters[routerName];

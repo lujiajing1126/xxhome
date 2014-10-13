@@ -6,6 +6,7 @@ define(function(require, exports, module) {
 		UserModel = require('scripts/models/oUserModel'),
 		JobService = require('scripts/services/discovery/JobService'),
 		Helper = require('scripts/public/helper'),
+		moment = require('scripts/lib/moment'),
 		bowser = require('scripts/public/bowser'),
 		b = bowser.bowser;
 
@@ -37,10 +38,11 @@ define(function(require, exports, module) {
 		 */
 		window.AppUser = new UserModel();
 		AppUser.init(function() {
-			//$(".body").html(template("app/templates/discovery/job/job", {}));
 			var session = AppUser.getSession();
 			(JobService.getJob(jobId, session).then(function(data) {
 				if (data && data.status == "OK") {
+					data.recruitment.descriptions = data.recruitment.description ? data.recruitment.description.split(/\r\n/g) : ["无职位介绍"];
+					data.recruitment.application=moment(data.recruitment.application).format('MM-DD');
 					$(".body").html(template("app/templates/discovery/job/job", data));
 				} else throw data;
 			}))["catch"](function(error) {
@@ -48,7 +50,6 @@ define(function(require, exports, module) {
 			}).done(function() {
 				Helper.userStatus();
 			});
-
 		});
 	};
 	module.exports = Controller;

@@ -14,6 +14,7 @@ $header-height: 60px;
 	margin: 0;
 	padding: 0;
 	outline: none;
+	letter-spacing:0.8px;
 }
 *, *:before, *:after {
 	-webkit-box-sizing: border-box;
@@ -41,6 +42,11 @@ body {
 	&.relative {
 		padding-top: 0;
 	}
+	&.mobile-only {
+		width: 786px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 ::selection {
 	background: #72d0eb;
@@ -64,6 +70,12 @@ a:hover {
 	-webkit-transition: all 1s;
 	-moz-transition: all 1s;
 	-o-transition: all 1s;
+}
+.animate-05 {
+	transition: all .5s;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-o-transition: all .5s;
 }
 ul, li {
 	list-style: none;
@@ -182,6 +194,15 @@ ul, li {
 .off {
 	display: none;
 }
-.right{
-	text-align:right;
+.right {
+	text-align: right;
+}
+
+/* 相应屏幕 */
+@media (max-width:786px) {
+	.body {
+		&.mobile-only {
+			width: 100%;
+		}
+	}
 }

@@ -50,7 +50,7 @@ define(function(require, exports, module) {
 					/**
 					 * 获取学校版块之后获取招聘列表
 					 */
-					render();
+					render(true);
 					//$(".body").html(template("app/templates/discovery/job/jobs", {}));
 				} else {
 					throw data;
@@ -72,11 +72,8 @@ define(function(require, exports, module) {
 	function render(init) {
 		var session = AppUser.getSession();
 		(JobService.getJobs(subscriptions, session, pageIndex * limit, limit).then(function(data) {
-			console.log(data);
-			if (init)
-				$(".body").html(template("app/templates/discovery/jobs", data));
-			else
-				$(".body").append(template("app/templates/discovery/jobs", data));
+			var action = init ? "html" : "append";
+			$(".body")[action](template("app/templates/discovery/job/jobs", data));
 		}))["catch"](function(error) {
 			Helper.errorToast(error);
 		});

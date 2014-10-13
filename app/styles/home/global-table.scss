@@ -1,10 +1,25 @@
-.xx-table{
-	width:100%;
-	display:table;
-	.xx-table-row{
+.xx-table {
+	width: 100%;
+	display: table;
+	.xx-table-row {
 		display: table-row;
-		.xx-table-cell{
+		&.middle {
+			.xx-table-cell {
+				vertical-align: middle;
+			}
+		}
+		.xx-table-cell {
 			display: table-cell;
+			&.middle {
+				vertical-align: middle;
+			}
+		}
+	}
+	&.middle {
+		.xx-table-row {
+			.xx-table-cell {
+				vertical-align: middle;
+			}
 		}
 	}
 }

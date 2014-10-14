@@ -14,7 +14,7 @@ define(function(require, exports, module) {
 		this.eventId = eventId;
 		this.actions = {
 			rob: function() {
-				Helper.alert("立即下载校校App可报名活动并抢票！", {}, function() {
+				Helper.confirm("立即下载校校App可报名活动并抢票！", {}, function() {
 					window.location.href = Helper.pages.download;
 				});
 			}

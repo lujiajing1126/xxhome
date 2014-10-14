@@ -249,6 +249,10 @@ define(function(require, exports, module) {
 		options = $.extend({}, options);
 		Alert.alert(message, options, callback);
 	};
+	exports.confirm = function(message, options, successCallback, errorCallback) {
+		options = $.extend({}, options);
+		Alert.confirm(message, options, successCallback, errorCallback);
+	};
 
 	/**
 	 * 提示组

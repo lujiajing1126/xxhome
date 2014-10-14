@@ -44,11 +44,17 @@ define(function(require, exports, module) {
 					// if(data.recruitment.stage==""){
 					// }
 					data.recruitment.descriptions = data.recruitment.description ? data.recruitment.description.split(/\r\n/g) : ["无职位介绍"];
-					data.recruitment.application=moment(data.recruitment.application).format('MM-DD');
+					data.recruitment.application = moment(data.recruitment.application).format('MM-DD');
 					$(".body").html(template("app/templates/discovery/job/job", data));
 				} else throw data;
 			}))["catch"](function(error) {
-				Helper.errorToast(error);
+				if (error == "Not Logged In") {
+					Helper.alert("请先登录！", {}, function() {
+						window.location.href = Helper.pages.login + "?go=job|"+jobId;
+					});
+				} else {
+					Helper.errorToast(error);
+				}
 			}).done(function() {
 				Helper.userStatus();
 			});

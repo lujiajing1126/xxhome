@@ -17,10 +17,10 @@ define(function(require, exports, module) {
 		xiaoxiaoSupport: '—校校技术赞助'
 	};
 	exports.pages = {
-		home: './index.html',
-		login: './login.html',
+		home: '/index.html',
+		login: '/login.html',
 		notFound: 'http://xiaoxiao.la/404.html',
-		download:'./download.html'
+		download:'/download.html'
 	};
 	exports.delays = {
 		authCode: 60

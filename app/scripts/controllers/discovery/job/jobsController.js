@@ -64,7 +64,14 @@ define(function(require, exports, module) {
 					throw data;
 				}
 			}))["catch"](function(error) {
-				Helper.errorToast(error);
+				if (error == "Not Logged In") {
+					Helper.alert("请先登录！", {}, function() {
+						window.location.href =Helper.pages.login+"?go=jobs";
+					});
+				} else {
+					Helper.errorToast(error);
+				}
+
 			}).done(function() {
 				Helper.userStatus();
 			});
@@ -95,7 +102,7 @@ define(function(require, exports, module) {
 			 */
 			if (!init) {
 				pageIndex--;
-				Helper.btnLoadingEnd($(".load-more-wrapper .btn"),"加载失败");
+				Helper.btnLoadingEnd($(".load-more-wrapper .btn"), "加载失败");
 			}
 		});
 	};

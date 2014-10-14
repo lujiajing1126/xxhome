@@ -3,7 +3,7 @@ define(function(require, exports, module) {
 		Helper = require('scripts/public/helper');
 
 	exports.getEventInfo = function(eventId, session) {
-		var fields = ['name', 'location', 'category', 'description', 'begin', 'end', 'numberOfPeople', 'signingUpFields', 'poster', 'images', 'attachments', 'stage','organizationId','organizationName','issuingTicket','votes'];
+		var fields = ['name', 'location', 'category', 'description', 'begin', 'end', 'numberOfPeople', 'signingUpFields', 'poster', 'images', 'attachments', 'stage','organizationId','organizationName','issuingTicket'];
 		//var fields = ['name', 'location'];
 		return Helper.globalResponseHandler({
 			url: '/api/event/' + eventId + '/load?session=' + session + '&fields=' + fields.join(','),

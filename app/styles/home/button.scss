@@ -10,7 +10,7 @@
 		color: #fff;
 	}
 }
-.btn-vote-back,.btn-back {
+.btn-vote-back, .btn-back {
 	background-color: $theme-color;
 	color: #fff;
 	width: 100%;
@@ -23,6 +23,23 @@
 	}
 }
 
+/* 活动页面下载按钮样式 */
+.controller-wrapper {
+	text-align: center;
+	display: none;
+	.btn-controller {
+		background-color: $theme-color;
+		color: #fff;
+		width: 500px;
+		border-radius: 2px;
+		outline: none;
+		&:hover {
+			background-color: $theme-deep-color;
+			border-color: $theme-deep-color;
+			color: #fff;
+		}
+	}
+}
 button.xx-btn {
 	@include border-radius(10px);
 	color: $theme-color;
@@ -60,4 +77,12 @@ button.xx-btn-theme-color {
 }
 .w-p-40 {
 	width: 48%;
+}
+@media (max-width:786px) {
+	.controller-wrapper {
+		display: block;
+		.btn-controller {
+			width: 100%;
+		}
+	}
 }

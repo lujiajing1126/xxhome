@@ -55,8 +55,16 @@
 	</div>
 	<div class="wrapper xx-title-wrapper clearfix responsive">
 		<p>活动名称：{{name}}</p>
-		<p>主办方：<a href="http://xiaoxiao.la/organization.html?oid={{organizationId}}">{{organizationName}}</a></p>
+		<p>
+			主办方：
+			<a href="http://xiaoxiao.la/organization.html?oid={{organizationId}}">{{organizationName}}</a>
+		</p>
 	</div>
+</section>
+<section class="container responsive controller-wrapper">
+	{{if !issuingTicket}}
+	<button class="btn btn-controller" data-xx-action="rob">我要抢票</button>
+	{{/if}}
 </section>
 <section class="container responsive">
 	<div class="wrapper article-wrapper responsive">
@@ -73,6 +81,11 @@
 			<p>活动类型：{{category}}</p>
 		</footer>
 	</div>
+</section>
+<section class="container responsive controller-wrapper">
+	{{if issuingTicket}}
+	<a href="/download.html" class="btn btn-controller">下载校校App，你懂的！</a>
+	{{/if}}
 </section>
 {{/if}}
 <!-- section footer -->

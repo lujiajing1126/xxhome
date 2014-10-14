@@ -19,7 +19,8 @@ define(function(require, exports, module) {
 	exports.pages = {
 		home: './index.html',
 		login: './login.html',
-		notFound: 'http://xiaoxiao.la/404.html'
+		notFound: 'http://xiaoxiao.la/404.html',
+		download:'./download.html'
 	};
 	exports.delays = {
 		authCode: 60

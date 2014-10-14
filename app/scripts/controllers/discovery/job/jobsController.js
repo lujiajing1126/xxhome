@@ -30,6 +30,14 @@ define(function(require, exports, module) {
 
 	var Controller = function() {
 		this.namespace = "discoveryJobs";
+		this.actions = {
+			loadMore: function(e) {
+				var that = this;
+				Helper.btnLoadingStart(that, "正在加载...");
+				pageIndex++;
+				render(false);
+			}
+		};
 	};
 	bC.extend(Controller);
 	Controller.prototype.init = function() {
@@ -44,14 +52,14 @@ define(function(require, exports, module) {
 			var session = AppUser.getSession();
 			(UserService.getSubscriptions(session).then(function(data) {
 				if (data && data.status == "OK") {
+					/**
+					 * 先获取学校版块
+					 * 然后根据版块获取招聘列表
+					 */
 					$.each(data.subscriptions, function(idx, item) {
 						subscriptions.push(item.boardName);
 					});
-					/**
-					 * 获取学校版块之后获取招聘列表
-					 */
 					render(true);
-					//$(".body").html(template("app/templates/discovery/job/jobs", {}));
 				} else {
 					throw data;
 				}
@@ -60,8 +68,8 @@ define(function(require, exports, module) {
 			}).done(function() {
 				Helper.userStatus();
 			});
-
 		});
+		Helper.eventListener("click", _controller.actions);
 	};
 	/**
 	 * 取数据并渲染模板
@@ -76,9 +84,19 @@ define(function(require, exports, module) {
 			$.each(data.recruitments, function(idx, item) {
 				item.application = moment(item.application).format('MM-DD');
 			});
+			//判断是否全部加载
+			data.fullyLoaded = (pageIndex * limit + data.recruitments.length) >= data.numberOfRows;
+			$(".body .load-more-wrapper").remove();
 			$(".body")[action](template("app/templates/discovery/job/jobs", data));
 		}))["catch"](function(error) {
 			Helper.errorToast(error);
+			/**
+			 * 加载失败且加载事件来自“加载更多”按钮，则需要处理该按钮
+			 */
+			if (!init) {
+				pageIndex--;
+				Helper.btnLoadingEnd($(".load-more-wrapper .btn"),"加载失败");
+			}
 		});
 	};
 

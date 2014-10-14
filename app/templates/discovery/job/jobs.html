@@ -25,3 +25,10 @@
 	</div>
 </a>
 {{/each}}
+<div class="load-more-wrapper">
+	{{if fullyLoaded}}
+	<button class="btn btn-back disabled">下面没有了</button>
+	{{else}}
+	<button class="btn btn-back" data-xx-action="loadMore">加载更多</button>
+	{{/if}}
+</div>

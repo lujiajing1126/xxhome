@@ -1,6 +1,7 @@
 .job-option-wrapper {
 	width: 100%;
-	background-color: #fbfbfb;
+	background-color: #f7f7f7;
+	//李总二叼挑的颜色
 	border-bottom: 1px solid #bbb;
 	padding: 5px 10px;
 	.job-title {
@@ -10,7 +11,7 @@
 			margin-bottom: 3px;
 			a {
 				color: #222;
-				&:hover{
+				&:hover {
 					text-decoration: none;
 					color: $theme-color;
 				}
@@ -35,6 +36,24 @@
 		color: #999;
 	}
 }
+.load-more-wrapper {
+	text-align: center;
+	margin-top: 20px;
+	.btn-back {
+		background-color: $theme-color;
+		color: #fff;
+		width: 95%;
+		border-radius: 1px;
+		outline: none;
+		margin-left: auto;
+		margin-right: auto;
+		&:hover {
+			background-color: $theme-deep-color;
+			border-color: $theme-deep-color;
+			color: #fff;
+		}
+	}
+}
 .job-wrapper {
 	margin: 0 auto;
 	padding: 5px 10px;
@@ -53,7 +72,8 @@
 			}
 		}
 		.job-info {
-			p{margin: 5px 0;
+			p{color: #444;
+				margin: 5px 0;
 				&.inner-header {
 					margin-top: 20px;
 					color: #111;
@@ -61,12 +81,15 @@
 						font-size: 14px;
 					}
 				}
-				color: #444;
+				a{
+					color: $theme-color;
+				}
 			}
 		}
 	}
-	.job-footer{
+	.job-footer {
 		margin-top: 30px;
+		margin-bottom: 20px;
 	}
 	.job-title {
 		h4 {

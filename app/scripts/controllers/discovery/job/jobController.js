@@ -41,6 +41,8 @@ define(function(require, exports, module) {
 			var session = AppUser.getSession();
 			(JobService.getJob(jobId, session).then(function(data) {
 				if (data && data.status == "OK") {
+					// if(data.recruitment.stage==""){
+					// }
 					data.recruitment.descriptions = data.recruitment.description ? data.recruitment.description.split(/\r\n/g) : ["无职位介绍"];
 					data.recruitment.application=moment(data.recruitment.application).format('MM-DD');
 					$(".body").html(template("app/templates/discovery/job/job", data));

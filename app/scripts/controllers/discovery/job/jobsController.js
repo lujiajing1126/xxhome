@@ -73,6 +73,9 @@ define(function(require, exports, module) {
 		var session = AppUser.getSession();
 		(JobService.getJobs(subscriptions, session, pageIndex * limit, limit).then(function(data) {
 			var action = init ? "html" : "append";
+			$.each(data.recruitments, function(idx, item) {
+				item.application = moment(item.application).format('MM-DD');
+			});
 			$(".body")[action](template("app/templates/discovery/job/jobs", data));
 		}))["catch"](function(error) {
 			Helper.errorToast(error);

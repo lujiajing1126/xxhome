@@ -1,27 +1,27 @@
 {{each recruitments as job i}}
-<div class="job-option-wrapper xx-table">
-	<div class="inner-line xx-table-row">
-		<div class="job-title xx-table-cell">
-			<h4>
-				<a href="/discovery/job.html?jid={{job.id}}" class="animate-05">{{job.jobsTitle}}</a>
-			</h4>
+<a href="/discovery/job.html?jid={{job.id}}" class="animate-05">
+	<div class="job-option-wrapper xx-table">
+		<div class="inner-line xx-table-row">
+			<div class="job-title xx-table-cell">
+				<h4>{{job.jobsTitle}}</h4>
+			</div>
+			<div class="xx-table-cell right job-date">
+				<span>{{job.application}}</span>
+			</div>
 		</div>
-		<div class="xx-table-cell right job-date">
-			<span>09-03</span>
+		<div class="inner-line">
+			<div class="job-company">
+				<span>{{job.company}}</span>
+			</div>
+		</div>
+		<div class="inner-line xx-table-row">
+			<div class="xx-table-cell job-address">
+				<span>{{job.location}}</span>
+			</div>
+			<div class="xx-table-cell job-payment right">
+				<span>{{job.salary}}</span>
+			</div>
 		</div>
 	</div>
-	<div class="inner-line">
-		<div class="job-company">
-			<span>{{job.company}}</span>
-		</div>
-	</div>
-	<div class="inner-line xx-table-row">
-		<div class="xx-table-cell job-address">
-			<span>{{job.location}}</span>
-		</div>
-		<div class="xx-table-cell job-payment right">
-			<span>{{job.salary}}</span>
-		</div>
-	</div>
-</div>
+</a>
 {{/each}}

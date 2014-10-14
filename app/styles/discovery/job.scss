@@ -54,7 +54,7 @@
 		}
 		.job-info {
 			p{margin: 5px 0;
-				&.header {
+				&.inner-header {
 					margin-top: 20px;
 					color: #111;
 					strong {
@@ -64,6 +64,9 @@
 				color: #444;
 			}
 		}
+	}
+	.job-footer{
+		margin-top: 30px;
 	}
 	.job-title {
 		h4 {

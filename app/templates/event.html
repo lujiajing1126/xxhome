@@ -62,7 +62,7 @@
 	</div>
 </section>
 <section class="container responsive controller-wrapper">
-	{{if !issuingTicket}}
+	{{if issuingTicket}}
 	<button class="btn btn-controller" data-xx-action="rob">我要抢票</button>
 	{{/if}}
 </section>
@@ -83,9 +83,7 @@
 	</div>
 </section>
 <section class="container responsive controller-wrapper">
-	{{if issuingTicket}}
 	<a href="/download.html" class="btn btn-controller">下载校校App，你懂的！</a>
-	{{/if}}
 </section>
 {{/if}}
 <!-- section footer -->

@@ -11,6 +11,7 @@
 @import "home/orgIcon";
 @import "home/eventIcon";
 @import "home/icon";
+@import "partial/share";
 //活动
 @import "home/event";
 @import "home/download";
@@ -28,6 +29,8 @@
 @import "home/sd_singer_vote";
 //discovery
 @import "discovery/job";
+//partial
+@import "partial/innerFooter";
 body, html {
 	// 黑体的标准写法
 	font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;

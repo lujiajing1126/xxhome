@@ -31,6 +31,7 @@ define(function(require, exports, module) {
 		(EventService.getEventInfo(eventId, session).then(function(data) {
 			if (data.status == "OK") {
 				var eventInfo = data.static;
+				document.title=eventInfo.name+" — 活动详情 — 校校";
 				eventInfo.pageType = "responsive"; //响应式
 				eventInfo.eventId = eventId;
 				eventInfo.descriptions = eventInfo.description ? eventInfo.description.split(/\r\n/g) : ["活动无简介"];

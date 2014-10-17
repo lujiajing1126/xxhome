@@ -39,6 +39,7 @@ define(function(require, exports, module) {
 					logindata.email = userName;
 				Helper.btnLoadingStart(login_btn, Helper.tips.loginLoading);
 				(AppUser.loginOnly(logindata).then(function(session) {
+					that.initGo && (go = that.initGo);
 					session && go && (window.location.href = go);
 				}))["catch"](function(error) {
 					Helper.errorCenterToast(error);
@@ -49,8 +50,9 @@ define(function(require, exports, module) {
 	};
 
 	bC.extend(Controller);
-	Controller.prototype.init = function() {
+	Controller.prototype.init = function(initGo) {
 		var _controller = this;
+		_controller.initGo = initGo;
 		// 初始化用户，全局唯一的用户示例
 		window.AppUser = new userModel();
 		AppUser.init(render);

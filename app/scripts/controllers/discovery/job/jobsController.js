@@ -49,32 +49,32 @@ define(function(require, exports, module) {
 		 */
 		window.AppUser = new UserModel();
 		AppUser.init(function() {
-			var session = AppUser.getSession();
-			(UserService.getSubscriptions(session).then(function(data) {
-				if (data && data.status == "OK") {
-					/**
-					 * 先获取学校版块
-					 * 然后根据版块获取招聘列表
-					 */
-					$.each(data.subscriptions, function(idx, item) {
-						subscriptions.push(item.boardName);
-					});
-					render(true);
-				} else {
-					throw data;
-				}
-			}))["catch"](function(error) {
-				if (error == "Not Logged In") {
-					Helper.alert("请先登录！", {}, function() {
-						window.location.href =Helper.pages.login+"?go=jobs";
-					});
-				} else {
-					Helper.errorToast(error);
-				}
-
-			}).done(function() {
-				Helper.userStatus();
-			});
+			// var session = AppUser.getSession();
+			// (UserService.getSubscriptions(session).then(function(data) {
+			// 	if (data && data.status == "OK") {
+			// 		/**
+			// 		 * 先获取学校版块
+			// 		 * 然后根据版块获取招聘列表
+			// 		 */
+			// 		$.each(data.subscriptions, function(idx, item) {
+			// 			subscriptions.push(item.boardName);
+			// 		});
+			// 		render(true);
+			// 	} else {
+			// 		throw data;
+			// 	}
+			// }))["catch"](function(error) {
+			// 	if (error == "Not Logged In") {
+			// 		Helper.alert("请先登录！", {}, function() {
+			// 			window.location.href =Helper.pages.login+"?go=jobs";
+			// 		});
+			// 	} else {
+			// 		Helper.errorToast(error);
+			// 	}
+			// }).done(function() {
+			// 	Helper.userStatus();
+			// });
+			render(true);
 		});
 		Helper.eventListener("click", _controller.actions);
 	};
@@ -104,6 +104,8 @@ define(function(require, exports, module) {
 				pageIndex--;
 				Helper.btnLoadingEnd($(".load-more-wrapper .btn"), "加载失败");
 			}
+		}).done(function(){
+			Helper.userStatus();
 		});
 	};
 

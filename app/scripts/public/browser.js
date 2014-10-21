@@ -6,7 +6,7 @@ define(function(require, exports, module) {
 	// 	_Android = ua.match(/^mozilla/i) == "mozilla" && ua.indexOf("linux") != -1 && ua.indexOf('android'),
 	// 	_WX = ua.indexOf('micromessenger') != -1;
 
-	// exports.bowser = {
+	// exports.browser = {
 	// 	ios: _iOS,
 	// 	android: _Android,
 	// 	wx: _WX,
@@ -35,7 +35,8 @@ define(function(require, exports, module) {
 		language: (navigator.browserLanguage || navigator.language)
 			.toLowerCase()
 	};
-	exports.bowser = {
+	exports.browser = {
+		versions: browser.versions,
 		ios: browser.versions.ios,
 		android: browser.versions.android,
 		wx: browser.versions.WX,

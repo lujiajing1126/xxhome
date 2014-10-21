@@ -5,8 +5,8 @@ define(function(require, exports, module) {
 		template = require('build/template'),
 		Helper = require('scripts/public/helper'),
 		UserService = require('scripts/services/oUserService'),
-		bowser = require('scripts/public/bowser'),
-		b = bowser.bowser;
+		browser = require('scripts/public/browser'),
+		b = browser.browser;
 
 	var Controller = function(eventId) {
 		this.namespace = "password";

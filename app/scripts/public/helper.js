@@ -5,6 +5,7 @@ define(function(require, exports, module) {
 		Alert = require('scripts/lib/Ly.alert'),
 		Toast = require('scripts/lib/Ly.toast'),
 		jumpRouter = require('scripts/public/jumpRouter'),
+		appApi = require('scripts/public/appApi'),
 		expPhoneNumber = sysConfig.regulars.phoneNumber,
 		expEmail = sysConfig.regulars.email,
 		expPassword = sysConfig.regulars.password,
@@ -45,14 +46,6 @@ define(function(require, exports, module) {
 					throw "对不起，您请求过于频繁，请输入验证码后再试";
 					break;
 				case 'Not Logged In':
-					// $.removeCookie("userSession", {
-					// 	path: '/'
-					// });
-					// if ($("#BTN_LOGIN").length > 0) {
-					// 	$("#BTN_LOGIN").trigger("click");
-					// } else {
-					// 	window.location.href = homepage;
-					// }
 					return data.status;
 					break;
 				case 'Permission Denied':
@@ -62,12 +55,14 @@ define(function(require, exports, module) {
 					// Bug Track
 					throw "Inconsistent Arguments";
 					break;
+				default:
+					throw "未知错误！！！";
+					break;
 			}
 		};
 		return Q($.ajax(data)).then(function(data) {
 			return handle(data);
 		}, function(error) {
-			seajs.log(error);
 			throw "Web Service Error";
 		});
 	};
@@ -282,4 +277,5 @@ define(function(require, exports, module) {
 		});
 	};
 	exports.jumpRouter = jumpRouter;
+	exports.appApi = appApi;
 });

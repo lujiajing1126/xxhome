@@ -1,1 +1,0 @@
-define(function(a,b){var c=(SUI.$,a("scripts/public/helper"));b.getEventInfo=function(a,b){var d=["name","location","category","description","begin","end","numberOfPeople","signingUpFields","poster","images","attachments","stage","organizationId","organizationName"];return c.globalResponseHandler({url:"/api/event/"+a+"/load?session="+b+"&fields="+d.join(","),dataType:"JSON"})}});

@@ -6,8 +6,8 @@ define(function(require, exports, module) {
 		EventService = require('scripts/services/EventService'),
 		moment = require('scripts/lib/moment'),
 		Helper = require('scripts/public/helper'),
-		bowser = require('scripts/public/bowser'),
-		b = bowser.bowser;
+		browser = require('scripts/public/browser'),
+		b = browser.browser;
 
 	var Controller = function(eventId) {
 		this.namespace = "activityInformation";

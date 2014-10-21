@@ -5,8 +5,8 @@ define(function(require, exports, module) {
 		template = require('build/template'),
 		moment = require('scripts/lib/moment'),
 		Helper = require('scripts/public/helper'),
-		bowser = require('scripts/public/bowser'),
-		b = bowser.bowser,
+		browser = require('scripts/public/browser'),
+		b = browser.browser,
 		VoteService = require('scripts/services/oVoteService');
 
 	var residueTickets;

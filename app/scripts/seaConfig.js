@@ -12,7 +12,7 @@ seajs.config({
 		'artTemplate': 'build/template',
 		'template': 'build/template',
 		'helper':'scripts/public/helper',
-		'bowser':'scripts/public/bowser',
+		'browser':'scripts/public/browser',
 		'moment':'scripts/lib/moment',
 		'UserModel':'scripts/models/oUserModel',
 		'UserService':'scripts/services/oUserService',

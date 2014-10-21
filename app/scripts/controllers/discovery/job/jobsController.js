@@ -8,8 +8,8 @@ define(function(require, exports, module) {
 		JobService = require('scripts/services/discovery/JobService'),
 		moment = require('scripts/lib/moment'),
 		Helper = require('scripts/public/helper'),
-		bowser = require('scripts/public/bowser'),
-		b = bowser.bowser;
+		browser = require('scripts/public/browser'),
+		b = browser.browser;
 
 	var pageIndex = 0,
 		limit = 10,

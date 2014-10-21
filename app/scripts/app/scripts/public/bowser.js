@@ -1,1 +1,0 @@
-define(function(a,b){var c=window.navigator.userAgent.toLowerCase(),d="mozilla"==c.match(/^mozilla/i)&&-1!=c.indexOf("mobile")&&(-1!=c.indexOf("ipod")||-1!=c.indexOf("iphone")||-1!=c.indexOf("ipad")),e="mozilla"==c.match(/^mozilla/i)&&-1!=c.indexOf("linux")&&c.indexOf("android"),f=-1!=c.indexOf("micromessenger");b.bowser={ios:d,android:e,wx:f}});

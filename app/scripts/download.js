@@ -2,12 +2,12 @@ define(function(require, exports, module) {
 
 	var $ = SUI.$;
 	var template = require('build/template');
-	var bowser = require('scripts/public/bowser');
+	var browser = require('scripts/public/browser');
 	var loginController = require('scripts/controllers/loginController');
 	
 	exports.init = function() {
 		var templateName;
-		var b = bowser.bowser;
+		var b = browser.browser;
 
 		if (b.android || b.ios || b.wx) {
 			templateName = 'app/templates/download_phone';

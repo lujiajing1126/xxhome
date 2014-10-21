@@ -1,1 +1,0 @@
-define(function(a){var b=(SUI.$,a("build/template"),a("scripts/controllers/loginController"));a("sui/bootstrap/bootstrap"),(new b).init()});

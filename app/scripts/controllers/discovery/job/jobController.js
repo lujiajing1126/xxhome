@@ -7,8 +7,8 @@ define(function(require, exports, module) {
 		JobService = require('scripts/services/discovery/JobService'),
 		Helper = require('scripts/public/helper'),
 		moment = require('scripts/lib/moment'),
-		bowser = require('scripts/public/bowser'),
-		b = bowser.bowser;
+		browser = require('scripts/public/browser'),
+		b = browser.browser;
 
 	var session = Helper.getParam("session"),
 		jobId = Helper.getParam("jid"); //通过app端查看招聘需要传session
@@ -26,7 +26,14 @@ define(function(require, exports, module) {
 	}
 
 	var Controller = function() {
-		this.namespace = "discoveryJob";
+		var _controller = this;
+		_controller.namespace = "discoveryJob";
+		_controller.actions = {
+			share: function() {
+				var url = "http:xiaoxiao.la/discovery/job/" + jobId;
+				Helper.appApi.share(url);
+			}
+		};
 	};
 	bC.extend(Controller);
 	Controller.prototype.init = function() {
@@ -41,16 +48,22 @@ define(function(require, exports, module) {
 			var session = AppUser.getSession();
 			(JobService.getJob(jobId, session).then(function(data) {
 				if (data && data.status == "OK") {
-					// if(data.recruitment.stage==""){
-					// }
-					data.recruitment.descriptions = data.recruitment.description ? data.recruitment.description.split(/\r\n/g) : ["无职位介绍"];
-					data.recruitment.application = moment(data.recruitment.application).format('MM-DD');
-					$(".body").html(template("app/templates/discovery/job/job", data));
+					if (data.recruitment.stage == "drafting") {
+						Helper.errorToast("招聘不存在");
+						window.location.href = "/discovery/jobs";
+					} else if (data.recruitment.stage == "archived") {
+						Helper.errorToast("招聘已过期");
+						window.location.href = "/discovery/jobs";
+					} else {
+						data.recruitment.descriptions = data.recruitment.description ? data.recruitment.description.split(/\r\n/g) : ["无职位介绍"];
+						data.recruitment.application = moment(data.recruitment.application).format('MM-DD');
+						$(".body").html(template("app/templates/discovery/job/job", data));
+					}
 				} else throw data;
 			}))["catch"](function(error) {
 				if (error == "Not Logged In") {
 					Helper.alert("请先登录！", {}, function() {
-						window.location.href = Helper.pages.login + "?go=job|"+jobId;
+						window.location.href = Helper.pages.login + "?go=job|" + jobId;
 					});
 				} else {
 					Helper.errorToast(error);
@@ -59,6 +72,7 @@ define(function(require, exports, module) {
 				Helper.userStatus();
 			});
 		});
+		Helper.eventListener("click", _controller.actions);
 	};
 	module.exports = Controller;
 });

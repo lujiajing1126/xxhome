@@ -4,8 +4,8 @@ define(function(require, exports, module) {
 		baseController = require('scripts/baseController'),
 		bC = new baseController(),
 		template = require('build/template'),
-		bowser = require('scripts/public/bowser'),
-		b = bowser.bowser,
+		browser = require('scripts/public/browser'),
+		b = browser.browser,
 		VoteService = require('scripts/services/oVoteService');
 
 	var voteId = Helper.getParam("vid"),

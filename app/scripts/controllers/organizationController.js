@@ -5,8 +5,8 @@ define(function(require, exports, module) {
 		template = require('build/template'),
 		Helper = require('scripts/public/helper'),
 		OrganizationService = require('scripts/services/OrgService'),
-		bowser = require('scripts/public/bowser'),
-		b = bowser.bowser;
+		browser = require('scripts/public/browser'),
+		b = browser.browser;
 	var Controller = function(orgId) {
 		this.namespace = "organizationInfo";
 		this.orgId = orgId;

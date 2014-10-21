@@ -33,6 +33,7 @@ define(function(require, exports, module) {
 			share: function() {
 				var url = Helper.pages.sJob + "?jid=" + jobId;
 				Helper.appApi.share({
+					title: document.title,
 					url: url,
 					fromApp: fromApp,
 					fnc: function() {
@@ -55,6 +56,7 @@ define(function(require, exports, module) {
 			var session = AppUser.getSession();
 			(JobService.getJob(jobId, session).then(function(data) {
 				if (data && data.status == "OK") {
+					data.recruitment.jobsTitle && (document.title = data.recruitment.jobsTitle);
 					if (data.recruitment.stage == "drafting") {
 						Helper.errorToast("招聘不存在");
 						window.location.href = "/discovery/jobs";

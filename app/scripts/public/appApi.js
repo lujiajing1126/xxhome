@@ -18,7 +18,7 @@ define(function(require, exports, module) {
 		}
 	}
 	/**
-	 * 
+	 *
 	 * 分享函数分如下三种情况：
 	 * 1、来自校校App，则调取App中分享接口
 	 * 2、非校校App，执行else语句
@@ -28,7 +28,8 @@ define(function(require, exports, module) {
 	 *            fnc：非校校App时执行的函数
 	 */
 	exports.share = function(options) {
-		var url = url || window.location.href,
+		var url = options.url || window.location.href,
+			title = options.title || document.title,
 			fromApp = options.fromApp || false,
 			fnc = options.fnc;
 		connectWebViewJavascriptBridge(function(bridge) {
@@ -36,9 +37,12 @@ define(function(require, exports, module) {
 			osBridge = bridge;
 		});
 		if (fromApp && browser.versions.android) {
-			window.appView.share(url);
+			window.appView.share(url, title);
 		} else if (fromApp && browser.versions.iPhone) {
-			osBridge.send(url);
+			osBridge.send({
+				url: url,
+				title: title
+			});
 		} else {
 			fnc && fnc();
 		}

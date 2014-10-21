@@ -20,9 +20,9 @@ define(function(require, exports, module) {
 		home: '/index.html',
 		login: '/login.html',
 		notFound: 'http://xiaoxiao.la/404.html',
-		download:'/download.html',
-		sJobs:'http:xiaoxiao.la/discovery/jobs.html',//分享用
-		sJob:'http:xiaoxiao.la/discovery/job.html'//分享用
+		download: '/download.html',
+		sJobs: 'http://xiaoxiao.la/discovery/jobs.html', //分享用
+		sJob: 'http://xiaoxiao.la/discovery/job.html' //分享用
 	};
 	exports.delays = {
 		authCode: 60

@@ -41,6 +41,7 @@ define(function(require, exports, module) {
 			share: function() {
 				var url = Helper.pages.sJobs;
 				Helper.appApi.share({
+					title: document.title,
 					url: url,
 					fromApp: fromApp,
 					fnc: function() {

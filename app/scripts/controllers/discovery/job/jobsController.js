@@ -15,7 +15,8 @@ define(function(require, exports, module) {
 		limit = 10,
 		subscriptions = [], //用户订阅的学校版块
 		session = Helper.getParam("session"), //通过app端查看招聘需要传session
-		keyword = Helper.getParam("keyword");
+		keyword = Helper.getParam("keyword"),
+		fromApp = Helper.getParam('fromapp');
 	/**
 	 * 如果app端已传session，则手动设置session
 	 */
@@ -36,6 +37,16 @@ define(function(require, exports, module) {
 				Helper.btnLoadingStart(that, "正在加载...");
 				pageIndex++;
 				render(false);
+			},
+			share: function() {
+				var url = Helper.pages.sJobs;
+				Helper.appApi.share({
+					url: url,
+					fromApp: fromApp,
+					fnc: function() {
+						$(".share-container").removeClass("hide").find('.bds_more').get(0).click();
+					}
+				});
 			}
 		};
 	};
@@ -93,6 +104,8 @@ define(function(require, exports, module) {
 			});
 			//判断是否全部加载
 			data.fullyLoaded = (pageIndex * limit + data.recruitments.length) >= data.numberOfRows;
+			data.share = true;
+			data.fromApp = fromApp;
 			$(".body .load-more-wrapper").remove();
 			$(".body")[action](template("app/templates/discovery/job/jobs", data));
 		}))["catch"](function(error) {
@@ -104,7 +117,7 @@ define(function(require, exports, module) {
 				pageIndex--;
 				Helper.btnLoadingEnd($(".load-more-wrapper .btn"), "加载失败");
 			}
-		}).done(function(){
+		}).done(function() {
 			Helper.userStatus();
 		});
 	};

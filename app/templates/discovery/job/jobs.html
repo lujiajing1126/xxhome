@@ -1,5 +1,5 @@
 {{each recruitments as job i}}
-<a href="/discovery/job.html?jid={{job.id}}" class="animate-05">
+<a href="/discovery/job.html?jid={{job.id}}{{if fromApp}}&fromapp=1{{/if}}" class="animate-05">
 	<div class="job-option-wrapper xx-table">
 		<div class="inner-line xx-table-row">
 			<div class="job-title xx-table-cell">

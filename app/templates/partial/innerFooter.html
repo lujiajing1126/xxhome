@@ -1,8 +1,13 @@
 
 	<div class="inner-footer">
+		{{if !fromApp}}
 		该内容来自
 		<a href="/index.html">校校</a>
 		，您可以
 		<a href="/download.html">下载校校App</a>
 		获取更多校园活动资讯。
+		{{/if}}
+		{{if share}}
+		<a class="link-share" href="javascript:void(0);" data-xx-action="share">我要分享</a>
+		{{/if}}
 	</div>

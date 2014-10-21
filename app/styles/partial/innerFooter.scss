@@ -1,8 +1,15 @@
 .inner-footer {
 	text-align: center;
 	margin-top:20px;
+	margin-bottom:10px;
 	padding:5px 20px 0;
 	a{
 		color: $theme-color;
+	}
+	.link-share{
+		&:hover{
+			text-decoration: none;
+			color: red;
+		}
 	}
 }

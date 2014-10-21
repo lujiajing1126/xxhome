@@ -11,7 +11,8 @@ define(function(require, exports, module) {
 		b = browser.browser;
 
 	var session = Helper.getParam("session"),
-		jobId = Helper.getParam("jid"); //通过app端查看招聘需要传session
+		jobId = Helper.getParam("jid"), //通过app端查看招聘需要传session
+		fromApp = Helper.getParam('fromapp');
 
 	/**
 	 * 如果app端已传session，则手动设置session
@@ -30,8 +31,14 @@ define(function(require, exports, module) {
 		_controller.namespace = "discoveryJob";
 		_controller.actions = {
 			share: function() {
-				var url = "http:xiaoxiao.la/discovery/job/" + jobId;
-				Helper.appApi.share(url);
+				var url = Helper.pages.sJob + "?jid=" + jobId;
+				Helper.appApi.share({
+					url: url,
+					fromApp: fromApp,
+					fnc: function() {
+						$(".share-container").removeClass("hide").find('.bds_more').get(0).click();
+					}
+				});
 			}
 		};
 	};
@@ -57,6 +64,8 @@ define(function(require, exports, module) {
 					} else {
 						data.recruitment.descriptions = data.recruitment.description ? data.recruitment.description.split(/\r\n/g) : ["无职位介绍"];
 						data.recruitment.application = moment(data.recruitment.application).format('MM-DD');
+						data.share = true;
+						data.fromApp = fromApp;
 						$(".body").html(template("app/templates/discovery/job/job", data));
 					}
 				} else throw data;

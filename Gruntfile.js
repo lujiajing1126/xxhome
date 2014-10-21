@@ -94,7 +94,8 @@ module.exports = function(grunt) {
 					],
 					'dist/scripts/base.js': [
 						'dist/scripts/baseController.js',
-						'dist/scripts/public/bowser.js',
+						'dist/scripts/public/browser.js',
+						'dist/scripts/public/appApi.js',
 						'dist/scripts/public/eventListener.js',
 						'dist/scripts/public/jumpRouter.js',
 						'dist/scripts/public/msysconfig.js',

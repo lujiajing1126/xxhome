@@ -20,7 +20,7 @@
 		</div>
 		<div class="vote-info-wrapper clearfix">
 			<div class="vote-ticket-number">{{option.tickets}}</div>
-			<div class="vote-member-name">{{option.option.optionName}}</div>
+			<div class="vote-member-name">{{option.option.optionName.split(',')[0]}}</div>
 		</div>
 		<div class="vote-btn-wrapper">
 			<button class="btn btn-vote" data-xx-action="voteCast" data-value="{{option.option.id}}">我要投票</button>

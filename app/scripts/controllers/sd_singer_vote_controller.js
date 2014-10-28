@@ -13,10 +13,10 @@ define(function(require, exports, module) {
 			goVote: function() {
 				var isLogin = AppUser.isLogin;
 				if (isLogin) {
-					window.location.href = "./vote.html?vid="+vid;
+					window.location.href = "/vote.html?vid="+vid;
 				} else {
 					Helper.alert("同学你需要登录校校才能投票哦！", {}, function() {
-						window.location.href = "./login.html?go=vote|3";
+						window.location.href = "/login.html?go=vote|"+vid;
 					});
 				}
 			}

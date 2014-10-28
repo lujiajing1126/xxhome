@@ -49,6 +49,18 @@
 				border-radius: 14px;
 				cursor: pointer;
 			}
+			.btn-vote {
+				background-color: rgba(255, 255, 255, .7);
+				color: #333;
+				line-height: 36px;
+				display: inline-block;
+				width: 100px;
+				color: #c24229;
+				margin-bottom: 15px;
+				&:hover{
+					background-color:rgba(255,255,255,.3);
+				}
+			}
 		}
 	}
 }

@@ -27,6 +27,7 @@ define(function(require, exports, module) {
 	 * @return {Q Promise} [200返回代码，handle函数处理服务器返回的异常;其他错误抛出WebService错误]
 	 */
 	var globalResponseHandler = function(data, options) {
+		data.cache = false;
 		var handle = function(data) {
 			var homepage = "/index.html";
 			switch (data.status) {

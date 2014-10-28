@@ -5,6 +5,7 @@ define(function(require, exports, module) {
 		template = require('build/template'),
 		Helper = require('scripts/public/helper'),
 		loginController = require('scripts/controllers/loginController');
+	var vid;
 	var Controller = function(voteId) {
 		var _controller = this;
 		this.namespace = "sdSingerVote";
@@ -12,7 +13,7 @@ define(function(require, exports, module) {
 			goVote: function() {
 				var isLogin = AppUser.isLogin;
 				if (isLogin) {
-					window.location.href = "./vote.html?vid=3";
+					window.location.href = "./vote.html?vid="+vid;
 				} else {
 					Helper.alert("同学你需要登录校校才能投票哦！", {}, function() {
 						window.location.href = "./login.html?go=vote|3";
@@ -22,9 +23,10 @@ define(function(require, exports, module) {
 		};
 	};
 	bC.extend(Controller);
-	Controller.prototype.init = function() {
+	Controller.prototype.init = function(voteId,templateName) {
+		vid = voteId;
 		var _controller = this;
-		$(".body").html(template("app/templates/sd_singer_vote", {}));
+		$(".body").html(template(templateName, {}));
 		Helper.eventListener("click", _controller.actions);
 		(new loginController()).init(function() {
 			Helper.userStatus();

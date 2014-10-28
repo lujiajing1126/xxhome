@@ -61,9 +61,19 @@ define(function(require, exports, module) {
 		var session = AppUser.getSession();
 		(VoteService.getVotePlayer(voteId, playerId, session).then(function(data) {
 			if (data && data.status == "OK") {
-				document.title=data.vote.voteName+"—"+data.option.optionName+Helper.tips.xiaoxiaoSupport;
+				document.title = data.vote.voteName + "—" + data.option.optionName + Helper.tips.xiaoxiaoSupport;
 				residueTickets = data.residueTickets;
 				data.option.descriptions = data.option.description ? data.option.description.split(/\r\n/g) : ["无介绍"];
+
+				/**
+				 * fixed: url in name
+				 */
+				var name = data.option.optionName;
+				if (name.indexOf(',') != -1) {
+					data.option.optionName = name.split(',')[0];
+					data.option.url = name.split(',')[1];
+				}
+
 				if (b.isMobile) {
 					data.mobile = true;
 					$('.body').html(template('app/templates/voteplayer', data));

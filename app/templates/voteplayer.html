@@ -6,8 +6,7 @@
 	<div class="voteplayer-wrapper">
 		<div class="voteplayer-avatar">
 			<img src="api/vote/option/{{option.id}}/image" onerror="this.src='images/default/3.png';" />
-			{{if i
-			<3}}<div class="rank"> <i>{{i+1}}</i>
+			{{if i<3}}<div class="rank"> <i>{{i+1}}</i>
 			</div>
 			{{/if}}
 		</div>
@@ -16,6 +15,9 @@
 			{{each option.descriptions as desc i}}
 			<p>{{desc}}</p>
 			{{/each}}
+			{{if option.url}}
+			<p>作品链接：<a href="{{option.url}}">{{option.url}}</a></p>
+			{{/if}}
 		</div>
 		<div class="voteplayer-footer clearfix">
 			<div class="voteplayer-ticket-wrapper">

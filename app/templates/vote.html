@@ -12,12 +12,11 @@
 		<div class="vote-avatar">
 			<a href="./voteplayer.html?vid={{option.option.voteId}}&pid={{option.option.id}}">
 				<img src="api/vote/option/{{option.option.id}}/image" onerror="this.src='images/default/3.png';" />
+				<div class="more-info">查看详情</div>
 			</a>
-			{{if i
-			< 3}}<div class="rank"> <i>{{i+1}}</i>
+			{{if i< 3}}<div class="rank"> <i>{{i+1}}</i>
 			</div>
 			{{/if}}
-			<div class="more-info">查看详情</div>
 		</div>
 		<div class="vote-info-wrapper clearfix">
 			<div class="vote-ticket-number">{{option.tickets}}</div>

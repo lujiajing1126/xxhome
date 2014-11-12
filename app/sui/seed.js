@@ -22,7 +22,9 @@ seajs.config({
     },
 
     // 映射配置
-    map: [],
+    map: [
+            ['.js', ".js?v=1.0.1"]
+    ],
 
     // 预加载项
     preload: [

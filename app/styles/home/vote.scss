@@ -55,10 +55,12 @@ $vote-theme-color: #ffba00;
 		}
 	}
 	.vote-info-wrapper {
-		padding: 5px 2px;
+		padding: 5px 0px;
+		position:relative;
 		.vote-ticket-number {
-			float: left;
-			width: auto;
+			position: absolute;
+			left: 0;
+			top: 0;
 			color: $vote-theme-color;
 			font-weight: bold;
 			font-size: 20px;
@@ -69,14 +71,15 @@ $vote-theme-color: #ffba00;
 			width: auto;
 			background-color: #b1b1b1;
 			color: #fff;
-			border-radius: 4px;
-			padding: 0 5px;
+			border-radius: 2px;
+			//padding: 0 5px;
 			font-size: 16px;
 			text-overflow: ellipsis;
 			overflow: hidden;
 			white-space: nowrap;
 			text-align: center;
 			line-height: 28px;
+			height: 28px;
 		}
 	}
 	.vote-btn-wrapper {

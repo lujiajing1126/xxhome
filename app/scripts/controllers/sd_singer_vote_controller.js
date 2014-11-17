@@ -12,14 +12,14 @@ define(function(require, exports, module) {
 		this.actions = {
 			goVote: function() {
 				var isLogin = AppUser.isLogin;
-				if (isLogin) {
-					window.location.href = "/vote.html?vid=" + vid;
-				} else {
-					Helper.alert("同学你需要登录校校才能投票哦！", {}, function() {
-						//window.location.href = "/login.html?go=vote|"+vid;
-						window.location.href = "/vote.html?vid=" + vid;
-					});
-				}
+				// if (isLogin) {
+				 	window.location.href = "/vote.html?vid=" + vid;
+				// } else {
+				// 	Helper.alert("同学你需要登录校校才能投票哦！", {}, function() {
+				// 		//window.location.href = "/login.html?go=vote|"+vid;
+				// 		window.location.href = "/vote.html?vid=" + vid;
+				// 	});
+				// }
 			}
 		};
 	};

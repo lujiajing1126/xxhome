@@ -103,8 +103,8 @@ define(function(require, exports, module) {
 		window.AppUser = new userModel();
 		AppUser.init(render);
 		Helper.eventListener("click." + _controller.namespace, _controller.actions);
-		Helper.globalEventListener("blur." + _controller.namespace, "data-xx-blur-action", _controller.actions);
-		Helper.globalEventListener("keyup." + _controller.namespace, "data-xx-keyup-action", _controller.actions);
+		//Helper.globalEventListener("blur." + _controller.namespace, "data-xx-blur-action", _controller.actions);
+		//Helper.globalEventListener("keyup." + _controller.namespace, "data-xx-keyup-action", _controller.actions);
 
 		function render() {
 			$('.body').html(template('app/templates/signup', {

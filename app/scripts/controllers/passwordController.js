@@ -140,15 +140,15 @@ define(function(require, exports, module) {
 		Helper.userStatus();
 		var _controller = this;
 		Helper.eventListener("click." + this.namespace, _controller.actions);
-		$(document).on("keyup." + this.namespace, "#userName", function(event) {
-			event = event || window.event;
-			var userName = $(this).val();
-			if (Helper.isEmail(userName) || Helper.isPhoneNumber(userName)) {
-				$("#btn_auth_code").show();
-			} else {
-				$("#btn_auth_code").hide();
-			}
-		});
+		// $(document).on("keyup." + this.namespace, "#userName", function(event) {
+		// 	event = event || window.event;
+		// 	var userName = $(this).val();
+		// 	if (Helper.isEmail(userName) || Helper.isPhoneNumber(userName)) {
+		// 		$("#btn_auth_code").show();
+		// 	} else {
+		// 		$("#btn_auth_code").hide();
+		// 	}
+		// });
 	};
 
 	function getAuthCode(userName, session, btn_auth_code, type) {
